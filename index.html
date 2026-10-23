@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma & Gerador de Loja Virtual - Moda Feminina</title>
+    
+    <!-- Meta Tag Dinâmica de Verificação do Google Search Console -->
+    <meta name="google-site-verification" id="gsc-meta" content="">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            900: '#831843',
+                            gold: '#d4af37',
+                            luxury: '#111827'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Fontes do Google para Estilo Grife e Luxo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Ícones FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Alpine.js Otimizado -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        [x-cloak] { display: none !important; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+
+<body x-data="lojaEngine()" x-init="inicializarApp()" class="h-full font-sans text-slate-800 antialiased selection:bg-pink-500 selection:text-white">
+
+    <!-- BARRA SUPERIOR DE NAVEGAÇÃO RÁPIDA E ADMINISTRAÇÃO -->
+    <div class="bg-slate-900 text-slate-300 text-xs py-1.5 px-4 flex justify-between items-center border-b border-slate-800 z-50 sticky top-0">
+        <div class="flex items-center space-x-3">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-pink-900/60 text-pink-300 border border-pink-700/50">
+                <i class="fa-solid fa-bolt mr-1"></i> Cloudflare & GitHub Pages Light
+            </span>
+            <span class="hidden md:inline text-slate-400">Visual Ativo: <strong class="text-white uppercase" x-text="config.layoutStyle === 'grife' ? 'Loja de Grife (Luxo)' : 'Grade 2 Produtos'"></strong></span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button @click="abaAtual = 'loja'" :class="abaAtual === 'loja' ? 'text-pink-400 font-bold' : 'hover:text-white'">
+                <i class="fa-solid fa-store mr-1"></i> Loja
+            </button>
+            <button @click="abaAtual = 'afiliados'" :class="abaAtual === 'afiliados' ? 'text-pink-400 font-bold' : 'hover:text-white'">
+                <i class="fa-solid fa-chart-line mr-1"></i> Área do Afiliado
+            </button>
+            <button @click="abrirModalAdmin()" class="bg-brand-600 hover:bg-brand-500 text-white px-2.5 py-1 rounded-md transition font-medium text-xs flex items-center">
+                <i class="fa-solid fa-lock mr-1.5"></i> Painel Admin
+            </button>
+        </div>
+    </div>
+
+    <!-- VISÃO PRINCIPAL DA LOJA VIRTUAL -->
+    <div x-show="abaAtual === 'loja'" class="min-h-screen flex flex-col">
+        
+        <!-- CABEÇALHO DA LOJA -->
+        <header :class="config.layoutStyle === 'grife' ? 'bg-slate-950 text-white border-b border-slate-800' : 'bg-white text-slate-900 shadow-sm'" class="transition-colors duration-300 sticky top-7 z-40">
+            <!-- Barra de Anúncios / Promoções -->
+            <div x-show="config.textoAnuncio" class="bg-gradient-to-r from-pink-600 to-rose-600 text-white text-center py-1.5 px-4 text-xs font-medium tracking-wide">
+                <span x-text="config.textoAnuncio"></span>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    
+                    <!-- Logotipo / Nome da Loja -->
+                    <div class="flex items-center space-x-3 cursor-pointer" @click="categoriaSelecionada = 'todas'">
+                        <template x-if="config.logoUrl">
+                            <img :src="config.logoUrl" :alt="config.nomeLoja" class="h-10 w-auto object-contain" onerror="this.src='https://placehold.co/150x50/111827/ffffff?text=SUA+MARCA'">
+                        </template>
+                        <span class="text-2xl font-bold tracking-tight" :class="config.layoutStyle === 'grife' ? 'font-serif text-brand-gold tracking-widest uppercase' : 'font-sans text-slate-900'" x-text="config.nomeLoja"></span>
+                    </div>
+
+                    <!-- Menu de Categorias -->
+                    <nav class="hidden md:flex space-x-8">
+                        <button @click="categoriaSelecionada = 'todas'" :class="categoriaSelecionada === 'todas' ? 'text-brand-500 font-bold border-b-2 border-brand-500' : 'hover:text-brand-500'" class="pb-1 text-sm transition">Todos os Produtos</button>
+                        <template x-for="cat in categorias" :key="cat">
+                            <button @click="categoriaSelecionada = cat" :class="categoriaSelecionada === cat ? 'text-brand-500 font-bold border-b-2 border-brand-500' : 'hover:text-brand-500'" class="pb-1 text-sm transition uppercase tracking-wider" x-text="cat"></button>
+                        </template>
+                    </nav>
+
+                    <!-- Carrinho -->
+                    <div class="flex items-center space-x-5">
+                        <button @click="carrinhoAberto = true" class="relative p-2 hover:text-brand-500 transition">
+                            <i class="fa-solid fa-bag-shopping text-2xl"></i>
+                            <span x-show="carrinho.length > 0" x-text="qtdItensCarrinho" class="absolute -top-1 -right-1 bg-brand-600 text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- BANNER DE DESTAQUE / CARROSSEL -->
+        <section x-show="banners.length > 0" class="relative bg-slate-900 text-white overflow-hidden">
+            <div class="relative h-64 sm:h-96 md:h-[450px] w-full">
+                <template x-for="(banner, idx) in banners" :key="idx">
+                    <div x-show="bannerAtivo === idx" x-transition.opacity.duration.700ms class="absolute inset-0">
+                        <img :src="banner.imagem" :alt="banner.titulo" class="w-full h-full object-cover opacity-75" onerror="this.src='https://placehold.co/1200x500/1e293b/ffffff?text=Colecao+Moda+Feminina'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent flex flex-col justify-end p-6 sm:p-12 max-w-7xl mx-auto">
+                            <span class="text-brand-gold uppercase text-xs tracking-widest font-semibold mb-2" x-text="banner.subtitulo"></span>
+                            <h1 class="text-3xl sm:text-5xl font-bold mb-3" :class="config.layoutStyle === 'grife' ? 'font-serif' : 'font-sans'" x-text="banner.titulo"></h1>
+                            <p class="text-sm sm:text-base text-slate-300 max-w-lg mb-4" x-text="banner.descricao"></p>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <!-- Botões de Navegação dos Banners -->
+            <div x-show="banners.length > 1" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+                <template x-for="(b, idx) in banners" :key="idx">
+                    <button @click="bannerAtivo = idx" :class="bannerAtivo === idx ? 'bg-white w-6' : 'bg-white/50 w-2'" class="h-2 rounded-full transition-all duration-300"></button>
+                </template>
+            </div>
+        </section>
+
+        <!-- CATÁLOGO DE PRODUTOS COM ALTERNÂNCIA DE LAYOUT -->
+        <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-200">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900" :class="config.layoutStyle === 'grife' ? 'font-serif italic tracking-wide' : 'font-sans'" x-text="categoriaSelecionada === 'todas' ? 'Coleção Exclusiva' : categoriaSelecionada"></h2>
+                    <p class="text-slate-500 text-sm mt-1">Peças exclusivas com alto padrão de qualidade e elegância</p>
+                </div>
+                
+                <!-- Alternador de Layout para Demonstração Dinâmica -->
+                <div class="mt-4 md:mt-0 flex items-center space-x-2 bg-slate-100 p-1 rounded-lg text-xs">
+                    <button @click="config.layoutStyle = 'grid2'" :class="config.layoutStyle === 'grid2' ? 'bg-white shadow text-slate-900 font-bold' : 'text-slate-500'" class="px-3 py-1.5 rounded-md transition">Grade de 2 Produtos</button>
+                    <button @click="config.layoutStyle = 'grife'" :class="config.layoutStyle === 'grife' ? 'bg-slate-900 text-brand-gold font-bold' : 'text-slate-500'" class="px-3 py-1.5 rounded-md transition">Estilo Grife de Luxo</button>
+                </div>
+            </div>
+
+            <!-- GRADE DE PRODUTOS DINÂMICA (GRADE 2 PRODUTOS vs GRIFE) -->
+            <div :class="{
+                'grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-8': config.layoutStyle === 'grid2',
+                'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12': config.layoutStyle === 'grife'
+            }">
+                <template x-for="produto in produtosFiltrados" :key="produto.id">
+                    <div class="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col">
+                        
+                        <!-- Imagem do Produto e Botões Rápidos -->
+                        <div class="relative aspect-[3/4] bg-slate-100 overflow-hidden cursor-pointer" @click="abrirModalProduto(produto)">
+                            <img :src="produto.imagem" :alt="produto.nome" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x800/f1f5f9/475569?text=Moda+Feminina'">
+                            <span x-show="produto.precoAntigo" class="absolute top-3 left-3 bg-rose-600 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">Promoção</span>
+                            
+                            <!-- Botão Flutuante de Voz (Ouvir Descrição) -->
+                            <button @click.stop="ouvirDescricao(produto.descricao)" class="absolute top-3 right-3 bg-white/90 hover:bg-brand-500 hover:text-white text-slate-700 p-2 rounded-full shadow-md backdrop-blur-sm transition" title="Ouvir Descrição em Português">
+                                <i class="fa-solid fa-volume-high text-xs"></i>
+                            </button>
+                        </div>
+
+                        <!-- Informações do Produto -->
+                        <div class="p-4 sm:p-5 flex-grow flex flex-col justify-between" :class="config.layoutStyle === 'grife' ? 'text-center bg-slate-50/50' : 'text-left'">
+                            <div>
+                                <span class="text-xs text-brand-500 font-semibold uppercase tracking-wider" x-text="produto.categoria"></span>
+                                <h3 class="text-base sm:text-lg font-medium text-slate-900 mt-1 line-clamp-1 cursor-pointer" :class="config.layoutStyle === 'grife' ? 'font-serif font-bold text-slate-900' : 'font-sans'" @click="abrirModalProduto(produto)" x-text="produto.nome"></h3>
+                                <p class="text-xs text-slate-500 mt-1 line-clamp-2" x-text="produto.descricao"></p>
+                            </div>
+
+                            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between" :class="config.layoutStyle === 'grife' ? 'flex-col space-y-3' : 'flex-row'">
+                                <div class="flex items-baseline space-x-2">
+                                    <span class="text-lg sm:text-xl font-bold text-slate-900" x-text="formatarMoeda(produto.preco)"></span>
+                                    <span x-show="produto.precoAntigo" class="text-xs text-slate-400 line-through" x-text="formatarMoeda(produto.precoAntigo)"></span>
+                                </div>
+
+                                <div class="flex items-center space-x-2 w-full sm:w-auto">
+                                    <!-- Botão de Atendimento Inteligente / Chatbot -->
+                                    <button @click="abrirChatbotProduto(produto)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 p-2 rounded-lg transition" title="Dúvidas de Tamanho ou Tecido">
+                                        <i class="fa-solid fa-robot text-sm text-brand-600"></i>
+                                    </button>
+                                    
+                                    <!-- Botão Comprar -->
+                                    <button @click="adicionarAoCarrinho(produto)" class="flex-1 sm:flex-initial bg-slate-900 hover:bg-brand-600 text-white text-xs font-bold px-3 py-2 rounded-lg transition flex items-center justify-center space-x-1">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                        <span>Comprar</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </template>
+            </div>
+        </main>
+
+        <!-- RODAPÉ DA LOJA -->
+        <footer class="bg-slate-950 text-slate-400 pt-12 pb-8 border-t border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h4 class="text-white font-bold mb-4" :class="config.layoutStyle === 'grife' ? 'font-serif text-brand-gold' : ''" x-text="config.nomeLoja"></h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" x-text="config.textoRodape || 'Sua loja virtual de moda feminina de alta elegância e sofisticação.'"></p>
+                </div>
+                <div>
+                    <h5 class="text-white font-semibold text-sm mb-3">Links Úteis</h5>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#" @click.prevent="abaAtual = 'afiliados'" class="hover:text-white transition">Programa de Afiliados</a></li>
+                        <li><a href="#" @click.prevent="abrirModalAdmin()" class="hover:text-white transition">Painel do Administrador</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-white font-semibold text-sm mb-3">Pagamento & Entrega</h5>
+                    <div class="flex items-center space-x-3 text-2xl text-slate-500">
+                        <i class="fa-brands fa-pix text-emerald-400" title="Pix Mercado Pago"></i>
+                        <i class="fa-solid fa-credit-card" title="Cartão de Crédito"></i>
+                        <i class="fa-solid fa-truck-fast text-sky-400" title="SuperFrete / Correios"></i>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="text-white font-semibold text-sm mb-3">Atendimento</h5>
+                    <p class="text-xs">Atendimento em Horário Comercial</p>
+                    <p class="text-xs mt-1 text-brand-400" x-text="config.emailSuporte || 'contato@sualoja.com'"></p>
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800 pt-6 text-center text-xs text-slate-500">
+                <p>&copy; <span x-text="new Date().getFullYear()"></span> <span x-text="config.nomeLoja"></span>. Plataforma Otimizada para GitHub Pages & Cloudflare.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PAINEL E PROGRAMA DE AFILIADOS -->
+    <div x-show="abaAtual === 'afiliados'" class="min-h-screen bg-slate-100 py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+            
+            <div class="flex items-center justify-between mb-8 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div>
+                    <h1 class="text-2xl font-bold text-slate-900">Programa de Afiliados</h1>
+                    <p class="text-xs text-slate-500 mt-0.5">Divulgue nossos produtos e receba comissões em cada venda confirmada!</p>
+                </div>
+                <button @click="abaAtual = 'loja'" class="text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-lg transition">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Voltar para a Loja
+                </button>
+            </div>
+
+            <!-- Login / Cadastro de Afiliado -->
+            <div x-show="!usuarioAfiliado" class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 max-w-md mx-auto">
+                <h2 class="text-lg font-bold text-slate-900 mb-4">Acessar ou Criar Conta de Afiliado</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Seu Nome Completo</label>
+                        <input type="text" x-model="formAfiliado.nome" class="w-full text-sm border-slate-300 rounded-lg p-2.5 border focus:ring-2 focus:ring-brand-500 outline-none" placeholder="Maria Silva">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Seu E-mail</label>
+                        <input type="email" x-model="formAfiliado.email" class="w-full text-sm border-slate-300 rounded-lg p-2.5 border focus:ring-2 focus:ring-brand-500 outline-none" placeholder="maria@email.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Chave PIX para Recebimento de Comissões</label>
+                        <input type="text" x-model="formAfiliado.chavePix" class="w-full text-sm border-slate-300 rounded-lg p-2.5 border focus:ring-2 focus:ring-brand-500 outline-none" placeholder="CPF/E-mail/Telefone">
+                    </div>
+                    <button @click="loginAfiliado()" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-3 rounded-xl transition text-sm shadow-md">
+                        Entrar / Cadastrar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Painel do Afiliado Logado -->
+            <div x-show="usuarioAfiliado" class="space-y-6">
+                <!-- Cards de Métricas Individuais -->
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <span class="text-xs font-medium text-slate-400 block">Seu Código Único</span>
+                        <span class="text-xl font-bold text-brand-600" x-text="usuarioAfiliado?.codigo"></span>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <span class="text-xs font-medium text-slate-400 block">Total de Cliques</span>
+                        <span class="text-2xl font-bold text-slate-800" x-text="usuarioAfiliado?.cliques || 0"></span>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <span class="text-xs font-medium text-slate-400 block">Vendas Realizadas</span>
+                        <span class="text-2xl font-bold text-emerald-600" x-text="usuarioAfiliado?.qtdVendas || 0"></span>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <span class="text-xs font-medium text-slate-400 block">Saldo em Comissões</span>
+                        <span class="text-2xl font-bold text-slate-900" x-text="formatarMoeda(usuarioAfiliado?.saldo || 0)"></span>
+                    </div>
+                </div>
+
+                <!-- Gerador de Links de Afiliado -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <h3 class="text-base font-bold text-slate-900 mb-1">Gerador de Links de Indicação</h3>
+                    <p class="text-xs text-slate-500 mb-4">Selecione qualquer produto para copiar seu link com código de rastreamento:</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <template x-for="prod in produtos" :key="prod.id">
+                            <div class="flex items-center justify-between p-3 border border-slate-100 rounded-xl bg-slate-50">
+                                <div class="flex items-center space-x-3">
+                                    <img :src="prod.imagem" class="w-10 h-10 object-cover rounded-lg" onerror="this.src='https://placehold.co/100'">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-800" x-text="prod.nome"></p>
+                                        <p class="text-[11px] text-slate-500" x-text="formatarMoeda(prod.preco)"></p>
+                                    </div>
+                                </div>
+                                <button @click="copiarLinkAfiliado(prod.id)" class="text-xs bg-brand-100 text-brand-700 hover:bg-brand-200 font-semibold px-3 py-1.5 rounded-md transition flex items-center space-x-1">
+                                    <i class="fa-regular fa-copy"></i>
+                                    <span>Copiar Link</span>
+                                </button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODAL DETALHES DO PRODUTO -->
+    <div x-show="produtoModalAtivo" x-cloak class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div @click.away="fecharModalProduto()" class="bg-white rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl border border-slate-100 relative my-8">
+            <button @click="fecharModalProduto()" class="absolute top-4 right-4 z-10 bg-slate-100 hover:bg-slate-200 text-slate-700 h-8 w-8 rounded-full flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+
+            <div class="grid grid-cols-1 md:grid-cols-2">
+                <div class="bg-slate-100 aspect-square md:aspect-auto">
+                    <img :src="produtoModalAtivo?.imagem" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x800'">
+                </div>
+
+                <div class="p-6 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-brand-500 uppercase tracking-wider" x-text="produtoModalAtivo?.categoria"></span>
+                        <h2 class="text-xl font-bold text-slate-900 mt-1" x-text="produtoModalAtivo?.nome"></h2>
+                        <p class="text-2xl font-bold text-slate-900 mt-2" x-text="formatarMoeda(produtoModalAtivo?.preco || 0)"></p>
+                        
+                        <p class="text-xs text-slate-600 mt-4 leading-relaxed" x-text="produtoModalAtivo?.descricao"></p>
+
+                        <!-- Leitor de Descrição por Voz Nativo -->
+                        <button @click="ouvirDescricao(produtoModalAtivo?.descricao)" class="mt-3 text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-3 py-1.5 rounded-lg transition flex items-center space-x-2">
+                            <i class="fa-solid fa-volume-high text-brand-500"></i>
+                            <span>Ouvir Descrição com Voz do Navegador</span>
+                        </button>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 space-y-3">
+                        <button @click="adicionarAoCarrinho(produtoModalAtivo); fecharModalProduto()" class="w-full bg-slate-900 hover:bg-brand-600 text-white font-bold py-3 rounded-xl transition text-sm flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                            <span>Adicionar ao Carrinho</span>
+                        </button>
+                        <button @click="abrirChatbotProduto(produtoModalAtivo)" class="w-full bg-pink-50 hover:bg-pink-100 text-pink-700 font-semibold py-2.5 rounded-xl transition text-xs flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-comments"></i>
+                            <span>Dúvidas sobre Tamanho / Tecido</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHATBOT DE VENDAS INTELIGENTE EM CADA PRODUTO -->
+    <div x-show="produtoChatAtivo" x-cloak class="fixed inset-0 z-50 overflow-hidden bg-slate-900/50 backdrop-blur-sm flex justify-end">
+        <div @click.away="produtoChatAtivo = null" class="w-full max-w-md bg-white h-full flex flex-col shadow-2xl">
+            <div class="bg-slate-900 text-white p-4 flex items-center justify-between border-b border-slate-800">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center">
+                        <i class="fa-solid fa-robot text-xs text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xs font-bold">Assistente Virtual Moda</h3>
+                        <p class="text-[10px] text-slate-400" x-text="produtoChatAtivo?.nome"></p>
+                    </div>
+                </div>
+                <button @click="produtoChatAtivo = null" class="text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Lista de Mensagens -->
+            <div class="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50 text-xs">
+                <template x-for="(msg, i) in mensagensChat" :key="i">
+                    <div :class="msg.remetente === 'usuario' ? 'justify-end' : 'justify-start'" class="flex">
+                        <div :class="msg.remetente === 'usuario' ? 'bg-brand-600 text-white rounded-l-xl rounded-tr-xl' : 'bg-white text-slate-800 border border-slate-200 rounded-r-xl rounded-tl-xl'" class="max-w-[80%] p-3 shadow-sm">
+                            <p x-text="msg.texto"></p>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Campo de Texto do Chat -->
+            <div class="p-3 bg-white border-t border-slate-200 flex items-center space-x-2">
+                <input type="text" x-model="inputChat" @keydown.enter="enviarMensagemChat()" placeholder="Pergunte sobre medidas, tecido ou envio..." class="flex-1 text-xs border border-slate-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                <button @click="enviarMensagemChat()" class="bg-brand-600 hover:bg-brand-500 text-white p-2.5 rounded-lg transition">
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAINEL DO CARRINHO DE COMPRAS E FRETE -->
+    <div x-show="carrinhoAberto" x-cloak class="fixed inset-0 z-50 overflow-hidden bg-slate-900/50 backdrop-blur-sm flex justify-end">
+        <div @click.away="carrinhoAberto = false" class="w-full max-w-md bg-white h-full flex flex-col shadow-2xl">
+            <div class="bg-slate-900 text-white p-4 flex items-center justify-between">
+                <h3 class="text-sm font-bold flex items-center space-x-2">
+                    <i class="fa-solid fa-bag-shopping text-brand-500"></i>
+                    <span>Seu Carrinho de Compras</span>
+                </h3>
+                <button @click="carrinhoAberto = false" class="text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="flex-1 p-4 overflow-y-auto space-y-4">
+                <template x-if="carrinho.length === 0">
+                    <div class="text-center py-12">
+                        <i class="fa-solid fa-bag-shopping text-4xl text-slate-300 mb-3"></i>
+                        <p class="text-xs text-slate-500">Seu carrinho está vazio.</p>
+                    </div>
+                </template>
+
+                <template x-for="(item, idx) in carrinho" :key="idx">
+                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
+                        <div class="flex items-center space-x-3">
+                            <img :src="item.imagem" class="w-12 h-12 object-cover rounded-lg" onerror="this.src='https://placehold.co/100'">
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-900" x-text="item.nome"></h4>
+                                <span class="text-xs text-brand-600 font-semibold" x-text="formatarMoeda(item.preco)"></span>
+                            </div>
+                        </div>
+                        <button @click="removerDoCarrinho(idx)" class="text-slate-400 hover:text-rose-600 transition p-1">
+                            <i class="fa-solid fa-trash-can text-xs"></i>
+                        </button>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Calculadora de Frete e Finalização Mercado Pago -->
+            <div x-show="carrinho.length > 0" class="p-4 bg-slate-50 border-t border-slate-200 space-y-3">
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-600 mb-1">Calcular Frete (SuperFrete / Correios)</label>
+                    <div class="flex space-x-2">
+                        <input type="text" x-model="cepDestino" placeholder="00000-000" class="flex-1 text-xs border border-slate-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-brand-500">
+                        <button @click="calcularFrete()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs px-3 rounded-lg font-semibold transition">Calcular</button>
+                    </div>
+                    <p x-show="valorFrete !== null" class="text-xs text-emerald-600 font-semibold mt-1">Frete estimado: <span x-text="formatarMoeda(valorFrete)"></span></p>
+                </div>
+
+                <div class="pt-2 border-t border-slate-200 flex justify-between text-sm font-bold text-slate-900">
+                    <span>Total da Compra:</span>
+                    <span x-text="formatarMoeda(totalCarrinho + (valorFrete || 0))"></span>
+                </div>
+
+                <button @click="processarPagamentoMercadoPago()" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 rounded-xl transition text-xs flex items-center justify-center space-x-2 shadow-md">
+                    <i class="fa-brands fa-pix"></i>
+                    <span>Pagar com Mercado Pago (Pix/Cartão)</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTÕES FLUTUANTES PERSONALIZÁVEIS -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col space-y-3">
+        <template x-for="btn in config.botoesFlutuantes" :key="btn.id">
+            <a :href="btn.url" target="_blank" :style="{ backgroundColor: btn.corFundo }" class="w-12 h-12 rounded-full text-white shadow-lg flex items-center justify-center hover:scale-110 transition duration-300" :title="btn.rotulo">
+                <i :class="btn.icone" class="text-xl"></i>
+            </a>
+        </template>
+    </div>
+
+    <!-- PAINEL ADMINISTRATIVO COMPLETO (ADMIN) -->
+    <div x-show="modalAdminAberto" x-cloak class="fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-4xl w-full overflow-hidden shadow-2xl border border-slate-200 flex flex-col max-h-[90vh]">
+            
+            <div class="bg-slate-900 text-white p-5 flex items-center justify-between border-b border-slate-800">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-lg bg-pink-600 flex items-center justify-center">
+                        <i class="fa-solid fa-sliders text-white text-xs"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-sm font-bold">Painel de Controle do Administrador</h2>
+                        <p class="text-[10px] text-slate-400">Gerenciador de E-Commerce & GitHub Pages Engine</p>
+                    </div>
+                </div>
+                <button @click="modalAdminAberto = false" class="text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Login Seguro Admin -->
+            <div x-show="!adminAutenticado" class="p-8 max-w-sm mx-auto text-center space-y-4">
+                <i class="fa-solid fa-shield-halved text-4xl text-brand-600"></i>
+                <h3 class="text-base font-bold text-slate-900">Acesso Restrito ao Administrador</h3>
+                <p class="text-xs text-slate-500">Informe o e-mail cadastrado para ter acesso completo ao painel de controle.</p>
+                <input type="email" x-model="emailLoginAdmin" placeholder="jeanaguiar636@gmail.com" class="w-full text-xs border border-slate-300 p-2.5 rounded-lg outline-none focus:ring-2 focus:ring-brand-500">
+                <button @click="autenticarAdmin()" class="w-full bg-slate-900 hover:bg-brand-600 text-white font-bold py-2.5 rounded-lg text-xs transition">Entrar no Painel</button>
+            </div>
+
+            <!-- Interface do Painel Admin -->
+            <div x-show="adminAutenticado" class="flex-1 flex overflow-hidden">
+                <!-- Abas do Painel -->
+                <div class="w-52 bg-slate-50 border-r border-slate-200 p-3 space-y-1 text-xs">
+                    <button @click="abaAdmin = 'metricas'" :class="abaAdmin === 'metricas' ? 'bg-white shadow text-brand-600 font-bold' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-3 py-2 rounded-lg transition flex items-center space-x-2">
+                        <i class="fa-solid fa-chart-pie w-4"></i>
+                        <span>Métricas Globais</span>
+                    </button>
+                    <button @click="abaAdmin = 'layout'" :class="abaAdmin === 'layout' ? 'bg-white shadow text-brand-600 font-bold' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-3 py-2 rounded-lg transition flex items-center space-x-2">
+                        <i class="fa-solid fa-palette w-4"></i>
+                        <span>Aparência e Layout</span>
+                    </button>
+                    <button @click="abaAdmin = 'produtos'" :class="abaAdmin === 'produtos' ? 'bg-white shadow text-brand-600 font-bold' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-3 py-2 rounded-lg transition flex items-center space-x-2">
+                        <i class="fa-solid fa-shirt w-4"></i>
+                        <span>Gerenciar Produtos</span>
+                    </button>
+                    <button @click="abaAdmin = 'integracoes'" :class="abaAdmin === 'integracoes' ? 'bg-white shadow text-brand-600 font-bold' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-3 py-2 rounded-lg transition flex items-center space-x-2">
+                        <i class="fa-solid fa-plug w-4"></i>
+                        <span>Integrações e SEO</span>
+                    </button>
+                    <button @click="abaAdmin = 'afiliados'" :class="abaAdmin === 'afiliados' ? 'bg-white shadow text-brand-600 font-bold' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-3 py-2 rounded-lg transition flex items-center space-x-2">
+                        <i class="fa-solid fa-users w-4"></i>
+                        <span>Rede de Afiliados</span>
+                    </button>
+                    <button @click="abaAdmin = 'botoes'" :class="abaAdmin === 'botoes' ? 'bg-white shadow text-brand-600 font-bold' : 'text-slate-600 hover:bg-slate-100'" class="w-full text-left px-3 py-2 rounded-lg transition flex items-center space-x-2">
+                        <i class="fa-solid fa-circle-nodes w-4"></i>
+                        <span>Botões Flutuantes</span>
+                    </button>
+                </div>
+
+                <!-- Conteúdo das Abas do Admin -->
+                <div class="flex-1 p-6 overflow-y-auto text-xs space-y-6">
+                    
+                    <!-- ABA: MÉTRICAS -->
+                    <div x-show="abaAdmin === 'metricas'" class="space-y-4">
+                        <h3 class="text-sm font-bold text-slate-900 border-b border-slate-200 pb-2">Visão Geral de Desempenho</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                            <div class="p-4 bg-slate-50 border rounded-xl">
+                                <span class="text-slate-500 block">Total de Produtos</span>
+                                <span class="text-xl font-bold text-slate-900" x-text="produtos.length"></span>
+                            </div>
+                            <div class="p-4 bg-slate-50 border rounded-xl">
+                                <span class="text-slate-500 block">Afiliados Ativos</span>
+                                <span class="text-xl font-bold text-slate-900" x-text="listaAfiliados.length"></span>
+                            </div>
+                            <div class="p-4 bg-slate-50 border rounded-xl">
+                                <span class="text-slate-500 block">Cliques em Links</span>
+                                <span class="text-xl font-bold text-slate-900" x-text="totalCliquesAfiliados"></span>
+                            </div>
+                            <div class="p-4 bg-slate-50 border rounded-xl">
+                                <span class="text-slate-500 block">Comissões a Pagar</span>
+                                <span class="text-xl font-bold text-emerald-600" x-text="formatarMoeda(totalComissoesPagar)"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ABA: LAYOUT -->
+                    <div x-show="abaAdmin === 'layout'" class="space-y-4">
+                        <h3 class="text-sm font-bold text-slate-900 border-b border-slate-200 pb-2">Estilo do Layout</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="border p-4 rounded-xl cursor-pointer flex items-center space-x-3" :class="config.layoutStyle === 'grid2' ? 'border-brand-500 bg-pink-50/30' : 'border-slate-200'">
+                                <input type="radio" name="layoutStyle" value="grid2" x-model="config.layoutStyle">
+                                <div>
+                                    <span class="font-bold block text-slate-800">Grade 2 Produtos</span>
+                                    <span class="text-[10px] text-slate-500">Visual moderno, compacto e responsivo.</span>
+                                </div>
+                            </label>
+                            <label class="border p-4 rounded-xl cursor-pointer flex items-center space-x-3" :class="config.layoutStyle === 'grife' ? 'border-brand-500 bg-pink-50/30' : 'border-slate-200'">
+                                <input type="radio" name="layoutStyle" value="grife" x-model="config.layoutStyle">
+                                <div>
+                                    <span class="font-bold block text-slate-800">Loja de Grife (Luxo)</span>
+                                    <span class="text-[10px] text-slate-500">Fontes clássicas, estilo boutique de alto padrão.</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="space-y-3 pt-3">
+                            <div>
+                                <label class="block font-semibold text-slate-700 mb-1">Nome da Loja Virtual</label>
+                                <input type="text" x-model="config.nomeLoja" class="w-full border p-2 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block font-semibold text-slate-700 mb-1">URL da Imagem da Logomarca</label>
+                                <input type="text" x-model="config.logoUrl" class="w-full border p-2 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block font-semibold text-slate-700 mb-1">Texto do Topo (Barra de Anúncio)</label>
+                                <input type="text" x-model="config.textoAnuncio" class="w-full border p-2 rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ABA: PRODUTOS (CRUD COMPLETO) -->
+                    <div x-show="abaAdmin === 'produtos'" class="space-y-4">
+                        <div class="flex justify-between items-center border-b pb-2">
+                            <h3 class="text-sm font-bold text-slate-900">Gerenciar Catálogo de Produtos</h3>
+                            <button @click="abrirFormularioNovoProduto()" class="bg-brand-600 text-white font-bold px-3 py-1.5 rounded-lg text-xs">+ Cadastrar Produto</button>
+                        </div>
+
+                        <div class="space-y-2">
+                            <template x-for="(prod, i) in produtos" :key="prod.id">
+                                <div class="flex items-center justify-between p-3 border rounded-xl bg-slate-50">
+                                    <div class="flex items-center space-x-3">
+                                        <img :src="prod.imagem" class="w-10 h-10 object-cover rounded-lg" onerror="this.src='https://placehold.co/100'">
+                                        <div>
+                                            <p class="font-bold text-slate-800" x-text="prod.nome"></p>
+                                            <p class="text-[10px] text-slate-500" x-text="formatarMoeda(prod.preco)"></p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <button @click="editarProduto(prod)" class="text-slate-600 hover:text-brand-600"><i class="fa-solid fa-pen"></i></button>
+                                        <button @click="excluirProduto(i)" class="text-slate-600 hover:text-rose-600"><i class="fa-solid fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- ABA: INTEGRAÇÕES, MERCADO PAGO, GOOGLE ANALYTICS E SEARCH CONSOLE -->
+                    <div x-show="abaAdmin === 'integracoes'" class="space-y-4">
+                        <h3 class="text-sm font-bold text-slate-900 border-b pb-2">Integrações & Configurações de SEO</h3>
+                        
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">Mercado Pago (Token de Acesso / Public Key)</label>
+                            <input type="text" x-model="config.tokenMercadoPago" placeholder="APP_USR-xxxx..." class="w-full border p-2 rounded-lg">
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">SuperFrete / Token de API de Frete</label>
+                            <input type="text" x-model="config.tokenSuperFrete" placeholder="Bearer Token SuperFrete" class="w-full border p-2 rounded-lg">
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">Google Search Console (Código de Verificação Meta Tag)</label>
+                            <input type="text" x-model="config.codigoGSC" @input="atualizarMetaGSC()" placeholder="Código da meta tag de verificação" class="w-full border p-2 rounded-lg">
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">Google Analytics ID (GA4)</label>
+                            <input type="text" x-model="config.idGA4" placeholder="G-XXXXXXXXXX" class="w-full border p-2 rounded-lg">
+                        </div>
+                    </div>
+
+                    <!-- ABA: BOTÕES FLUTUANTES -->
+                    <div x-show="abaAdmin === 'botoes'" class="space-y-4">
+                        <div class="flex justify-between items-center border-b pb-2">
+                            <h3 class="text-sm font-bold text-slate-900">Gerenciador de Botões Flutuantes</h3>
+                            <button @click="adicionarBotaoFlutuante()" class="bg-brand-600 text-white font-bold px-3 py-1.5 rounded-lg text-xs">+ Adicionar Botão</button>
+                        </div>
+
+                        <div class="space-y-3">
+                            <template x-for="(btn, idx) in config.botoesFlutuantes" :key="btn.id">
+                                <div class="p-3 border rounded-xl bg-slate-50 space-y-2">
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <input type="text" x-model="btn.rotulo" placeholder="Título/Rótulo" class="border p-1.5 rounded">
+                                        <input type="text" x-model="btn.url" placeholder="URL do Link (https://...)" class="border p-1.5 rounded">
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <input type="text" x-model="btn.icone" placeholder="Ícone FontAwesome (ex: fa-brands fa-whatsapp)" class="border p-1.5 rounded">
+                                        <input type="color" x-model="btn.corFundo" class="h-8 w-full rounded border p-0 cursor-pointer">
+                                    </div>
+                                    <button @click="config.botoesFlutuantes.splice(idx, 1)" class="text-rose-600 font-bold text-[10px]">Remover Botão</button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- ABA: AFILIADOS -->
+                    <div x-show="abaAdmin === 'afiliados'" class="space-y-4">
+                        <h3 class="text-sm font-bold text-slate-900 border-b pb-2">Gerenciamento de Afiliados</h3>
+                        <div class="space-y-2">
+                            <template x-for="aff in listaAfiliados" :key="aff.codigo">
+                                <div class="p-3 border rounded-xl bg-slate-50 flex items-center justify-between">
+                                    <div>
+                                        <p class="font-bold text-slate-800" x-text="aff.nome"></p>
+                                        <p class="text-[10px] text-slate-500" x-text="aff.email + ' | PIX: ' + aff.chavePix"></p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-bold text-emerald-600" x-text="formatarMoeda(aff.saldo)"></p>
+                                        <p class="text-[10px] text-slate-400" x-text="aff.qtdVendas + ' vendas'"></p>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Rodapé com Botão Salvar Alterações -->
+            <div x-show="adminAutenticado" class="bg-slate-100 p-4 border-t border-slate-200 flex justify-between items-center">
+                <span class="text-[11px] text-slate-500">Salva e sincroniza automaticamente no armazenamento do navegador.</span>
+                <button @click="salvarConfiguracoesLoja()" class="bg-brand-600 hover:bg-brand-500 text-white font-bold px-5 py-2 rounded-xl text-xs transition shadow-md">
+                    Salvar Alterações
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FORMULÁRIO DE CADASTRO/EDIÇÃO DE PRODUTO -->
+    <div x-show="produtoEmEdicao" x-cloak class="fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 space-y-4 text-xs">
+            <h3 class="text-sm font-bold text-slate-900" x-text="produtoEmEdicao?.id ? 'Editar Produto' : 'Novo Produto'"></h3>
+            
+            <div>
+                <label class="block font-semibold mb-1">Nome do Produto</label>
+                <input type="text" x-model="produtoEmEdicao.nome" class="w-full border p-2 rounded-lg">
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+                <div>
+                    <label class="block font-semibold mb-1">Preço Atual (R$)</label>
+                    <input type="number" step="0.01" x-model="produtoEmEdicao.preco" class="w-full border p-2 rounded-lg">
+                </div>
+                <div>
+                    <label class="block font-semibold mb-1">Preço Antigo / De (R$)</label>
+                    <input type="number" step="0.01" x-model="produtoEmEdicao.precoAntigo" class="w-full border p-2 rounded-lg">
+                </div>
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">Categoria</label>
+                <input type="text" x-model="produtoEmEdicao.categoria" class="w-full border p-2 rounded-lg" placeholder="Vestidos, Conjuntos, Blusas...">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">URL da Imagem</label>
+                <input type="text" x-model="produtoEmEdicao.imagem" class="w-full border p-2 rounded-lg">
+            </div>
+            <div>
+                <label class="block font-semibold mb-1">Descrição Completa</label>
+                <textarea x-model="produtoEmEdicao.descricao" rows="3" class="w-full border p-2 rounded-lg"></textarea>
+            </div>
+
+            <div class="flex justify-end space-x-2 pt-2">
+                <button @click="produtoEmEdicao = null" class="px-4 py-2 bg-slate-100 rounded-lg text-slate-600 font-bold">Cancelar</button>
+                <button @click="salvarFormularioProduto()" class="px-4 py-2 bg-brand-600 text-white rounded-lg font-bold">Salvar Produto</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT DA ENGINE E SISTEMA DE PERSISTÊNCIA LOCAL -->
+    <script>
+        function lojaEngine() {
+            return {
+                abaAtual: 'loja',
+                categoriaSelecionada: 'todas',
+                bannerAtivo: 0,
+                carrinhoAberto: false,
+                carrinho: [],
+                cepDestino: '',
+                valorFrete: null,
+
+                // Admin e Modais
+                modalAdminAberto: false,
+                adminAutenticado: false,
+                emailLoginAdmin: '',
+                abaAdmin: 'metricas',
+                produtoModalAtivo: null,
+                produtoChatAtivo: null,
+                mensagensChat: [],
+                inputChat: '',
+
+                // Formulários
+                produtoEmEdicao: null,
+                usuarioAfiliado: null,
+                formAfiliado: { nome: '', email: '', chavePix: '' },
+
+                // Configuração Padrão da Loja
+                config: {
+                    layoutStyle: 'grid2', // 'grid2' ou 'grife'
+                    nomeLoja: 'Maison Luxe',
+                    logoUrl: '',
+                    textoAnuncio: '✨ Frete Grátis em compras acima de R$ 299 | Parcele em até 6x sem juros',
+                    textoRodape: 'Sua marca de referência em alta costura e moda feminina contemporânea.',
+                    emailSuporte: 'jeanaguiar636@gmail.com',
+                    tokenMercadoPago: '',
+                    tokenSuperFrete: '',
+                    codigoGSC: '',
+                    idGA4: '',
+                    botoesFlutuantes: [
+                        { id: 1, rotulo: 'WhatsApp', url: 'https://wa.me/5500000000000', icone: 'fa-brands fa-whatsapp', corFundo: '#25D366' },
+                        { id: 2, rotulo: 'Instagram', url: 'https://instagram.com', icone: 'fa-brands fa-instagram', corFundo: '#E1306C' }
+                    ]
+                },
+
+                // Categorias Padrão
+                categorias: ['Vestidos', 'Conjuntos', 'Blusas', 'Alfaiataria'],
+
+                // Produtos de Exemplo Inicial
+                produtos: [
+                    {
+                        id: 1,
+                        nome: 'Vestido Midi Seda Pure Elegance',
+                        preco: 289.90,
+                        precoAntigo: 359.90,
+                        categoria: 'Vestidos',
+                        imagem: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
+                        descricao: 'Vestido midi confeccionado em seda pura com toque suave e caimento impecável. Possui decote sutil e fenda lateral elegante.'
+                    },
+                    {
+                        id: 2,
+                        nome: 'Conjunto Alfaiataria Blazer & Calça',
+                        preco: 420.00,
+                        precoAntigo: null,
+                        categoria: 'Conjuntos',
+                        imagem: 'https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?auto=format&fit=crop&w=800&q=80',
+                        description: 'Conjunto de alfaiataria estruturada em linho misto. Blazer acinturado com botões encapados e calça pantalona de cintura alta.',
+                        descricao: 'Conjunto de alfaiataria estruturada em linho misto. Blazer acinturado com botões encapados e calça pantalona de cintura alta.'
+                    },
+                    {
+                        id: 3,
+                        nome: 'Blusa Satin Regata Gola Alta',
+                        preco: 139.90,
+                        precoAntigo: 179.90,
+                        categoria: 'Blusas',
+                        imagem: 'https://images.unsplash.com/photo-1551803091-e20673f15770?auto=format&fit=crop&w=800&q=80',
+                        descricao: 'Blusa regata com acabamento acetinado de alto brilho. Gola alta refinada, perfeita para composições formais ou casuais sofisticadas.'
+                    },
+                    {
+                        id: 4,
+                        nome: 'Calça Pantalona Alfaiataria Premium',
+                        preco: 229.00,
+                        precoAntigo: null,
+                        categoria: 'Alfaiataria',
+                        imagem: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80',
+                        descricao: 'Calça pantalona corte alfaiataria com frisos frontais que alongam a silhueta. Tecido leve que não amassa facilmente.'
+                    }
+                ],
+
+                // Banners Padrão
+                banners: [
+                    {
+                        titulo: 'Coleção Primavera / Verão 2026',
+                        subtitulo: 'Lançamento Exclusivo',
+                        descricao: 'Fluidez, tecidos nobres e tons terrosos para elevar seu estilo neste ano.',
+                        imagem: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=80'
+                    }
+                ],
+
+                // Registro do Programa de Afiliados
+                listaAfiliados: [
+                    { nome: 'Ana Souza', email: 'ana@email.com', codigo: 'ANA10', chavePix: 'ana@email.com', cliques: 42, qtdVendas: 3, saldo: 89.90 }
+                ],
+
+                // Inicialização do Sistema
+                inicializarApp() {
+                    const configSalva = localStorage.getItem('loja_config');
+                    if (configSalva) this.config = JSON.parse(configSalva);
+
+                    const produtosSalvos = localStorage.getItem('loja_produtos');
+                    if (produtosSalvos) this.produtos = JSON.parse(produtosSalvos);
+
+                    const afiliadosSalvos = localStorage.getItem('loja_afiliados');
+                    if (afiliadosSalvos) this.listaAfiliados = JSON.parse(afiliadosSalvos);
+
+                    // Verificar indicação via link de afiliado (?ref=CODIGO)
+                    const parametros = new URLSearchParams(window.location.search);
+                    const codigoRef = parametros.get('ref');
+                    if (codigoRef) {
+                        const af = this.listaAfiliados.find(a => a.codigo === codigoRef);
+                        if (af) {
+                            af.cliques = (af.cliques || 0) + 1;
+                            this.salvarAfiliados();
+                            localStorage.setItem('indicado_por', codigoRef);
+                        }
+                    }
+
+                    this.atualizarMetaGSC();
+                },
+
+                salvarConfiguracoesLoja() {
+                    localStorage.setItem('loja_config', JSON.stringify(this.config));
+                    localStorage.setItem('loja_produtos', JSON.stringify(this.produtos));
+                    this.salvarAfiliados();
+                    alert('Configurações salvas com sucesso!');
+                    this.modalAdminAberto = false;
+                },
+
+                salvarAfiliados() {
+                    localStorage.setItem('loja_afiliados', JSON.stringify(this.listaAfiliados));
+                },
+
+                // Filtros
+                get produtosFiltrados() {
+                    if (this.categoriaSelecionada === 'todas') return this.produtos;
+                    return this.produtos.filter(p => p.categoria === this.categoriaSelecionada);
+                },
+
+                get totalCarrinho() {
+                    return this.carrinho.reduce((soma, item) => soma + item.preco, 0);
+                },
+
+                get qtdItensCarrinho() {
+                    return this.carrinho.length;
+                },
+
+                get totalCliquesAfiliados() {
+                    return this.listaAfiliados.reduce((acc, item) => acc + (item.cliques || 0), 0);
+                },
+
+                get totalComissoesPagar() {
+                    return this.listaAfiliados.reduce((acc, item) => acc + (item.saldo || 0), 0);
+                },
+
+                // Leitura de Descrição por Voz (Sintetizador Nativo PT-BR)
+                ouvirDescricao(texto) {
+                    if (!('speechSynthesis' in window)) {
+                        alert('Seu navegador não suporta a síntese de voz nativa.');
+                        return;
+                    }
+                    window.speechSynthesis.cancel();
+                    const ut = new SpeechSynthesisUtterance(texto);
+                    ut.lang = 'pt-BR';
+                    ut.rate = 1.0;
+                    window.speechSynthesis.speak(ut);
+                },
+
+                // Assistente Virtual / Chatbot
+                abrirChatbotProduto(produto) {
+                    this.produtoChatAtivo = produto;
+                    this.mensagensChat = [
+                        { remetente: 'bot', texto: `Olá! Sou sua assistente virtual para a peça "${produto.nome}". Deseja tirar dúvidas sobre medidas, tecido ou combinação de looks?` }
+                    ];
+                },
+
+                enviarMensagemChat() {
+                    if (!this.inputChat.trim()) return;
+                    const texto = this.inputChat;
+                    this.mensagensChat.push({ remetente: 'usuario', texto });
+                    this.inputChat = '';
+
+                    setTimeout(() => {
+                        let resposta = 'Esta peça possui modelagem padrão. Recomendamos selecionar seu tamanho habitual. O tecido possui excelente acabamento e caimento macio.';
+                        const txt = texto.toLowerCase();
+                        if (txt.includes('tecido') || txt.includes('composição')) {
+                            resposta = 'Esta peça é fabricada com tecido nobre de alta durabilidade e toque suave, garantindo conforto e elegância durante todo o dia.';
+                        } else if (txt.includes('tamanho') || txt.includes('medida')) {
+                            resposta = 'Tabela recomendada: P (36-38), M (40), G (42-44). Se preferir uma peça mais solta, sugerimos escolher um número maior.';
+                        }
+                        this.mensagensChat.push({ remetente: 'bot', texto: resposta });
+                    }, 500);
+                },
+
+                // Operações do Carrinho
+                adicionarAoCarrinho(produto) {
+                    this.carrinho.push(produto);
+                    this.carrinhoAberto = true;
+                },
+
+                removerDoCarrinho(index) {
+                    this.carrinho.splice(index, 1);
+                },
+
+                calcularFrete() {
+                    if (!this.cepDestino) return;
+                    this.valorFrete = 18.90;
+                },
+
+                processarPagamentoMercadoPago() {
+                    if (this.carrinho.length === 0) return;
+                    alert('Redirecionando para o Checkout do Mercado Pago (Pix/Cartão)...');
+                    this.carrinho = [];
+                    this.carrinhoAberto = false;
+                },
+
+                // Programa de Afiliados
+                loginAfiliado() {
+                    if (!this.formAfiliado.email || !this.formAfiliado.nome) {
+                        alert('Por favor, informe seu nome e e-mail.');
+                        return;
+                    }
+                    let af = this.listaAfiliados.find(a => a.email === this.formAfiliado.email);
+                    if (!af) {
+                        const cod = this.formAfiliado.nome.substring(0, 3).toUpperCase() + Math.floor(100 + Math.random() * 900);
+                        af = {
+                            nome: this.formAfiliado.nome,
+                            email: this.formAfiliado.email,
+                            chavePix: this.formAfiliado.chavePix,
+                            codigo: cod,
+                            cliques: 0,
+                            qtdVendas: 0,
+                            saldo: 0.00
+                        };
+                        this.listaAfiliados.push(af);
+                        this.salvarAfiliados();
+                    }
+                    this.usuarioAfiliado = af;
+                },
+
+                copiarLinkAfiliado(produtoId) {
+                    const link = `${window.location.origin}${window.location.pathname}?prod=${produtoId}&ref=${this.usuarioAfiliado.codigo}`;
+                    
+                    const aux = document.createElement('input');
+                    aux.value = link;
+                    document.body.appendChild(aux);
+                    aux.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(aux);
+
+                    alert(`Link de afiliado copiado com sucesso:\n${link}`);
+                },
+
+                // Painel Administrador
+                abrirModalAdmin() {
+                    this.modalAdminAberto = true;
+                },
+
+                autenticarAdmin() {
+                    if (this.emailLoginAdmin.trim().toLowerCase() === 'jeanaguiar636@gmail.com') {
+                        this.adminAutenticado = true;
+                    } else {
+                        alert('E-mail não autorizado como administrador!');
+                    }
+                },
+
+                abrirModalProduto(produto) {
+                    this.produtoModalAtivo = produto;
+                },
+
+                fecharModalProduto() {
+                    this.produtoModalAtivo = null;
+                },
+
+                abrirFormularioNovoProduto() {
+                    this.produtoEmEdicao = { nome: '', preco: 0, precoAntigo: null, categoria: 'Vestidos', imagem: '', descricao: '' };
+                },
+
+                editarProduto(prod) {
+                    this.produtoEmEdicao = { ...prod };
+                },
+
+                salvarFormularioProduto() {
+                    if (this.produtoEmEdicao.id) {
+                        const idx = this.produtos.findIndex(p => p.id === this.produtoEmEdicao.id);
+                        if (idx !== -1) this.produtos[idx] = { ...this.produtoEmEdicao };
+                    } else {
+                        this.produtoEmEdicao.id = Date.now();
+                        this.produtos.push({ ...this.produtoEmEdicao });
+                    }
+                    this.produtoEmEdicao = null;
+                    this.salvarConfiguracoesLoja();
+                },
+
+                excluirProduto(index) {
+                    if (confirm('Tem certeza que deseja excluir este produto?')) {
+                        this.produtos.splice(index, 1);
+                        this.salvarConfiguracoesLoja();
+                    }
+                },
+
+                adicionarBotaoFlutuante() {
+                    this.config.botoesFlutuantes.push({
+                        id: Date.now(),
+                        rotulo: 'Novo Botão',
+                        url: 'https://',
+                        icone: 'fa-solid fa-link',
+                        corFundo: '#000000'
+                    });
+                },
+
+                atualizarMetaGSC() {
+                    const meta = document.getElementById('gsc-meta');
+                    if (meta && this.config.codigoGSC) {
+                        meta.setAttribute('content', this.config.codigoGSC);
+                    }
+                },
+
+                formatarMoeda(valor) {
+                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor || 0);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
