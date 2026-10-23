@@ -1,683 +1,238 @@
-<!DOCTYPE html>
-<html lang="pt-BR" dir="ltr">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- SEO & GEO PRIMÁRIO (PLATAFORMA CHATSHOP) -->
-  <title>ChatShop | Plataforma & Gerador de Lojas Virtuais de Moda Feminina</title>
-  <meta name="description" content="ChatShop - A plataforma líder para criação de lojas virtuais de moda feminina com assistente de voz, chatbot de dúvidas por produto e integração com afiliados.">
-  <meta name="keywords" content="ChatShop, loja virtual, moda feminina, conjuntos moletinho, vestidos midi, gerador de e-commerce, afiliados moda">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-  <link rel="canonical" href="https://chatshop.com.br/">
-
-  <!-- VERIFICAÇÃO GOOGLE E ANALYTICS (CONFIGURÁVEL NO ADMIN) -->
-  <meta name="google-site-verification" content="SEU_CODIGO_GOOGLE_SEARCH_CONSOLE" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SEU_TRACKING_ID"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-SEU_TRACKING_ID');
-  </script>
-
-  <!-- OPEN GRAPH / PREVIEW SOCIAL -->
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="pt_BR">
-  <meta property="og:site_name" content="ChatShop Moda Feminina">
-  <meta property="og:title" content="ChatShop | Crie sua Loja Virtual de Moda Feminina">
-  <meta property="og:description" content="A e-commerce engine mais leve e completa para vendas de roupas e coleções femininas.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1200">
-
-  <!-- SCHEMA.ORG (DADOS ESTRUTURADOS GOOGLE SHOPPING) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "https://chatshop.com.br/#website",
-        "url": "https://chatshop.com.br/",
-        "name": "ChatShop - Criador de Loja Virtual",
-        "inLanguage": "pt-BR"
-      },
-      {
-        "@type": "Organization",
-        "@id": "https://chatshop.com.br/#organization",
-        "name": "ChatShop Tecnologia",
-        "url": "https://chatshop.com.br/",
-        "email": "jeanaguiar636@gmail.com"
-      }
-    ]
-  }
-  </script>
-
-  <!-- TAILWIND CSS & FONTAWESOME -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- ALPINE.JS (REQUISITO DA INTERFACE) -->
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-  <style>
-    .font-grife { font-family: 'Playfair Display', Georgia, serif; }
-    .aspect-product { aspect-ratio: 3 / 4; }
-    [x-cloak] { display: none !important; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ChatShop — Crie sua loja virtual com chatbot e afiliados</title>
+<meta name="description" content="Monte sua loja de moda em minutos, com chatbot de dúvidas por produto, pedidos no WhatsApp e programa de afiliados.">
+<meta property="og:title" content="ChatShop — Lojas virtuais com chatbot e afiliados">
+<meta property="og:description" content="Sua loja, seu painel, seus afiliados. Pedidos direto no WhatsApp.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🛍️%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fdf7f6;--fg:#3b1a22;--card:#fff;--pri:#7a1f3d;--prf:#fdf3f3;--sec:#f8e6e8;--mut:#f6eded;--mf:#8a6a70;--bd:#efd9dc;--wa:#25c866;--rad:14px;--hero:linear-gradient(135deg,#7a1f3d,#a8465f);--sh:0 12px 32px -14px rgba(122,31,61,.4)}
+*{box-sizing:border-box;margin:0}body{background:var(--bg);color:var(--fg);font:16px/1.5 "DM Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;letter-spacing:-.01em;line-height:1.15}h1{font-size:clamp(2rem,6vw,3.4rem)}h2{font-size:1.7rem}a{color:var(--pri);text-decoration:none}
+.wrap{max-width:1100px;margin:auto;padding:28px 16px}.narrow{max-width:380px;margin:auto;padding:40px 16px}.c{text-align:center;padding:40px}.mut{color:var(--mf);font-size:.9rem}.sm{font-size:.85rem;padding:6px 14px}
+#hd{position:sticky;top:0;z-index:30;background:rgba(253,247,246,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--bd)}
+#hd div{max-width:1100px;margin:auto;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+#hd .logo{font:600 1.5rem Fraunces,serif;color:var(--pri)}#hd nav{display:flex;gap:4px;align-items:center;flex-wrap:wrap}#hd nav a{padding:6px 12px;border-radius:99px;font-size:.9rem}#hd nav a:hover{background:var(--sec)}
+.btn{display:inline-block;border:1px solid transparent;border-radius:99px;padding:10px 20px;font:600 .95rem inherit;cursor:pointer;background:var(--sec);color:var(--pri);text-align:center}
+.hero-b{background:var(--hero);color:#fff;box-shadow:var(--sh)}.out{background:transparent;border-color:var(--bd);color:var(--fg)}.sec{background:var(--sec)}.wa{background:var(--wa);color:#fff}.ghost{background:none}.full{width:100%}.btn:disabled{opacity:.5}
+.hero{max-width:1100px;margin:auto;padding:48px 16px;display:grid;gap:32px;align-items:center}@media(min-width:800px){.hero{grid-template-columns:1fr 1fr}}
+.eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:.8rem;font-weight:700;color:var(--pri);margin-bottom:12px}.sub{margin:16px 0 24px;color:var(--mf);font-size:1.1rem;max-width:30rem}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.heroimg{aspect-ratio:4/3;border-radius:24px;background:var(--hero);display:grid;place-items:center;font-size:5rem;overflow:hidden;box-shadow:var(--sh)}.heroimg img{width:100%;height:100%;object-fit:cover}
+.grid3{max-width:1100px;margin:auto;padding:0 16px 32px;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.sec-t{max-width:1100px;margin:16px auto;padding:0 16px}
+.card{display:block;background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:20px;color:inherit}a.card:hover{box-shadow:var(--sh)}.card h3{margin:6px 0}
+footer{border-top:1px solid var(--bd);padding:28px;text-align:center;font-size:.85rem;color:var(--mf);margin-top:32px}
+.bar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:20px}.tabs{display:flex;gap:6px;flex-wrap:wrap;background:var(--mut);padding:4px;border-radius:12px;margin-bottom:16px;width:fit-content}
+.tab{border:0;background:none;padding:8px 14px;border-radius:9px;font:500 .9rem inherit;cursor:pointer;color:var(--mf)}.tab.on{background:var(--card);color:var(--fg);box-shadow:0 1px 3px #0002}
+.stack{display:grid;gap:14px}label{font-size:.85rem;font-weight:600;display:grid;gap:4px}.chk{display:flex;justify-content:space-between;align-items:center;background:var(--mut);padding:12px;border-radius:12px;font-weight:500}
+input,textarea,select{font:inherit;padding:9px 12px;border:1px solid var(--bd);border-radius:10px;background:#fff;color:var(--fg);width:100%}input[type=checkbox]{width:auto;accent-color:var(--pri);width:20px;height:20px}textarea{min-height:70px}select{width:auto;border-radius:99px}
+.lnk{background:none;border:0;color:var(--pri);margin-top:14px;width:100%;cursor:pointer;font:inherit}.form{max-width:640px;background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:22px}
+.item{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:14px;margin-bottom:8px;font-size:.9rem}.item>.g{flex:1;min-width:180px}.item img,.item .ph{width:72px;height:72px;border-radius:12px;object-fit:cover;background:var(--mut)}
+.badge{font-size:.75rem;padding:2px 10px;border-radius:99px;background:var(--sec);color:var(--pri);margin-right:4px}.pr{font-weight:700;color:var(--pri)}
+.stats{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:16px}.stat{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px}.stat p{font-size:.75rem;color:var(--mf)}.stat b{font:600 1.5rem Fraunces,serif}
+.shophead{background:var(--hero);color:#fff;text-align:center;padding:48px 16px}.shophead p{max-width:36rem;margin:10px auto 0;opacity:.9}
+.prods{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}@media(min-width:800px){.prods{grid-template-columns:repeat(4,1fr)}}
+.prod{background:var(--card);border:1px solid var(--bd);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}.prod>img,.prod>.ph{aspect-ratio:3/4;width:100%;object-fit:cover;background:var(--sec)}.pb{padding:12px;display:grid;gap:8px;margin-top:auto}.pb b{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.ov{position:fixed;inset:0;background:#0006;z-index:50;display:flex;align-items:flex-end;justify-content:center}@media(min-width:600px){.ov{align-items:center}}
+.sheet{background:var(--card);width:100%;max-width:420px;max-height:88vh;overflow:auto;border-radius:24px 24px 0 0;padding:18px;display:grid;gap:12px}@media(min-width:600px){.sheet{border-radius:24px}}
+.ch{display:flex;justify-content:space-between;align-items:center}.x{border:0;background:none;font-size:1.2rem;cursor:pointer}.msgs{display:grid;gap:8px;min-height:80px}
+.m{max-width:85%;padding:8px 12px;border-radius:16px;font-size:.9rem}.bot{background:var(--mut)}.me{background:var(--pri);color:#fff;margin-left:auto}.chip{border:1px solid var(--bd);background:#fff;border-radius:99px;padding:5px 12px;font-size:.8rem;cursor:pointer;margin:0 6px 6px 0}
+.faq{background:var(--mut);padding:10px;border-radius:12px;display:grid;gap:6px;margin-bottom:8px}
+#toast{position:fixed;top:12px;left:0;right:0;z-index:99;display:grid;gap:6px;justify-items:center;pointer-events:none}.t{background:#1f7a4a;color:#fff;padding:10px 18px;border-radius:12px;font-size:.9rem}.t.err{background:#b3261e}
+</style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased font-sans" x-data="plataformaChatShop()">
-
-  <!-- HEADER LIMPO E ELEGANTE -->
-  <header class="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-      
-      <!-- Identificação da Loja Atual e Marca ChatShop -->
-      <div class="flex items-center space-x-3 cursor-pointer" @click="painelAberto = false">
-        <template x-if="lojaAtiva.logo">
-          <img :src="lojaAtiva.logo" :alt="lojaAtiva.nome" class="h-10 w-auto object-contain">
-        </template>
-        <div>
-          <h1 class="text-xl font-bold tracking-tight text-gray-900 font-grife" x-text="lojaAtiva.nome"></h1>
-          <span class="text-[10px] text-rose-600 font-semibold uppercase tracking-widest block -mt-1" x-text="'Powered by ChatShop (' + lojaAtiva.id + ')'"></span>
-        </div>
-      </div>
-
-      <!-- Ações do Menu (Único Botão PAINEL) -->
-      <div class="flex items-center space-x-4">
-        <!-- BOTÃO ÚNICO: PAINEL -->
-        <button @click="abrirPainel()" class="flex items-center space-x-2 text-sm font-semibold text-gray-700 hover:text-black bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full transition duration-200">
-          <i class="fa-solid fa-user-circle text-lg text-rose-600"></i>
-          <span>Painel</span>
-        </button>
-
-        <!-- Carrinho de Compras -->
-        <button @click="carrinhoAberto = true" class="relative p-2 text-gray-700 hover:text-black transition" aria-label="Abrir Carrinho">
-          <i class="fa-solid fa-bag-shopping text-xl"></i>
-          <span x-show="carrinho.length > 0" class="absolute -top-1 -right-1 bg-rose-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full" x-text="carrinho.reduce((acc, item) => acc + item.qtd, 0)"></span>
-        </button>
-      </div>
-
-    </div>
-  </header>
-
-  <!-- BANNER PRINCIPAL DA LOJA ATIVA -->
-  <section x-show="lojaAtiva.banner" class="relative w-full bg-gray-900 overflow-hidden">
-    <img :src="lojaAtiva.banner" :alt="'Banner - ' + lojaAtiva.nome" class="w-full h-48 md:h-80 object-cover opacity-85" loading="eager">
-  </section>
-
-  <!-- VITRINE DE PRODUTOS DA LOJA -->
-  <main class="max-w-7xl mx-auto px-4 py-8">
-    <div :class="lojaAtiva.layoutGrife ? 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8' : 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4'">
-      <template x-for="prod in produtosFiltrados" :key="prod.id">
-        <article class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:shadow-lg transition duration-300">
-          
-          <!-- Imagem com Botão de Voz do Navegador -->
-          <div class="relative aspect-product bg-gray-100 overflow-hidden">
-            <img :src="prod.imagem" :alt="prod.nome" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
-            
-            <button @click="falarTexto(prod.nome + '. ' + prod.descricao)" class="absolute top-3 right-3 bg-black/60 hover:bg-black text-white p-2.5 rounded-full backdrop-blur-md transition shadow" title="Ouvir Descrição com Voz do Navegador">
-              <i class="fa-solid fa-volume-high text-xs"></i>
-            </button>
-          </div>
-
-          <!-- Informações do Produto -->
-          <div class="p-4 flex-1 flex flex-col justify-between">
-            <div>
-              <h2 class="font-bold text-gray-900 text-base line-clamp-1" x-text="prod.nome"></h2>
-              <p class="text-xs text-gray-500 mt-1 line-clamp-2" x-text="prod.descricao"></p>
-            </div>
-
-            <div class="mt-4">
-              <span class="text-xl font-extrabold text-gray-900" x-text="'R$ ' + prod.preco.toFixed(2)"></span>
-
-              <div class="grid grid-cols-2 gap-2 mt-3">
-                <!-- Botão Dúvidas / Chatbot -->
-                <button @click="abrirChatbot(prod)" class="w-full py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold rounded-xl flex items-center justify-center space-x-1 transition">
-                  <i class="fa-solid fa-robot text-rose-600"></i>
-                  <span>Dúvidas</span>
-                </button>
-
-                <!-- Comprar -->
-                <button @click="adicionarCarrinho(prod)" class="w-full py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold rounded-xl flex items-center justify-center space-x-1 shadow transition">
-                  <i class="fa-solid fa-cart-plus"></i>
-                  <span>Comprar</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-        </article>
-      </template>
-    </div>
-  </main>
-
-  <!-- BOTÕES FLUTUANTES DINÂMICOS (WhatsApp, Zap Leve, Instagram, etc.) -->
-  <div class="fixed bottom-6 right-6 z-40 flex flex-col space-y-3">
-    <template x-for="btn in lojaAtiva.botoesFlutuantes" :key="btn.id">
-      <a :href="btn.link" target="_blank" :title="btn.nome" class="w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-white text-xl transition transform hover:scale-110" :style="'background-color: ' + btn.cor" aria-label="Atendimento Social ChatShop">
-        <i :class="btn.icone"></i>
-      </a>
-    </template>
-  </div>
-
-  <!-- CHATBOT FLUTUANTE DE DÚVIDAS DO PRODUTO -->
-  <div x-show="chatAberto" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4" x-cloak>
-    <div class="bg-white w-full sm:max-w-md rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col h-[80vh] sm:h-[550px]">
-      
-      <!-- Cabeçalho do Chat -->
-      <div class="p-4 bg-gray-900 text-white flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-          <template x-if="produtoChat">
-            <img :src="produtoChat.imagem" :alt="produtoChat.nome" class="w-10 h-10 rounded-full object-cover border border-rose-500">
-          </template>
-          <div>
-            <h3 class="font-bold text-sm" x-text="produtoChat ? produtoChat.nome : 'Assistente ChatShop'"></h3>
-            <p class="text-[10px] text-emerald-400 font-semibold"><i class="fa-solid fa-circle text-[8px] mr-1"></i>Chatbot da Loja Online</p>
-          </div>
-        </div>
-        <button @click="chatAberto = false" class="text-gray-400 hover:text-white p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
-      </div>
-
-      <!-- Mensagens da Conversa -->
-      <div class="p-4 flex-1 overflow-y-auto space-y-3 bg-gray-50 text-xs">
-        <div class="flex items-start space-x-2">
-          <div class="w-7 h-7 rounded-full bg-rose-600 text-white flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-robot"></i></div>
-          <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-gray-100 text-gray-800 max-w-[85%]">
-            <p class="font-bold text-rose-600 mb-1">Olá! Tenho respostas sobre este produto:</p>
-            <p x-text="'Como posso te ajudar com o ' + (produtoChat ? produtoChat.nome : 'item') + '?'"></p>
-          </div>
-        </div>
-
-        <template x-for="msg in mensagensChat" :key="msg.id">
-          <div :class="msg.tipo === 'user' ? 'flex justify-end' : 'flex items-start space-x-2'">
-            <template x-if="msg.tipo === 'bot'">
-              <div class="w-7 h-7 rounded-full bg-rose-600 text-white flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-robot"></i></div>
-            </template>
-            <div :class="msg.tipo === 'user' ? 'bg-rose-600 text-white rounded-2xl rounded-tr-none' : 'bg-white text-gray-800 rounded-2xl rounded-tl-none border border-gray-100 shadow-sm'" class="p-3 max-w-[85%]">
-              <p x-text="msg.texto"></p>
-            </div>
-          </div>
-        </template>
-      </div>
-
-      <!-- Botões de Perguntas Frequentes -->
-      <div class="p-3 bg-white border-t space-y-2">
-        <template x-if="produtoChat && produtoChat.chatbotAtivo">
-          <div class="space-y-1.5">
-            <template x-for="faq in produtoChat.faqs" :key="faq.pergunta">
-              <button x-show="faq.pergunta" @click="perguntarChat(faq.pergunta, faq.resposta)" class="w-full text-left p-2.5 bg-gray-50 hover:bg-rose-50 hover:text-rose-700 text-gray-700 font-medium text-xs rounded-xl border transition flex justify-between items-center">
-                <span x-text="faq.pergunta"></span>
-                <i class="fa-solid fa-chevron-right text-[10px] text-gray-400"></i>
-              </button>
-            </template>
-          </div>
-        </template>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- MODAL DO PAINEL UNIFICADO DA PLATAFORMA CHATSHOP -->
-  <div x-show="painelAberto" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" x-cloak>
-    <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-      
-      <!-- Cabeçalho do Painel -->
-      <div class="p-5 bg-gray-900 text-white flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-full bg-rose-600/20 flex items-center justify-center text-rose-400">
-            <i class="fa-solid fa-user-circle text-xl"></i>
-          </div>
-          <div>
-            <h2 class="font-bold text-lg">Painel da Plataforma ChatShop</h2>
-            <p class="text-xs text-gray-400" x-text="usuario.logado ? usuario.email : 'Acesse para gerenciar sua conta'"></p>
-          </div>
-        </div>
-        <button @click="painelAberto = false" class="text-gray-400 hover:text-white p-2 transition"><i class="fa-solid fa-xmark text-2xl"></i></button>
-      </div>
-
-      <!-- Navegação Interna -->
-      <template x-if="usuario.logado">
-        <div class="flex border-b border-gray-200 bg-gray-50 text-sm overflow-x-auto">
-          <button @click="abaPainel = 'compras'" :class="abaPainel === 'compras' ? 'border-b-2 border-rose-600 font-bold text-rose-600 bg-white' : 'text-gray-600 hover:text-gray-900'" class="px-6 py-4 whitespace-nowrap transition">
-            <i class="fa-solid fa-bag-shopping mr-2"></i>Minhas Compras
-          </button>
-          
-          <button @click="abaPainel = 'afiliado'" :class="abaPainel === 'afiliado' ? 'border-b-2 border-rose-600 font-bold text-rose-600 bg-white' : 'text-gray-600 hover:text-gray-900'" class="px-6 py-4 whitespace-nowrap transition">
-            <i class="fa-solid fa-handshake mr-2"></i>
-            <span x-text="usuario.isAfiliado ? 'Área do Afiliado' : 'Afiliar-se'"></span>
-          </button>
-
-          <!-- Painel Admin do Lojista -->
-          <template x-if="usuario.email === 'jeanaguiar636@gmail.com' || usuario.isAdminConvidado">
-            <button @click="abaPainel = 'admin'" :class="abaPainel === 'admin' ? 'border-b-2 border-rose-600 font-bold text-rose-600 bg-rose-50/50' : 'text-gray-600 hover:text-gray-900'" class="px-6 py-4 whitespace-nowrap transition">
-              <i class="fa-solid fa-sliders mr-2 text-rose-600"></i>Painel Admin (<span x-text="lojaAtiva.nome"></span>)
-            </button>
-          </template>
-
-          <!-- Super Admin Master (Exclusivo jeanaguiar636@gmail.com) -->
-          <template x-if="usuario.email === 'jeanaguiar636@gmail.com'">
-            <button @click="abaPainel = 'superadmin'" :class="abaPainel === 'superadmin' ? 'border-b-2 border-purple-600 font-bold text-purple-600 bg-purple-50/50' : 'text-gray-600 hover:text-gray-900'" class="px-6 py-4 whitespace-nowrap transition">
-              <i class="fa-solid fa-crown mr-2 text-purple-600"></i>Super Admin (ChatShop)
-            </button>
-          </template>
-        </div>
-      </template>
-
-      <!-- Conteúdo do Painel -->
-      <div class="p-6 overflow-y-auto flex-1">
-        
-        <!-- LOGIN SIMPLES -->
-        <div x-show="!usuario.logado" class="max-w-md mx-auto py-8">
-          <div class="text-center mb-6">
-            <i class="fa-solid fa-lock text-4xl text-rose-600 mb-2"></i>
-            <h3 class="text-xl font-bold text-gray-900">Entrar na Plataforma ChatShop</h3>
-          </div>
-          <form @submit.prevent="fazerLogin()" class="space-y-4">
-            <input type="email" x-model="usuario.email" required placeholder="seuemail@exemplo.com" class="w-full p-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-rose-500 outline-none">
-            <button type="submit" class="w-full py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl shadow-lg transition">Acessar Painel</button>
-          </form>
-        </div>
-
-        <template x-if="usuario.logado">
-          <div>
-            <!-- ABA 1: MINHAS COMPRAS -->
-            <div x-show="abaPainel === 'compras'" class="space-y-4">
-              <h3 class="font-bold text-gray-900 text-lg">Histórico de Compras e Entregas</h3>
-              <div class="bg-gray-50 border border-dashed border-gray-300 rounded-2xl p-8 text-center text-sm text-gray-500">
-                <i class="fa-solid fa-box-open text-4xl mb-3 text-gray-400"></i>
-                <p>Nenhuma compra registrada até o momento nesta loja.</p>
-              </div>
-            </div>
-
-            <!-- ABA 2: PROGRAMA DE AFILIADOS -->
-            <div x-show="abaPainel === 'afiliado'" class="space-y-6">
-              <div x-show="!usuario.isAfiliado" class="bg-rose-50 border border-rose-200 rounded-3xl p-8 text-center">
-                <h3 class="text-2xl font-bold text-gray-900">Seja um Afiliado <span x-text="lojaAtiva.nome"></span></h3>
-                <p class="text-xs text-gray-600 mt-1">Divulgue os produtos e receba comissões automáticas.</p>
-                <button @click="afiliarSe()" class="mt-4 px-8 py-3 bg-rose-600 text-white font-bold rounded-2xl shadow">Quero Me Afiliar</button>
-              </div>
-              <div x-show="usuario.isAfiliado" class="space-y-4">
-                <div class="grid grid-cols-3 gap-4">
-                  <div class="bg-emerald-50 p-4 rounded-xl"><span class="text-xs text-emerald-800">Ganhos</span><p class="text-xl font-bold text-emerald-600">R$ 0,00</p></div>
-                  <div class="bg-blue-50 p-4 rounded-xl"><span class="text-xs text-blue-800">Vendas</span><p class="text-xl font-bold text-blue-600">0</p></div>
-                  <div class="bg-purple-50 p-4 rounded-xl"><span class="text-xs text-purple-800">Cliques</span><p class="text-xl font-bold text-purple-600">0</p></div>
-                </div>
-                <div class="bg-gray-50 p-4 rounded-xl">
-                  <label class="block text-xs font-semibold text-gray-600 mb-1">Seu Link de Afiliado</label>
-                  <input type="text" readonly :value="window.location.origin + '?loja=' + lojaAtiva.id + '&ref=' + usuario.codigoAfiliado" class="w-full p-2 border rounded bg-white text-xs font-mono">
-                </div>
-              </div>
-            </div>
-
-            <!-- ABA 3: GERENCIADOR COMPLETO DA LOJA (ADMINISTRAÇÃO) -->
-            <div x-show="abaPainel === 'admin'" class="space-y-6">
-              <div class="border-b pb-3 flex justify-between items-center">
-                <h3 class="font-bold text-gray-900 text-lg">Painel de Administração ChatShop</h3>
-                <span class="bg-rose-100 text-rose-800 text-xs px-3 py-1 rounded-full font-bold" x-text="'Loja Ativa: ' + lojaAtiva.nome"></span>
-              </div>
-              
-              <!-- DADOS BÁSICOS E VISUAIS -->
-              <div class="bg-gray-50 p-4 rounded-2xl border space-y-3">
-                <h4 class="font-bold text-sm text-gray-900"><i class="fa-solid fa-paintbrush text-rose-600 mr-2"></i>Identidade Visual & Capa</h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label class="block text-xs font-semibold text-gray-600 mb-1">Nome da Loja</label>
-                    <input type="text" x-model="lojaAtiva.nome" class="w-full p-2.5 border rounded-xl text-xs bg-white">
-                  </div>
-                  <div>
-                    <label class="block text-xs font-semibold text-gray-600 mb-1">URL da Logo</label>
-                    <input type="text" x-model="lojaAtiva.logo" placeholder="https://..." class="w-full p-2.5 border rounded-xl text-xs bg-white">
-                  </div>
-                </div>
-                <div>
-                  <label class="block text-xs font-semibold text-gray-600 mb-1">URL do Banner Principal</label>
-                  <input type="text" x-model="lojaAtiva.banner" placeholder="https://..." class="w-full p-2.5 border rounded-xl text-xs bg-white">
-                </div>
-
-                <!-- Alternar Estilo da Loja -->
-                <div class="flex items-center justify-between bg-white p-3 rounded-xl border mt-2">
-                  <div>
-                    <h5 class="text-xs font-bold text-gray-900">Layout Loja de Grife</h5>
-                    <p class="text-[10px] text-gray-500">Ative para visual espaçado (3 colunas) ou desative para grade de 2 produtos no celular.</p>
-                  </div>
-                  <input type="checkbox" x-model="lojaAtiva.layoutGrife" class="w-5 h-5 text-rose-600 rounded">
-                </div>
-              </div>
-
-              <!-- BOTÕES FLUTUANTES (WhatsApp, Zap Leve, Instagram) -->
-              <div class="bg-gray-50 p-4 rounded-2xl border space-y-3">
-                <h4 class="font-bold text-sm text-gray-900"><i class="fa-solid fa-comments text-emerald-600 mr-2"></i>Botões Flutuantes (Zap Leve, WhatsApp, etc.)</h4>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  <input type="text" x-model="novoBtn.nome" placeholder="Nome (ex: Zap Leve)" class="p-2 border rounded text-xs bg-white">
-                  <input type="text" x-model="novoBtn.icone" placeholder="Ícone (fa-solid fa-bolt)" class="p-2 border rounded text-xs bg-white">
-                  <input type="text" x-model="novoBtn.link" placeholder="Link (https://...)" class="p-2 border rounded text-xs bg-white">
-                  <input type="color" x-model="novoBtn.cor" class="h-9 w-full rounded border cursor-pointer">
-                </div>
-                <button @click="adicionarBotaoFlutuante()" class="w-full bg-emerald-600 text-white text-xs font-bold rounded-xl py-2">Adicionar Botão Flutuante</button>
-
-                <!-- Lista de Botões Cadastrados -->
-                <div class="space-y-1.5 mt-2">
-                  <template x-for="(btn, index) in lojaAtiva.botoesFlutuantes" :key="btn.id">
-                    <div class="flex items-center justify-between bg-white p-2 rounded-lg border text-xs">
-                      <div class="flex items-center space-x-2">
-                        <span class="w-5 h-5 rounded-full text-white flex items-center justify-center text-[10px]" :style="'background-color:' + btn.cor"><i :class="btn.icone"></i></span>
-                        <span class="font-bold" x-text="btn.nome"></span>
-                      </div>
-                      <button @click="lojaAtiva.botoesFlutuantes.splice(index, 1); salvarConfiguracoes()" class="text-red-500 hover:text-red-700 font-bold"><i class="fa-solid fa-trash text-xs"></i></button>
-                    </div>
-                  </template>
-                </div>
-              </div>
-
-              <!-- DOMÍNIO PRÓPRIO E SEO -->
-              <div class="bg-gray-50 p-4 rounded-2xl border space-y-3">
-                <h4 class="font-bold text-sm text-gray-900"><i class="fa-solid fa-globe text-blue-600 mr-2"></i>Domínio Próprio & SEO Google</h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <input type="text" x-model="lojaAtiva.dominioProprio" placeholder="www.minhaloja.com.br" class="p-2.5 border rounded-xl text-xs bg-white">
-                  <input type="text" x-model="lojaAtiva.googleConsole" placeholder="Código Google Search Console" class="p-2.5 border rounded-xl text-xs bg-white">
-                </div>
-              </div>
-
-              <!-- CADASTRO DE PRODUTO COM CHATBOT E VOZ -->
-              <div class="bg-gray-50 p-5 rounded-2xl border space-y-4">
-                <h4 class="font-bold text-sm text-gray-900"><i class="fa-solid fa-plus-circle text-rose-600 mr-2"></i>Cadastrar Novo Produto com Chatbot</h4>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <input type="text" x-model="novoProd.nome" placeholder="Nome do Produto" class="p-2.5 border rounded-xl text-xs bg-white">
-                  <input type="number" x-model.number="novoProd.preco" placeholder="Preço (R$)" class="p-2.5 border rounded-xl text-xs bg-white">
-                  <input type="text" x-model="novoProd.imagem" placeholder="URL da Imagem" class="p-2.5 border rounded-xl text-xs bg-white">
-                </div>
-                <textarea x-model="novoProd.descricao" placeholder="Descrição do produto para o leitor de voz e SEO..." class="w-full p-2.5 border rounded-xl text-xs h-20 bg-white"></textarea>
-
-                <!-- CONFIGURAÇÃO CHATBOT DO PRODUTO -->
-                <div class="bg-white p-3 rounded-xl border space-y-2">
-                  <div class="flex items-center space-x-2">
-                    <input type="checkbox" id="chatAtivoProd" x-model="novoProd.chatbotAtivo" class="w-4 h-4 text-rose-600 rounded">
-                    <label for="chatAtivoProd" class="text-xs font-bold text-gray-800">Ativar Chatbot de Dúvidas para este produto</label>
-                  </div>
-
-                  <div x-show="novoProd.chatbotAtivo" class="space-y-2 pt-2 border-t">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      <input type="text" x-model="novoProd.faqs[0].pergunta" placeholder="Pergunta 1 (ex: Tecido?)" class="p-2 border rounded text-xs bg-gray-50">
-                      <input type="text" x-model="novoProd.faqs[0].resposta" placeholder="Resposta 1 (ex: Moletinho Premium)" class="p-2 border rounded text-xs bg-gray-50">
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      <input type="text" x-model="novoProd.faqs[1].pergunta" placeholder="Pergunta 2 (ex: Tamanho?)" class="p-2 border rounded text-xs bg-gray-50">
-                      <input type="text" x-model="novoProd.faqs[1].resposta" placeholder="Resposta 2 (ex: Veste 38 ao 42)" class="p-2 border rounded text-xs bg-gray-50">
-                    </div>
-                  </div>
-                </div>
-
-                <button @click="adicionarProduto()" class="w-full py-3 bg-gray-900 text-white text-xs font-bold rounded-xl shadow">Salvar Produto na Loja</button>
-              </div>
-
-              <button @click="salvarConfiguracoes()" class="w-full py-3.5 bg-emerald-600 text-white font-bold rounded-xl shadow hover:bg-emerald-700 transition">Salvar Todas as Alterações da Loja</button>
-            </div>
-
-            <!-- ABA 4: SUPER ADMIN MASTER (PLATAFORMA CHATSHOP) -->
-            <div x-show="abaPainel === 'superadmin'" class="space-y-6">
-              <div class="bg-purple-50 border border-purple-200 p-5 rounded-2xl">
-                <h3 class="font-bold text-purple-900 text-lg mb-1"><i class="fa-solid fa-crown mr-2"></i>Painel Master Plataforma ChatShop</h3>
-                <p class="text-xs text-purple-700">Bem-vindo, Jean! Aqui você cria e gerencia todas as lojas virtuais ativas na plataforma ChatShop.</p>
-              </div>
-
-              <!-- CRIAR NOVA LOJA -->
-              <div class="bg-gray-50 p-4 rounded-xl border space-y-3">
-                <h4 class="font-bold text-sm text-gray-900">Criar Nova Loja na ChatShop</h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  <input type="text" x-model="novaLoja.id" placeholder="ID da Loja (ex: favo)" class="p-2.5 border rounded-xl text-xs bg-white">
-                  <input type="text" x-model="novaLoja.nome" placeholder="Nome Exibição (ex: Favo Moda)" class="p-2.5 border rounded-xl text-xs bg-white">
-                </div>
-                <button @click="criarNovaLoja()" class="w-full bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold py-3 rounded-xl transition">Criar Loja na ChatShop</button>
-              </div>
-
-              <!-- LISTA DE LOJAS CADASTRADAS -->
-              <div>
-                <h4 class="font-bold text-sm text-gray-900 mb-2">Lojas Virtuais Criadas</h4>
-                <div class="space-y-2">
-                  <template x-for="l in listaLojas" :key="l.id">
-                    <div class="flex justify-between items-center bg-white p-3 rounded-xl border text-xs">
-                      <div>
-                        <span class="font-bold text-gray-900" x-text="l.nome"></span>
-                        <span class="text-gray-400 text-[10px] ml-2" x-text="'(?loja=' + l.id + ')'"></span>
-                      </div>
-                      <a :href="'?loja=' + l.id" class="bg-rose-100 text-rose-700 font-bold px-3 py-1 rounded-lg">Acessar Loja</a>
-                    </div>
-                  </template>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-        </template>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- RODAPÉ DA PLATAFORMA CHATSHOP -->
-  <footer class="bg-white border-t border-gray-200 py-8 mt-16 text-center text-xs text-gray-500">
-    <div class="max-w-7xl mx-auto px-4">
-      <p class="font-bold text-gray-800" x-text="lojaAtiva.nome + ' © 2026'"></p>
-      <p class="mt-1 text-[11px] text-gray-400">Plataforma ChatShop - Gerador de Lojas Virtuais & Moda Feminina</p>
-    </div>
-  </footer>
-
-  <!-- SCRIPT CENTRAL CHATSHOP -->
-  <script>
-    function plataformaChatShop() {
-      return {
-        painelAberto: false,
-        carrinhoAberto: false,
-        chatAberto: false,
-        abaPainel: 'compras',
-        
-        usuario: {
-          logado: false,
-          email: '',
-          isAfiliado: false,
-          codigoAfiliado: '',
-          isAdminConvidado: false
-        },
-
-        // Lista Geral de Lojas na ChatShop
-        listaLojas: [
-          {
-            id: 'dridalia',
-            nome: 'Dridalia Moda Feminina',
-            logo: '',
-            banner: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1200',
-            layoutGrife: true,
-            dominioProprio: '',
-            googleConsole: '',
-            botoesFlutuantes: [
-              { id: 1, nome: 'WhatsApp', icone: 'fa-brands fa-whatsapp', link: 'https://wa.me/5500000000000', cor: '#25D366' },
-              { id: 2, nome: 'Zap Leve', icone: 'fa-solid fa-bolt', link: 'https://zapleve.com', cor: '#4F46E5' },
-              { id: 3, nome: 'Instagram', icone: 'fa-brands fa-instagram', link: 'https://instagram.com', cor: '#E1306C' }
-            ]
-          },
-          {
-            id: 'favo',
-            nome: 'Favo Moda & Acessórios',
-            logo: '',
-            banner: 'https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=1200',
-            layoutGrife: false,
-            dominioProprio: '',
-            googleConsole: '',
-            botoesFlutuantes: [
-              { id: 1, nome: 'WhatsApp', icone: 'fa-brands fa-whatsapp', link: 'https://wa.me/5500000000000', cor: '#25D366' }
-            ]
-          }
-        ],
-
-        lojaAtiva: {},
-        novaLoja: { id: '', nome: '' },
-
-        novoBtn: { nome: '', icone: 'fa-solid fa-comments', link: '', cor: '#10B981' },
-
-        produtoChat: null,
-        mensagensChat: [],
-
-        novoProd: {
-          nome: '',
-          preco: null,
-          imagem: '',
-          descricao: '',
-          chatbotAtivo: true,
-          faqs: [
-            { pergunta: 'Qual a composição do tecido?', resposta: 'Moletinho Premium de alta qualidade com toque suave.' },
-            { pergunta: 'Prazo de entrega?', resposta: 'Envio imediato em até 24 horas úteis.' }
-          ]
-        },
-
-        // Produtos Cadastrados
-        produtos: [
-          {
-            id: 1,
-            loja_id: 'dridalia',
-            nome: 'Conjunto Tati Moletinho Premium',
-            preco: 189.90,
-            descricao: 'Conjunto de moletinho super macio e elegante para o dia a dia.',
-            imagem: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600',
-            chatbotAtivo: true,
-            faqs: [
-              { pergunta: 'Qual a composição do tecido?', resposta: 'Moletinho Premium com elastano toque suave.' },
-              { pergunta: 'Quais tamanhos veste?', resposta: 'Veste perfeitamente do tamanho 38 ao 42.' }
-            ]
-          },
-          {
-            id: 2,
-            loja_id: 'dridalia',
-            nome: 'Vestido Midi Elegance Alfaiataria',
-            preco: 239.90,
-            descricao: 'Vestido midi fluido de alfaiataria com corte impecável.',
-            imagem: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=600',
-            chatbotAtivo: true,
-            faqs: [
-              { pergunta: 'Tem forro interno?', resposta: 'Sim, possui forro total sem transparência.' }
-            ]
-          }
-        ],
-
-        carrinho: [],
-
-        init() {
-          // Detecta a loja na URL ex: ?loja=favo ou usa a padrão 'dridalia'
-          const urlParams = new URLSearchParams(window.location.search);
-          const lojaParam = urlParams.get('loja') || 'dridalia';
-
-          const lojasSalvas = localStorage.getItem('chatshop_lojas');
-          if (lojasSalvas) this.listaLojas = JSON.parse(lojasSalvas);
-
-          const encontrada = this.listaLojas.find(l => l.id === lojaParam);
-          this.lojaAtiva = encontrada || this.listaLojas[0];
-
-          const prodsSalvos = localStorage.getItem('chatshop_produtos');
-          if (prodsSalvos) this.produtos = JSON.parse(prodsSalvos);
-        },
-
-        get produtosFiltrados() {
-          return this.produtos.filter(p => p.loja_id === this.lojaAtiva.id);
-        },
-
-        abrirPainel() { this.painelAberto = true; },
-        abrirChatbot(prod) { this.produtoChat = prod; this.mensagensChat = []; this.chatAberto = true; },
-
-        perguntarChat(pergunta, resposta) {
-          this.mensagensChat.push({ id: Date.now(), tipo: 'user', texto: pergunta });
-          setTimeout(() => {
-            this.mensagensChat.push({ id: Date.now() + 1, tipo: 'bot', texto: resposta });
-          }, 300);
-        },
-
-        fazerLogin() {
-          if (!this.usuario.email) return;
-          this.usuario.logado = true;
-        },
-
-        afiliarSe() {
-          const codigo = 'AF-' + Math.random().toString(36).substring(2, 7).toUpperCase();
-          this.usuario.isAfiliado = true;
-          this.usuario.codigoAfiliado = codigo;
-          alert('Conta de afiliado ativada na loja ' + this.lojaAtiva.nome + '!');
-        },
-
-        adicionarBotaoFlutuante() {
-          if (!this.novoBtn.nome || !this.novoBtn.link) {
-            alert('Preencha nome e link do botão flutuante.');
-            return;
-          }
-          this.lojaAtiva.botoesFlutuantes.push({
-            id: Date.now(),
-            nome: this.novoBtn.nome,
-            icone: this.novoBtn.icone || 'fa-solid fa-comments',
-            link: this.novoBtn.link,
-            cor: this.novoBtn.cor
-          });
-          this.salvarConfiguracoes();
-          this.novoBtn = { nome: '', icone: 'fa-solid fa-comments', link: '', cor: '#10B981' };
-          alert('Botão flutuante adicionado!');
-        },
-
-        adicionarProduto() {
-          if (!this.novoProd.nome || !this.novoProd.preco || !this.novoProd.imagem) {
-            alert('Preencha nome, preço e imagem do produto.');
-            return;
-          }
-          this.produtos.push({
-            id: Date.now(),
-            loja_id: this.lojaAtiva.id,
-            nome: this.novoProd.nome,
-            preco: Number(this.novoProd.preco),
-            imagem: this.novoProd.imagem,
-            descricao: this.novoProd.descricao,
-            chatbotAtivo: this.novoProd.chatbotAtivo,
-            faqs: JSON.parse(JSON.stringify(this.novoProd.faqs))
-          });
-          localStorage.setItem('chatshop_produtos', JSON.stringify(this.produtos));
-          alert('Produto cadastrado com sucesso!');
-        },
-
-        criarNovaLoja() {
-          if (!this.novaLoja.id || !this.novaLoja.nome) {
-            alert('Preencha ID e Nome da nova loja.');
-            return;
-          }
-          const idLimpo = this.novaLoja.id.toLowerCase().replace(/\s+/g, '');
-          this.listaLojas.push({
-            id: idLimpo,
-            nome: this.novaLoja.nome,
-            logo: '',
-            banner: 'https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=1200',
-            layoutGrife: true,
-            dominioProprio: '',
-            googleConsole: '',
-            botoesFlutuantes: [
-              { id: 1, nome: 'WhatsApp', icone: 'fa-brands fa-whatsapp', link: 'https://wa.me/5500000000000', cor: '#25D366' }
-            ]
-          });
-          localStorage.setItem('chatshop_lojas', JSON.stringify(this.listaLojas));
-          alert('Loja ' + this.novaLoja.nome + ' criada no ChatShop!');
-          this.novaLoja = { id: '', nome: '' };
-        },
-
-        salvarConfiguracoes() {
-          localStorage.setItem('chatshop_lojas', JSON.stringify(this.listaLojas));
-          alert('Configurações salvas!');
-        },
-
-        falarTexto(texto) {
-          if ('speechSynthesis' in window) {
-            window.speechSynthesis.cancel();
-            const msg = new SpeechSynthesisUtterance(texto);
-            msg.lang = 'pt-BR';
-            window.speechSynthesis.speak(msg);
-          }
-        },
-
-        adicionarCarrinho(prod) { this.carrinho.push({ ...prod, qtd: 1 }); alert('Produto adicionado ao carrinho!'); }
-      }
-    }
-  </script>
+<body>
+<div id="hd"></div><main id="app"></main><div id="modal"></div><div id="toast"></div>
+<script>
+const API = "https://chatshop-api.SEU-USUARIO.workers.dev"; // URL do seu Worker (troque após o deploy)
+const $ = (s) => document.querySelector(s), app = $("#app");
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const brl = (n) => Number(n || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const S = { user: JSON.parse(localStorage.getItem("u") || "null") };
+const toast = (m, err) => { const t = document.createElement("div"); t.className = "t" + (err ? " err" : ""); t.textContent = m; $("#toast").append(t); setTimeout(() => t.remove(), 3200); };
+const fail = (e) => toast(e.message || "Erro", 1);
+
+async function api(p, o = {}) {
+  const h = {}, tk = localStorage.getItem("t"); if (tk) h.authorization = "Bearer " + tk;
+  let b = o.body; if (b instanceof Blob) h["content-type"] = b.type; else if (b) { h["content-type"] = "application/json"; b = JSON.stringify(b); }
+  const r = await fetch(API + p, { method: o.method || (b ? "POST" : "GET"), headers: h, body: b });
+  const d = await r.json().catch(() => ({}));
+  if (r.status === 401 && tk) { logout(); throw new Error("Sessão expirada"); }
+  if (!r.ok) throw new Error(d.error || "Erro");
+  return d;
+}
+const setAuth = (d) => { localStorage.setItem("t", d.token); localStorage.setItem("u", JSON.stringify(d.user)); S.user = d.user; };
+function logout() { localStorage.removeItem("t"); localStorage.removeItem("u"); S.user = null; location.hash = "#/"; header(); }
+const header = () => {
+  const u = S.user;
+  $("#hd").innerHTML = `<div><a class="logo" href="#/">ChatShop</a><nav>${u ? `<a href="#/lojista">Lojista</a><a href="#/afiliado">Afiliado</a>${u.admin ? '<a href="#/admin">Admin</a>' : ""}<button class="btn ghost sm" id="out">Sair</button>` : '<a class="btn hero-b sm" href="#/auth">Entrar</a>'}</nav></div>`;
+  if (u) $("#out").onclick = logout;
+};
+const modal = (h) => { const m = $("#modal"); m.innerHTML = `<div class="ov"><div class="sheet">${h}</div></div>`; m.firstChild.onclick = (e) => { if (e.target === m.firstChild || e.target.closest("[data-x]")) closeM(); }; };
+const closeM = () => ($("#modal").innerHTML = "");
+const stat = (l, v) => `<div class="stat"><p>${l}</p><b>${v}</b></div>`;
+const sum = (a, k) => a.reduce((s, o) => s + Number(o[k] || 0), 0);
+
+// ---------- Home ----------
+async function home() {
+  const st = await api("/stores").catch(() => []);
+  const f = [["🏬", "Painel do lojista", "Produtos, pedidos, afiliados e comissões da sua loja."], ["💬", "Chatbot por produto", "Ative em cada produto e cadastre as perguntas frequentes."], ["🤝", "Programa de afiliados", "Você define a % de comissão e cada afiliado ganha seu link."]];
+  app.innerHTML = `<section class="hero"><div><p class="eyebrow">Plataforma de lojas virtuais</p><h1>Sua loja de moda, com chatbot e afiliados vendendo por você.</h1><p class="sub">Crie a loja, cadastre produtos com perguntas prontas e receba pedidos direto no WhatsApp.</p><div class="row"><a class="btn hero-b" href="#/lojista">Criar minha loja</a><a class="btn out" href="#/afiliado">Quero ser afiliado</a></div></div><div class="heroimg"><img src="hero.jpg" alt="Araras com vestidos em tons de rosa e vinho" onerror="this.replaceWith('🛍️')"></div></section>
+  <section class="grid3">${f.map(([i, t, d]) => `<div class="card"><div style="font-size:1.6rem">${i}</div><h3>${t}</h3><p class="mut">${d}</p></div>`).join("")}</section>
+  ${st.length ? `<div class="sec-t"><h2>Lojas na ChatShop</h2></div><section class="grid3">${st.map((s) => `<a class="card" href="#/loja/${esc(s.slug)}"><h3>${esc(s.name)}</h3><p class="mut">${esc(s.description || "Visite a loja")}</p></a>`).join("")}</section>` : ""}
+  <footer>ChatShop © 2026</footer>`;
+}
+
+// ---------- Login ----------
+let mode = "in";
+function auth() {
+  const up = mode === "up";
+  app.innerHTML = `<div class="narrow"><h1>${up ? "Criar conta" : "Entrar"}</h1><p class="mut" style="margin:6px 0 20px">Uma conta serve para lojista e afiliado.</p><form id="f" class="stack">${up ? '<label>Nome<input name="name" required></label>' : ""}<label>E-mail<input name="email" type="email" required></label><label>Senha<input name="password" type="password" minlength="6" required></label><button class="btn hero-b">${up ? "Criar conta" : "Entrar"}</button></form><button class="lnk" id="sw">${up ? "Já tem conta? Entrar" : "Não tem conta? Cadastre-se"}</button></div>`;
+  $("#sw").onclick = () => { mode = up ? "in" : "up"; auth(); };
+  $("#f").onsubmit = async (e) => {
+    e.preventDefault();
+    try { setAuth(await api("/auth/" + (up ? "signup" : "login"), { body: Object.fromEntries(new FormData(e.target)) })); header(); location.hash = "#/lojista"; } catch (x) { fail(x); }
+  };
+}
+
+// ---------- Loja pública ----------
+async function loja(slug, ref) {
+  const k = "ref:" + slug; if (ref) localStorage.setItem(k, ref); ref = ref || localStorage.getItem(k);
+  const d = await api("/stores/" + encodeURIComponent(slug)).catch(() => null);
+  if (!d) { app.innerHTML = '<p class="c">Loja não encontrada. <a href="#/">Voltar</a></p>'; return; }
+  const { store: s, products: ps } = d, by = (id) => ps.find((p) => p.id === id);
+  document.title = s.name + " — ChatShop";
+  app.innerHTML = `<header class="shophead"><h1>${esc(s.name)}</h1>${s.description ? `<p>${esc(s.description)}</p>` : ""}</header><div class="wrap">${ps.length ? "" : '<p class="c mut">Em breve novidades por aqui.</p>'}<div class="prods">${ps.map((p) => `<div class="prod">${p.image_url ? `<img loading="lazy" src="${esc(p.image_url)}" alt="${esc(p.name)}">` : '<div class="ph"></div>'}<div class="pb"><b>${esc(p.name)}</b><span class="pr">${brl(p.price)}</span>${p.chatbot_enabled && p.faqs.length ? `<button class="btn sec sm" data-chat="${p.id}">💬 Dúvidas</button>` : ""}<button class="btn wa sm" data-buy="${p.id}">Pedir no WhatsApp</button></div></div>`).join("")}</div></div><footer>Loja criada com <a href="#/">ChatShop</a></footer>`;
+  app.onclick = (e) => {
+    const c = e.target.closest("[data-chat]"), b = e.target.closest("[data-buy]");
+    if (c) chat(by(c.dataset.chat), () => buy(by(c.dataset.chat), s, ref)); else if (b) buy(by(b.dataset.buy), s, ref);
+  };
+}
+function chat(p, onBuy) {
+  modal(`<div class="ch"><b>${esc(p.name)}</b><button data-x class="x">✕</button></div><div id="msgs" class="msgs"><div class="m bot">Olá! Tire suas dúvidas sobre "${esc(p.name)}". Toque em uma pergunta:</div></div><div>${p.faqs.map((q, i) => `<button class="chip" data-q="${i}">${esc(q.question)}</button>`).join("")}</div><button class="btn wa full" id="cb">Quero comprar</button>`);
+  $("#modal").querySelectorAll("[data-q]").forEach((b) => (b.onclick = () => { const q = p.faqs[b.dataset.q]; $("#msgs").insertAdjacentHTML("beforeend", `<div class="m me">${esc(q.question)}</div><div class="m bot">${esc(q.answer)}</div>`); }));
+  $("#cb").onclick = onBuy;
+}
+function buy(p, s, ref) {
+  modal(`<div class="ch"><b>${esc(p.name)}</b><button data-x class="x">✕</button></div><form id="bf" class="stack"><label>Seu nome<input name="name" required minlength="2"></label><label>Seu WhatsApp<input name="phone" required minlength="8"></label><label>Quantidade<input name="qty" type="number" min="1" max="100" value="1"></label><p class="pr" id="tt">Total: ${brl(p.price)}</p><button class="btn wa full">Enviar pedido no WhatsApp</button></form>`);
+  const f = $("#bf"); f.qty.oninput = () => ($("#tt").textContent = "Total: " + brl(p.price * (+f.qty.value || 1)));
+  f.onsubmit = async (e) => {
+    e.preventDefault(); const qty = +f.qty.value || 1;
+    try {
+      await api("/orders", { body: { product_id: p.id, qty, name: f.name.value, phone: f.phone.value, ref: ref || "" } });
+      const t = `Olá! Quero pedir:\n${qty}× ${p.name} — ${brl(p.price * qty)}\nNome: ${f.name.value}\nTelefone: ${f.phone.value}`;
+      const url = `https://wa.me/${s.whatsapp}?text=${encodeURIComponent(t)}`;
+      toast("Pedido registrado! Finalize no WhatsApp."); closeM(); window.open(url, "_blank") || (location.href = url);
+    } catch (x) { fail(x); }
+  };
+}
+
+// ---------- Painel do lojista ----------
+const L = { sid: null, tab: "produtos", creating: false };
+const TABS = { produtos: "Produtos", pedidos: "Pedidos", afiliados: "Afiliados", config: "Configurações" };
+async function lojista() {
+  const ss = await api("/my/stores");
+  if (!ss.length || L.creating) return novaLoja(ss.length > 0);
+  const s = ss.find((x) => x.id === L.sid) || ss[0]; L.sid = s.id;
+  app.innerHTML = `<div class="wrap"><div class="bar"><div><p class="mut">Admin da loja</p><h1 style="font-size:2rem">${esc(s.name)}</h1></div><div class="row">${ss.length > 1 ? `<select id="sel">${ss.map((x) => `<option value="${x.id}" ${x.id === s.id ? "selected" : ""}>${esc(x.name)}</option>`).join("")}</select>` : ""}<a class="btn out sm" href="#/loja/${esc(s.slug)}">Ver loja</a><button class="btn sec sm" id="nw">Nova loja</button></div></div><div class="tabs">${Object.entries(TABS).map(([k, v]) => `<button class="tab ${L.tab === k ? "on" : ""}" data-t="${k}">${v}</button>`).join("")}</div><div id="tb"></div></div>`;
+  if ($("#sel")) $("#sel").onchange = (e) => { L.sid = e.target.value; lojista(); };
+  $("#nw").onclick = () => { L.creating = true; lojista(); };
+  app.querySelectorAll("[data-t]").forEach((b) => (b.onclick = () => { L.tab = b.dataset.t; lojista(); }));
+  try { await { produtos: prods, pedidos: pedidos, afiliados: afils, config: conf }[L.tab](s, $("#tb")); } catch (e) { fail(e); }
+}
+function novaLoja(cancel) {
+  app.innerHTML = `<div class="wrap"><form id="f" class="form stack"><h1 style="font-size:1.8rem">Crie sua loja virtual</h1><label>Nome da loja<input name="name" required minlength="2"></label><label>WhatsApp para receber pedidos (com DDD)<input name="whatsapp" placeholder="55 11 99999-9999" required></label><div class="row"><button class="btn hero-b">Criar loja</button>${cancel ? '<button type="button" class="btn ghost" id="cn">Cancelar</button>' : ""}</div></form></div>`;
+  if (cancel) $("#cn").onclick = () => { L.creating = false; lojista(); };
+  $("#f").onsubmit = async (e) => {
+    e.preventDefault();
+    try { const r = await api("/stores", { body: Object.fromEntries(new FormData(e.target)) }); L.sid = r.id; L.creating = false; toast("Loja criada!"); lojista(); } catch (x) { fail(x); }
+  };
+}
+async function prods(s, box) {
+  const ps = await api("/my/products/" + s.id);
+  box.innerHTML = `<button class="btn hero-b" id="np" style="margin-bottom:14px">+ Novo produto</button>${ps.length ? "" : '<p class="mut">Nenhum produto ainda.</p>'}<div>${ps.map((p) => `<div class="item">${p.image_url ? `<img src="${esc(p.image_url)}" alt="">` : '<div class="ph"></div>'}<div class="g"><b>${esc(p.name)}</b><br><span class="pr">${brl(p.price)}</span><br>${p.chatbot_enabled ? `<span class="badge">Chatbot · ${p.faqs.length} perguntas</span>` : ""}${p.active ? "" : '<span class="badge">Oculto</span>'}</div><button class="btn out sm" data-e="${p.id}">Editar</button><button class="btn ghost sm" data-d="${p.id}">🗑</button></div>`).join("")}</div>`;
+  $("#np").onclick = () => prodForm(s, null, box);
+  box.querySelectorAll("[data-e]").forEach((b) => (b.onclick = () => prodForm(s, ps.find((p) => p.id === b.dataset.e), box)));
+  box.querySelectorAll("[data-d]").forEach((b) => (b.onclick = async () => { if (!confirm("Excluir este produto?")) return; try { await api("/products/" + b.dataset.d, { method: "DELETE" }); prods(s, box); } catch (x) { fail(x); } }));
+}
+function prodForm(s, p, box) {
+  const faqs = p ? p.faqs : [{ question: "Quais tamanhos estão disponíveis?", answer: "" }, { question: "Qual o prazo de entrega?", answer: "" }];
+  const faqH = (q) => `<div class="faq"><input class="fq" placeholder="Pergunta" value="${esc(q.question)}"><textarea class="fa" placeholder="Resposta">${esc(q.answer)}</textarea><button type="button" class="btn ghost sm" onclick="this.parentElement.remove()">Remover</button></div>`;
+  box.innerHTML = `<form id="pf" class="form stack"><h2>${p ? "Editar produto" : "Novo produto"}</h2><label>Nome<input name="name" required value="${esc(p?.name)}"></label><label>Descrição<textarea name="description">${esc(p?.description)}</textarea></label><label>Preço (R$)<input name="price" type="number" step="0.01" min="0" value="${p?.price ?? 0}"></label><label>Foto do produto<input name="image_url" id="iu" placeholder="Cole um link https://…" value="${esc(p?.image_url)}"></label><label class="btn out sm" style="cursor:pointer"><span id="up">ou envie do seu aparelho</span><input type="file" id="fl" accept="image/*" hidden></label><div class="chk">Produto visível na loja<input type="checkbox" name="active" ${p?.active ?? 1 ? "checked" : ""}></div><div class="chk">Chatbot de dúvidas<input type="checkbox" name="chatbot_enabled" ${p?.chatbot_enabled ?? 1 ? "checked" : ""}></div><div id="fqs">${faqs.map(faqH).join("")}</div><button type="button" class="btn out sm" id="af">+ Pergunta</button><div class="row"><button class="btn hero-b">Salvar</button><button type="button" class="btn ghost" id="cn">Cancelar</button></div></form>`;
+  $("#af").onclick = () => $("#fqs").insertAdjacentHTML("beforeend", faqH({ question: "", answer: "" }));
+  $("#cn").onclick = () => prods(s, box);
+  $("#fl").onchange = async (e) => {
+    const f = e.target.files[0]; if (!f) return; if (f.size > 5242880) return toast("Imagem maior que 5MB", 1);
+    $("#up").textContent = "Enviando…";
+    try { $("#iu").value = (await api("/upload", { body: f })).url; toast("Imagem enviada"); } catch (x) { fail(x); }
+    $("#up").textContent = "ou envie do seu aparelho";
+  };
+  $("#pf").onsubmit = async (e) => {
+    e.preventDefault(); const f = e.target;
+    const body = { store_id: s.id, name: f.name.value, description: f.description.value, price: +f.price.value, image_url: f.image_url.value, active: f.active.checked, chatbot_enabled: f.chatbot_enabled.checked, faqs: [...document.querySelectorAll(".faq")].map((d) => ({ question: d.querySelector(".fq").value, answer: d.querySelector(".fa").value })) };
+    try { await api(p ? "/products/" + p.id : "/products", { method: p ? "PUT" : "POST", body }); toast("Produto salvo"); prods(s, box); } catch (x) { fail(x); }
+  };
+}
+async function pedidos(s, box) {
+  const os = await api("/orders/store/" + s.id), ok = os.filter((o) => o.status === "confirmed");
+  const lb = { pending: "Pendente", confirmed: "Confirmado", cancelled: "Cancelado" };
+  box.innerHTML = `<div class="stats">${stat("Pedidos", os.length)}${stat("Vendas confirmadas", brl(sum(ok, "total")))}${stat("Comissões a pagar", brl(sum(ok.filter((o) => !o.commission_paid), "commission")))}</div>${os.length ? "" : '<p class="mut">Nenhum pedido ainda.</p>'}${os.map((o) => `<div class="item"><div class="g"><b>${o.quantity}× ${esc(o.product_name)} · ${brl(o.total)}</b><br><span class="mut">${esc(o.customer_name)} · ${esc(o.customer_phone)} · ${new Date(o.created_at + "Z").toLocaleDateString("pt-BR")}</span>${o.aff_name ? `<br><span class="pr" style="font-size:.8rem">Afiliado: ${esc(o.aff_name)} — comissão ${brl(o.commission)}</span>` : ""}</div><select data-s="${o.id}">${Object.entries(lb).map(([k, v]) => `<option value="${k}" ${o.status === k ? "selected" : ""}>${v}</option>`).join("")}</select>${o.affiliate_id && o.status === "confirmed" ? `<label class="row" style="font-size:.8rem"><input type="checkbox" data-p="${o.id}" ${o.commission_paid ? "checked" : ""}>Comissão paga</label>` : ""}</div>`).join("")}`;
+  const up = async (id, body) => { try { await api("/orders/" + id, { method: "PUT", body }); pedidos(s, box); } catch (x) { fail(x); } };
+  box.querySelectorAll("[data-s]").forEach((e) => (e.onchange = () => up(e.dataset.s, { status: e.value })));
+  box.querySelectorAll("[data-p]").forEach((e) => (e.onchange = () => up(e.dataset.p, { commission_paid: e.checked })));
+}
+async function afils(s, box) {
+  const as = await api("/affiliates/store/" + s.id);
+  box.innerHTML = `<p class="mut" style="margin-bottom:14px">${s.affiliates_enabled ? `Programa ativo · comissão de ${s.commission_percent}% por venda confirmada.` : "Programa de afiliados desativado nas configurações."}</p>${as.length ? "" : '<p class="mut">Nenhum afiliado ainda.</p>'}${as.map((a) => `<div class="item"><div class="g"><b>${esc(a.name || a.email)}</b><br><span class="mut">${esc(a.email)} · código ${esc(a.code)} · ${a.sales} vendas · ${brl(a.comm)}</span></div><span class="badge">${a.status === "approved" ? "Ativo" : "Bloqueado"}</span><button class="btn out sm" data-a="${a.id}" data-st="${a.status === "approved" ? "blocked" : "approved"}">${a.status === "approved" ? "Bloquear" : "Reativar"}</button></div>`).join("")}`;
+  box.querySelectorAll("[data-a]").forEach((b) => (b.onclick = async () => { try { await api("/affiliates/" + b.dataset.a, { method: "PUT", body: { status: b.dataset.st } }); afils(s, box); } catch (x) { fail(x); } }));
+}
+function conf(s, box) {
+  box.innerHTML = `<form id="cf" class="form stack"><label>Nome<input name="name" value="${esc(s.name)}"></label><label>Descrição<textarea name="description">${esc(s.description)}</textarea></label><label>WhatsApp<input name="whatsapp" value="${esc(s.whatsapp)}"></label><div class="chk">Programa de afiliados<input type="checkbox" name="affiliates_enabled" ${s.affiliates_enabled ? "checked" : ""}></div><label>Comissão dos afiliados (%)<input name="commission_percent" type="number" min="0" max="90" value="${s.commission_percent}"></label><div class="chk">Loja visível ao público<input type="checkbox" name="active" ${s.active ? "checked" : ""}></div><button class="btn hero-b">Salvar</button></form>`;
+  $("#cf").onsubmit = async (e) => {
+    e.preventDefault(); const f = e.target;
+    try { await api("/stores/" + s.id, { method: "PUT", body: { name: f.name.value, description: f.description.value, whatsapp: f.whatsapp.value, logo_url: s.logo_url, commission_percent: +f.commission_percent.value, affiliates_enabled: f.affiliates_enabled.checked, active: f.active.checked } }); toast("Configurações salvas"); lojista(); } catch (x) { fail(x); }
+  };
+}
+
+// ---------- Afiliado ----------
+async function afiliado() {
+  const d = await api("/my/affiliate"), ok = d.orders.filter((o) => o.status === "confirmed"), joined = new Set(d.mine.map((m) => m.store_id));
+  const link = (slug, code) => `${location.origin}${location.pathname}#/loja/${slug}?ref=${code}`;
+  const st = (o) => (o.status === "confirmed" ? (o.commission_paid ? "Paga" : "A receber") : o.status === "pending" ? "Aguardando loja" : "Cancelado");
+  app.innerHTML = `<div class="wrap"><h1 style="font-size:2rem;margin-bottom:16px">Painel do afiliado</h1><div class="stats">${stat("Vendas confirmadas", ok.length)}${stat("Comissão a receber", brl(sum(ok.filter((o) => !o.commission_paid), "commission")))}${stat("Comissão recebida", brl(sum(ok.filter((o) => o.commission_paid), "commission")))}</div>
+  <h2 style="margin:20px 0 10px">Meus links</h2>${d.mine.length ? "" : '<p class="mut">Entre no programa de uma loja abaixo para ganhar seu link.</p>'}${d.mine.map((m) => `<div class="item"><div class="g"><b>${esc(m.sname)}</b> <span class="mut">· ${m.commission_percent}% por venda</span><br><span class="mut" style="word-break:break-all">${esc(link(m.slug, m.code))}</span></div>${m.status !== "approved" ? '<span class="badge">Bloqueado</span>' : `<button class="btn out sm" data-c="${esc(link(m.slug, m.code))}">Copiar</button>`}</div>`).join("")}
+  <h2 style="margin:20px 0 10px">Lojas com programa de afiliados</h2>${d.stores.filter((s) => !joined.has(s.id)).map((s) => `<div class="item"><div class="g"><b>${esc(s.name)}</b><br><span class="pr">${s.commission_percent}% de comissão</span></div><button class="btn hero-b sm" data-j="${s.id}">Participar</button></div>`).join("")}
+  <h2 style="margin:20px 0 10px">Minhas vendas</h2>${d.orders.length ? "" : '<p class="mut">Nenhuma venda ainda.</p>'}${d.orders.map((o) => `<div class="item"><div class="g">${esc(o.product_name)} · ${brl(o.total)}</div><span class="mut">${st(o)} · ${brl(o.commission)}</span></div>`).join("")}</div>`;
+  app.querySelectorAll("[data-c]").forEach((b) => (b.onclick = () => { navigator.clipboard.writeText(b.dataset.c); toast("Link copiado"); }));
+  app.querySelectorAll("[data-j]").forEach((b) => (b.onclick = async () => { try { await api("/affiliates", { body: { store_id: b.dataset.j } }); toast("Você agora é afiliado desta loja!"); afiliado(); } catch (x) { fail(x); } }));
+}
+
+// ---------- Admin ----------
+async function admin() {
+  if (!S.user.admin) { app.innerHTML = '<p class="c mut">Acesso restrito ao admin da plataforma.</p>'; return; }
+  const d = await api("/admin");
+  app.innerHTML = `<div class="wrap"><h1 style="font-size:2rem;margin-bottom:16px">Admin da plataforma ChatShop</h1><div class="stats">${stat("Usuários", d.users)}${stat("Lojas", d.stores.length)}${stat("Afiliados", d.affiliates)}${stat("Vendas confirmadas", brl(sum(d.stores, "revenue")))}</div>${d.stores.map((s) => `<div class="item"><div class="g"><a href="#/loja/${esc(s.slug)}"><b>${esc(s.name)}</b></a><br><span class="mut">${esc(s.owner_email)} · ${s.affs} afiliados · ${s.sales} vendas · ${brl(s.revenue)}</span></div><label class="row" style="font-size:.85rem">Ativa<input type="checkbox" data-s="${s.id}" ${s.active ? "checked" : ""}></label></div>`).join("")}</div>`;
+  app.querySelectorAll("[data-s]").forEach((c) => (c.onchange = async () => { try { await api("/admin/stores/" + c.dataset.s, { method: "PUT", body: { active: c.checked } }); } catch (x) { fail(x); } }));
+}
+
+// ---------- Rotas (hash, funciona no GitHub Pages sem config extra) ----------
+async function go() {
+  const [path, qs] = (location.hash.slice(1) || "/").split("?"), r = path.split("/").filter(Boolean), ref = new URLSearchParams(qs || "").get("ref");
+  header(); closeM(); app.onclick = null; document.title = "ChatShop — Crie sua loja virtual com chatbot e afiliados"; scrollTo(0, 0);
+  const priv = { lojista, afiliado, admin };
+  try {
+    if (!r.length) await home();
+    else if (r[0] === "auth") auth();
+    else if (r[0] === "loja" && r[1]) await loja(r[1], ref);
+    else if (priv[r[0]]) { if (!S.user) { location.hash = "#/auth"; return; } await priv[r[0]](); }
+    else app.innerHTML = '<p class="c">Página não encontrada. <a href="#/">Voltar</a></p>';
+  } catch (e) { app.innerHTML = `<p class="c mut">${esc(e.message)}</p>`; }
+}
+addEventListener("hashchange", go); go();
+</script>
 </body>
 </html>
