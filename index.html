@@ -4,17 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- SEO PRIMÁRIO & GEO -->
-  <title>Dridalia Moda Feminina | Loja Virtual de Roupas & Modas Luxo</title>
-  <meta name="description" content="Compre moda feminina de qualidade com os melhores preços. Conjuntos de moletinho, vestidos midi, moda feminina elegante com entrega rápida e frete grátis.">
-  <meta name="keywords" content="moda feminina, roupas femininas, vestidos midi, conjunto moletinho, achadinhos shopee, moda feminina mercado livre, vestuário feminino, loja de roupas">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  <link rel="canonical" href="https://sualoja.com.br/">
+  <!-- SEO & GEO PRIMÁRIO (PLATAFORMA CHATSHOP) -->
+  <title>ChatShop | Plataforma & Gerador de Lojas Virtuais de Moda Feminina</title>
+  <meta name="description" content="ChatShop - A plataforma líder para criação de lojas virtuais de moda feminina com assistente de voz, chatbot de dúvidas por produto e integração com afiliados.">
+  <meta name="keywords" content="ChatShop, loja virtual, moda feminina, conjuntos moletinho, vestidos midi, gerador de e-commerce, afiliados moda">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://chatshop.com.br/">
 
-  <!-- CONFIGURAÇÕES DE VERIFICAÇÃO GOOGLE -->
+  <!-- VERIFICAÇÃO GOOGLE E ANALYTICS (CONFIGURÁVEL NO ADMIN) -->
   <meta name="google-site-verification" content="SEU_CODIGO_GOOGLE_SEARCH_CONSOLE" />
-  
-  <!-- GOOGLE ANALYTICS GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SEU_TRACKING_ID"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -23,63 +21,32 @@
     gtag('config', 'G-SEU_TRACKING_ID');
   </script>
 
-  <!-- OPEN GRAPH / SOCIAL MEDIA (WhatsApp, Instagram, Facebook, Pinterest) -->
+  <!-- OPEN GRAPH / PREVIEW SOCIAL -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
-  <meta property="og:site_name" content="Dridalia Moda Feminina">
-  <meta property="og:title" content="Dridalia Moda Feminina | Tendências & Roupas Femininas Luxo">
-  <meta property="og:description" content="Confira os lançamentos de moda feminina com caimento perfeito. Frete rápido para todo o Brasil.">
+  <meta property="og:site_name" content="ChatShop Moda Feminina">
+  <meta property="og:title" content="ChatShop | Crie sua Loja Virtual de Moda Feminina">
+  <meta property="og:description" content="A e-commerce engine mais leve e completa para vendas de roupas e coleções femininas.">
   <meta property="og:image" content="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1200">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="twitter:card" content="summary_large_image">
 
-  <!-- DADOS ESTRUTURADOS SCHEMA.ORG (SEO & GEO AVANÇADO) -->
+  <!-- SCHEMA.ORG (DADOS ESTRUTURADOS GOOGLE SHOPPING) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "https://sualoja.com.br/#website",
-        "url": "https://sualoja.com.br/",
-        "name": "Dridalia Moda Feminina",
-        "description": "Plataforma e Loja Virtual de Roupas e Moda Feminina Luxo",
+        "@id": "https://chatshop.com.br/#website",
+        "url": "https://chatshop.com.br/",
+        "name": "ChatShop - Criador de Loja Virtual",
         "inLanguage": "pt-BR"
       },
       {
         "@type": "Organization",
-        "@id": "https://sualoja.com.br/#organization",
-        "name": "Dridalia Moda Feminina",
-        "url": "https://sualoja.com.br/",
-        "logo": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600",
+        "@id": "https://chatshop.com.br/#organization",
+        "name": "ChatShop Tecnologia",
+        "url": "https://chatshop.com.br/",
         "email": "jeanaguiar636@gmail.com"
-      },
-      {
-        "@type": "Product",
-        "name": "Conjunto Tati Moletinho Premium",
-        "image": [
-          "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600"
-        ],
-        "description": "Conjunto de moletinho super macio e elegante para o dia a dia. Modelagem exclusiva de alta qualidade.",
-        "sku": "MODA-TATI-001",
-        "brand": {
-          "@type": "Brand",
-          "name": "Dridalia Moda"
-        },
-        "offers": {
-          "@type": "Offer",
-          "url": "https://sualoja.com.br/",
-          "priceCurrency": "BRL",
-          "price": "189.90",
-          "priceValidUntil": "2027-12-31",
-          "itemCondition": "https://schema.org/NewCondition",
-          "availability": "https://schema.org/InStock",
-          "seller": {
-            "@type": "Organization",
-            "name": "Dridalia Moda Feminina"
-          }
-        }
       }
     ]
   }
@@ -88,7 +55,7 @@
   <!-- TAILWIND CSS & FONTAWESOME -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- ALPINE.JS -->
+  <!-- ALPINE.JS (REQUISITO DA INTERFACE) -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
   <style>
@@ -97,21 +64,24 @@
     [x-cloak] { display: none !important; }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased font-sans" x-data="lojaApp()">
+<body class="bg-gray-50 text-gray-800 antialiased font-sans" x-data="plataformaChatShop()">
 
-  <!-- NAVBAR LIMPA E SEMÂNTICA -->
+  <!-- HEADER LIMPO E ELEGANTE -->
   <header class="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
       
-      <!-- Logo e Nome da Loja -->
+      <!-- Identificação da Loja Atual e Marca ChatShop -->
       <div class="flex items-center space-x-3 cursor-pointer" @click="painelAberto = false">
-        <template x-if="config.logo">
-          <img :src="config.logo" :alt="config.nomeLoja" class="h-10 w-auto object-contain">
+        <template x-if="lojaAtiva.logo">
+          <img :src="lojaAtiva.logo" :alt="lojaAtiva.nome" class="h-10 w-auto object-contain">
         </template>
-        <h1 class="text-xl font-bold tracking-tight text-gray-900 font-grife" x-text="config.nomeLoja"></h1>
+        <div>
+          <h1 class="text-xl font-bold tracking-tight text-gray-900 font-grife" x-text="lojaAtiva.nome"></h1>
+          <span class="text-[10px] text-rose-600 font-semibold uppercase tracking-widest block -mt-1" x-text="'Powered by ChatShop (' + lojaAtiva.id + ')'"></span>
+        </div>
       </div>
 
-      <!-- Ações do Menu -->
+      <!-- Ações do Menu (Único Botão PAINEL) -->
       <div class="flex items-center space-x-4">
         <!-- BOTÃO ÚNICO: PAINEL -->
         <button @click="abrirPainel()" class="flex items-center space-x-2 text-sm font-semibold text-gray-700 hover:text-black bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full transition duration-200">
@@ -119,7 +89,7 @@
           <span>Painel</span>
         </button>
 
-        <!-- Carrinho -->
+        <!-- Carrinho de Compras -->
         <button @click="carrinhoAberto = true" class="relative p-2 text-gray-700 hover:text-black transition" aria-label="Abrir Carrinho">
           <i class="fa-solid fa-bag-shopping text-xl"></i>
           <span x-show="carrinho.length > 0" class="absolute -top-1 -right-1 bg-rose-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full" x-text="carrinho.reduce((acc, item) => acc + item.qtd, 0)"></span>
@@ -129,20 +99,20 @@
     </div>
   </header>
 
-  <!-- BANNER PRINCIPAL OTIMIZADO PARA SEO -->
-  <section x-show="config.banner" class="relative w-full bg-gray-900 overflow-hidden">
-    <img :src="config.banner" :alt="'Banner Promocional - ' + config.nomeLoja" class="w-full h-48 md:h-80 object-cover opacity-85" loading="eager">
+  <!-- BANNER PRINCIPAL DA LOJA ATIVA -->
+  <section x-show="lojaAtiva.banner" class="relative w-full bg-gray-900 overflow-hidden">
+    <img :src="lojaAtiva.banner" :alt="'Banner - ' + lojaAtiva.nome" class="w-full h-48 md:h-80 object-cover opacity-85" loading="eager">
   </section>
 
   <!-- VITRINE DE PRODUTOS DA LOJA -->
   <main class="max-w-7xl mx-auto px-4 py-8">
-    <div :class="config.layoutGrife ? 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8' : 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4'">
-      <template x-for="prod in produtos" :key="prod.id">
+    <div :class="lojaAtiva.layoutGrife ? 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8' : 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4'">
+      <template x-for="prod in produtosFiltrados" :key="prod.id">
         <article class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:shadow-lg transition duration-300">
           
-          <!-- Imagem com Ouvir Descrição (Voz do Navegador) -->
+          <!-- Imagem com Botão de Voz do Navegador -->
           <div class="relative aspect-product bg-gray-100 overflow-hidden">
-            <img :src="prod.imagem" :alt="prod.nome + ' - Moda Feminina'" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+            <img :src="prod.imagem" :alt="prod.nome" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
             
             <button @click="falarTexto(prod.nome + '. ' + prod.descricao)" class="absolute top-3 right-3 bg-black/60 hover:bg-black text-white p-2.5 rounded-full backdrop-blur-md transition shadow" title="Ouvir Descrição com Voz do Navegador">
               <i class="fa-solid fa-volume-high text-xs"></i>
@@ -160,7 +130,7 @@
               <span class="text-xl font-extrabold text-gray-900" x-text="'R$ ' + prod.preco.toFixed(2)"></span>
 
               <div class="grid grid-cols-2 gap-2 mt-3">
-                <!-- Botão de Dúvidas / Chatbot -->
+                <!-- Botão Dúvidas / Chatbot -->
                 <button @click="abrirChatbot(prod)" class="w-full py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold rounded-xl flex items-center justify-center space-x-1 transition">
                   <i class="fa-solid fa-robot text-rose-600"></i>
                   <span>Dúvidas</span>
@@ -180,10 +150,10 @@
     </div>
   </main>
 
-  <!-- BOTÕES FLUTUANTES DINÂMICOS (WhatsApp, Zap Leve, Instagram) -->
+  <!-- BOTÕES FLUTUANTES DINÂMICOS (WhatsApp, Zap Leve, Instagram, etc.) -->
   <div class="fixed bottom-6 right-6 z-40 flex flex-col space-y-3">
-    <template x-for="btn in botoesFlutuantes" :key="btn.id">
-      <a :href="btn.link" target="_blank" :title="btn.nome" class="w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-white text-xl transition transform hover:scale-110" :style="'background-color: ' + btn.cor" aria-label="Atendimento via Social">
+    <template x-for="btn in lojaAtiva.botoesFlutuantes" :key="btn.id">
+      <a :href="btn.link" target="_blank" :title="btn.nome" class="w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-white text-xl transition transform hover:scale-110" :style="'background-color: ' + btn.cor" aria-label="Atendimento Social ChatShop">
         <i :class="btn.icone"></i>
       </a>
     </template>
@@ -200,19 +170,19 @@
             <img :src="produtoChat.imagem" :alt="produtoChat.nome" class="w-10 h-10 rounded-full object-cover border border-rose-500">
           </template>
           <div>
-            <h3 class="font-bold text-sm" x-text="produtoChat ? produtoChat.nome : 'Assistente da Loja'"></h3>
-            <p class="text-[10px] text-emerald-400 font-semibold"><i class="fa-solid fa-circle text-[8px] mr-1"></i>Atendente Virtual Online</p>
+            <h3 class="font-bold text-sm" x-text="produtoChat ? produtoChat.nome : 'Assistente ChatShop'"></h3>
+            <p class="text-[10px] text-emerald-400 font-semibold"><i class="fa-solid fa-circle text-[8px] mr-1"></i>Chatbot da Loja Online</p>
           </div>
         </div>
         <button @click="chatAberto = false" class="text-gray-400 hover:text-white p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
       </div>
 
-      <!-- Corpo da Conversa -->
+      <!-- Mensagens da Conversa -->
       <div class="p-4 flex-1 overflow-y-auto space-y-3 bg-gray-50 text-xs">
         <div class="flex items-start space-x-2">
           <div class="w-7 h-7 rounded-full bg-rose-600 text-white flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-robot"></i></div>
           <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-gray-100 text-gray-800 max-w-[85%]">
-            <p class="font-bold text-rose-600 mb-1">Olá! Tenho respostas para este produto:</p>
+            <p class="font-bold text-rose-600 mb-1">Olá! Tenho respostas sobre este produto:</p>
             <p x-text="'Como posso te ajudar com o ' + (produtoChat ? produtoChat.nome : 'item') + '?'"></p>
           </div>
         </div>
@@ -229,7 +199,7 @@
         </template>
       </div>
 
-      <!-- Opções do Chatbot -->
+      <!-- Botões de Perguntas Frequentes -->
       <div class="p-3 bg-white border-t space-y-2">
         <template x-if="produtoChat && produtoChat.chatbotAtivo">
           <div class="space-y-1.5">
@@ -246,18 +216,19 @@
     </div>
   </div>
 
-  <!-- MODAL DO PAINEL UNIFICADO (CLIENTE / AFILIADO / ADMIN) -->
+  <!-- MODAL DO PAINEL UNIFICADO DA PLATAFORMA CHATSHOP -->
   <div x-show="painelAberto" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" x-cloak>
     <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
       
+      <!-- Cabeçalho do Painel -->
       <div class="p-5 bg-gray-900 text-white flex justify-between items-center">
         <div class="flex items-center space-x-3">
           <div class="w-10 h-10 rounded-full bg-rose-600/20 flex items-center justify-center text-rose-400">
             <i class="fa-solid fa-user-circle text-xl"></i>
           </div>
           <div>
-            <h2 class="font-bold text-lg">Painel da Plataforma</h2>
-            <p class="text-xs text-gray-400" x-text="usuario.logado ? usuario.email : 'Faça login para continuar'"></p>
+            <h2 class="font-bold text-lg">Painel da Plataforma ChatShop</h2>
+            <p class="text-xs text-gray-400" x-text="usuario.logado ? usuario.email : 'Acesse para gerenciar sua conta'"></p>
           </div>
         </div>
         <button @click="painelAberto = false" class="text-gray-400 hover:text-white p-2 transition"><i class="fa-solid fa-xmark text-2xl"></i></button>
@@ -275,15 +246,17 @@
             <span x-text="usuario.isAfiliado ? 'Área do Afiliado' : 'Afiliar-se'"></span>
           </button>
 
+          <!-- Painel Admin do Lojista -->
           <template x-if="usuario.email === 'jeanaguiar636@gmail.com' || usuario.isAdminConvidado">
             <button @click="abaPainel = 'admin'" :class="abaPainel === 'admin' ? 'border-b-2 border-rose-600 font-bold text-rose-600 bg-rose-50/50' : 'text-gray-600 hover:text-gray-900'" class="px-6 py-4 whitespace-nowrap transition">
-              <i class="fa-solid fa-sliders mr-2 text-rose-600"></i>Painel Admin (Gerenciar Loja)
+              <i class="fa-solid fa-sliders mr-2 text-rose-600"></i>Painel Admin (<span x-text="lojaAtiva.nome"></span>)
             </button>
           </template>
 
+          <!-- Super Admin Master (Exclusivo jeanaguiar636@gmail.com) -->
           <template x-if="usuario.email === 'jeanaguiar636@gmail.com'">
             <button @click="abaPainel = 'superadmin'" :class="abaPainel === 'superadmin' ? 'border-b-2 border-purple-600 font-bold text-purple-600 bg-purple-50/50' : 'text-gray-600 hover:text-gray-900'" class="px-6 py-4 whitespace-nowrap transition">
-              <i class="fa-solid fa-crown mr-2 text-purple-600"></i>Super Admin
+              <i class="fa-solid fa-crown mr-2 text-purple-600"></i>Super Admin (ChatShop)
             </button>
           </template>
         </div>
@@ -292,15 +265,15 @@
       <!-- Conteúdo do Painel -->
       <div class="p-6 overflow-y-auto flex-1">
         
-        <!-- LOGIN -->
+        <!-- LOGIN SIMPLES -->
         <div x-show="!usuario.logado" class="max-w-md mx-auto py-8">
           <div class="text-center mb-6">
             <i class="fa-solid fa-lock text-4xl text-rose-600 mb-2"></i>
-            <h3 class="text-xl font-bold text-gray-900">Acessar sua Conta</h3>
+            <h3 class="text-xl font-bold text-gray-900">Entrar na Plataforma ChatShop</h3>
           </div>
           <form @submit.prevent="fazerLogin()" class="space-y-4">
             <input type="email" x-model="usuario.email" required placeholder="seuemail@exemplo.com" class="w-full p-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-rose-500 outline-none">
-            <button type="submit" class="w-full py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl shadow-lg transition">Entrar</button>
+            <button type="submit" class="w-full py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl shadow-lg transition">Acessar Painel</button>
           </form>
         </div>
 
@@ -311,14 +284,15 @@
               <h3 class="font-bold text-gray-900 text-lg">Histórico de Compras e Entregas</h3>
               <div class="bg-gray-50 border border-dashed border-gray-300 rounded-2xl p-8 text-center text-sm text-gray-500">
                 <i class="fa-solid fa-box-open text-4xl mb-3 text-gray-400"></i>
-                <p>Nenhuma compra registrada até o momento.</p>
+                <p>Nenhuma compra registrada até o momento nesta loja.</p>
               </div>
             </div>
 
-            <!-- ABA 2: AFILIADOS -->
+            <!-- ABA 2: PROGRAMA DE AFILIADOS -->
             <div x-show="abaPainel === 'afiliado'" class="space-y-6">
               <div x-show="!usuario.isAfiliado" class="bg-rose-50 border border-rose-200 rounded-3xl p-8 text-center">
-                <h3 class="text-2xl font-bold text-gray-900">Seja um Afiliado</h3>
+                <h3 class="text-2xl font-bold text-gray-900">Seja um Afiliado <span x-text="lojaAtiva.nome"></span></h3>
+                <p class="text-xs text-gray-600 mt-1">Divulgue os produtos e receba comissões automáticas.</p>
                 <button @click="afiliarSe()" class="mt-4 px-8 py-3 bg-rose-600 text-white font-bold rounded-2xl shadow">Quero Me Afiliar</button>
               </div>
               <div x-show="usuario.isAfiliado" class="space-y-4">
@@ -329,62 +303,149 @@
                 </div>
                 <div class="bg-gray-50 p-4 rounded-xl">
                   <label class="block text-xs font-semibold text-gray-600 mb-1">Seu Link de Afiliado</label>
-                  <input type="text" readonly :value="window.location.origin + '?ref=' + usuario.codigoAfiliado" class="w-full p-2 border rounded bg-white text-xs font-mono">
+                  <input type="text" readonly :value="window.location.origin + '?loja=' + lojaAtiva.id + '&ref=' + usuario.codigoAfiliado" class="w-full p-2 border rounded bg-white text-xs font-mono">
                 </div>
               </div>
             </div>
 
-            <!-- ABA 3: ADMINISTRAÇÃO DA LOJA (COM SEO & DOMÍNIO PRÓPRIO) -->
+            <!-- ABA 3: GERENCIADOR COMPLETO DA LOJA (ADMINISTRAÇÃO) -->
             <div x-show="abaPainel === 'admin'" class="space-y-6">
-              <h3 class="font-bold text-gray-900 text-lg border-b pb-2">Gerenciar Loja, Domínio Próprio & SEO</h3>
+              <div class="border-b pb-3 flex justify-between items-center">
+                <h3 class="font-bold text-gray-900 text-lg">Painel de Administração ChatShop</h3>
+                <span class="bg-rose-100 text-rose-800 text-xs px-3 py-1 rounded-full font-bold" x-text="'Loja Ativa: ' + lojaAtiva.nome"></span>
+              </div>
               
-              <!-- CONFIGURAÇÃO DE DOMÍNIO PRÓPRIO -->
+              <!-- DADOS BÁSICOS E VISUAIS -->
               <div class="bg-gray-50 p-4 rounded-2xl border space-y-3">
-                <div class="flex items-center space-x-2">
-                  <i class="fa-solid fa-globe text-rose-600"></i>
-                  <h4 class="font-bold text-sm text-gray-900">Domínio Próprio (Ex: www.sualoja.com.br)</h4>
-                </div>
-                <div class="flex space-x-2">
-                  <input type="text" x-model="config.dominioProprio" placeholder="www.minhaloja.com.br" class="p-2.5 border rounded-xl text-xs flex-1 bg-white">
-                  <button @click="salvarConfiguracoes()" class="px-4 py-2 bg-gray-900 text-white text-xs font-bold rounded-xl">Salvar Domínio</button>
-                </div>
-              </div>
-
-              <!-- GOOGLE SEARCH CONSOLE & GA4 -->
-              <div class="bg-gray-50 p-4 rounded-2xl border space-y-3">
-                <h4 class="font-bold text-sm text-gray-900"><i class="fa-brands fa-google text-blue-600 mr-2"></i>Indexação & SEO Google</h4>
+                <h4 class="font-bold text-sm text-gray-900"><i class="fa-solid fa-paintbrush text-rose-600 mr-2"></i>Identidade Visual & Capa</h4>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <input type="text" x-model="config.googleConsole" placeholder="Código Google Search Console" class="p-2.5 border rounded-xl text-xs">
-                  <input type="text" x-model="config.googleAnalytics" placeholder="ID Analytics (G-XXXXX)" class="p-2.5 border rounded-xl text-xs">
+                  <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">Nome da Loja</label>
+                    <input type="text" x-model="lojaAtiva.nome" class="w-full p-2.5 border rounded-xl text-xs bg-white">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">URL da Logo</label>
+                    <input type="text" x-model="lojaAtiva.logo" placeholder="https://..." class="w-full p-2.5 border rounded-xl text-xs bg-white">
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-gray-600 mb-1">URL do Banner Principal</label>
+                  <input type="text" x-model="lojaAtiva.banner" placeholder="https://..." class="w-full p-2.5 border rounded-xl text-xs bg-white">
+                </div>
+
+                <!-- Alternar Estilo da Loja -->
+                <div class="flex items-center justify-between bg-white p-3 rounded-xl border mt-2">
+                  <div>
+                    <h5 class="text-xs font-bold text-gray-900">Layout Loja de Grife</h5>
+                    <p class="text-[10px] text-gray-500">Ative para visual espaçado (3 colunas) ou desative para grade de 2 produtos no celular.</p>
+                  </div>
+                  <input type="checkbox" x-model="lojaAtiva.layoutGrife" class="w-5 h-5 text-rose-600 rounded">
                 </div>
               </div>
 
-              <!-- CADASTRO DE PRODUTO COM CHATBOT -->
+              <!-- BOTÕES FLUTUANTES (WhatsApp, Zap Leve, Instagram) -->
+              <div class="bg-gray-50 p-4 rounded-2xl border space-y-3">
+                <h4 class="font-bold text-sm text-gray-900"><i class="fa-solid fa-comments text-emerald-600 mr-2"></i>Botões Flutuantes (Zap Leve, WhatsApp, etc.)</h4>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  <input type="text" x-model="novoBtn.nome" placeholder="Nome (ex: Zap Leve)" class="p-2 border rounded text-xs bg-white">
+                  <input type="text" x-model="novoBtn.icone" placeholder="Ícone (fa-solid fa-bolt)" class="p-2 border rounded text-xs bg-white">
+                  <input type="text" x-model="novoBtn.link" placeholder="Link (https://...)" class="p-2 border rounded text-xs bg-white">
+                  <input type="color" x-model="novoBtn.cor" class="h-9 w-full rounded border cursor-pointer">
+                </div>
+                <button @click="adicionarBotaoFlutuante()" class="w-full bg-emerald-600 text-white text-xs font-bold rounded-xl py-2">Adicionar Botão Flutuante</button>
+
+                <!-- Lista de Botões Cadastrados -->
+                <div class="space-y-1.5 mt-2">
+                  <template x-for="(btn, index) in lojaAtiva.botoesFlutuantes" :key="btn.id">
+                    <div class="flex items-center justify-between bg-white p-2 rounded-lg border text-xs">
+                      <div class="flex items-center space-x-2">
+                        <span class="w-5 h-5 rounded-full text-white flex items-center justify-center text-[10px]" :style="'background-color:' + btn.cor"><i :class="btn.icone"></i></span>
+                        <span class="font-bold" x-text="btn.nome"></span>
+                      </div>
+                      <button @click="lojaAtiva.botoesFlutuantes.splice(index, 1); salvarConfiguracoes()" class="text-red-500 hover:text-red-700 font-bold"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                  </template>
+                </div>
+              </div>
+
+              <!-- DOMÍNIO PRÓPRIO E SEO -->
+              <div class="bg-gray-50 p-4 rounded-2xl border space-y-3">
+                <h4 class="font-bold text-sm text-gray-900"><i class="fa-solid fa-globe text-blue-600 mr-2"></i>Domínio Próprio & SEO Google</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <input type="text" x-model="lojaAtiva.dominioProprio" placeholder="www.minhaloja.com.br" class="p-2.5 border rounded-xl text-xs bg-white">
+                  <input type="text" x-model="lojaAtiva.googleConsole" placeholder="Código Google Search Console" class="p-2.5 border rounded-xl text-xs bg-white">
+                </div>
+              </div>
+
+              <!-- CADASTRO DE PRODUTO COM CHATBOT E VOZ -->
               <div class="bg-gray-50 p-5 rounded-2xl border space-y-4">
-                <h4 class="font-bold text-sm text-gray-900"><i class="fa-solid fa-plus-circle text-rose-600 mr-2"></i>Cadastrar Novo Produto</h4>
+                <h4 class="font-bold text-sm text-gray-900"><i class="fa-solid fa-plus-circle text-rose-600 mr-2"></i>Cadastrar Novo Produto com Chatbot</h4>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <input type="text" x-model="novoProd.nome" placeholder="Nome do Produto" class="p-2.5 border rounded-xl text-xs">
-                  <input type="number" x-model.number="novoProd.preco" placeholder="Preço (R$)" class="p-2.5 border rounded-xl text-xs">
-                  <input type="text" x-model="novoProd.imagem" placeholder="URL da Imagem" class="p-2.5 border rounded-xl text-xs">
+                  <input type="text" x-model="novoProd.nome" placeholder="Nome do Produto" class="p-2.5 border rounded-xl text-xs bg-white">
+                  <input type="number" x-model.number="novoProd.preco" placeholder="Preço (R$)" class="p-2.5 border rounded-xl text-xs bg-white">
+                  <input type="text" x-model="novoProd.imagem" placeholder="URL da Imagem" class="p-2.5 border rounded-xl text-xs bg-white">
                 </div>
-                <textarea x-model="novoProd.descricao" placeholder="Descrição detalhada do produto (Importante para SEO do Google)..." class="w-full p-2.5 border rounded-xl text-xs h-20"></textarea>
+                <textarea x-model="novoProd.descricao" placeholder="Descrição do produto para o leitor de voz e SEO..." class="w-full p-2.5 border rounded-xl text-xs h-20 bg-white"></textarea>
 
-                <button @click="adicionarProduto()" class="w-full py-3 bg-gray-900 text-white text-xs font-bold rounded-xl">Salvar Produto no Catálogo</button>
+                <!-- CONFIGURAÇÃO CHATBOT DO PRODUTO -->
+                <div class="bg-white p-3 rounded-xl border space-y-2">
+                  <div class="flex items-center space-x-2">
+                    <input type="checkbox" id="chatAtivoProd" x-model="novoProd.chatbotAtivo" class="w-4 h-4 text-rose-600 rounded">
+                    <label for="chatAtivoProd" class="text-xs font-bold text-gray-800">Ativar Chatbot de Dúvidas para este produto</label>
+                  </div>
+
+                  <div x-show="novoProd.chatbotAtivo" class="space-y-2 pt-2 border-t">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      <input type="text" x-model="novoProd.faqs[0].pergunta" placeholder="Pergunta 1 (ex: Tecido?)" class="p-2 border rounded text-xs bg-gray-50">
+                      <input type="text" x-model="novoProd.faqs[0].resposta" placeholder="Resposta 1 (ex: Moletinho Premium)" class="p-2 border rounded text-xs bg-gray-50">
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      <input type="text" x-model="novoProd.faqs[1].pergunta" placeholder="Pergunta 2 (ex: Tamanho?)" class="p-2 border rounded text-xs bg-gray-50">
+                      <input type="text" x-model="novoProd.faqs[1].resposta" placeholder="Resposta 2 (ex: Veste 38 ao 42)" class="p-2 border rounded text-xs bg-gray-50">
+                    </div>
+                  </div>
+                </div>
+
+                <button @click="adicionarProduto()" class="w-full py-3 bg-gray-900 text-white text-xs font-bold rounded-xl shadow">Salvar Produto na Loja</button>
               </div>
 
+              <button @click="salvarConfiguracoes()" class="w-full py-3.5 bg-emerald-600 text-white font-bold rounded-xl shadow hover:bg-emerald-700 transition">Salvar Todas as Alterações da Loja</button>
             </div>
 
-            <!-- ABA 4: SUPER ADMIN -->
+            <!-- ABA 4: SUPER ADMIN MASTER (PLATAFORMA CHATSHOP) -->
             <div x-show="abaPainel === 'superadmin'" class="space-y-6">
               <div class="bg-purple-50 border border-purple-200 p-5 rounded-2xl">
-                <h3 class="font-bold text-purple-900 text-lg mb-1"><i class="fa-solid fa-crown mr-2"></i>Painel Master da Plataforma</h3>
-                <p class="text-xs text-purple-700">Conceda permissão de Admin para seus amigos criarem e gerenciarem suas próprias lojas.</p>
+                <h3 class="font-bold text-purple-900 text-lg mb-1"><i class="fa-solid fa-crown mr-2"></i>Painel Master Plataforma ChatShop</h3>
+                <p class="text-xs text-purple-700">Bem-vindo, Jean! Aqui você cria e gerencia todas as lojas virtuais ativas na plataforma ChatShop.</p>
               </div>
-              <div class="bg-gray-50 p-4 rounded-xl border flex space-x-2">
-                <input type="email" x-model="novoAdminEmail" placeholder="amigo@email.com" class="p-2.5 border rounded-xl text-xs flex-1">
-                <button @click="concederAdmin()" class="bg-purple-600 text-white text-xs font-bold px-4 rounded-xl">Liberar Admin</button>
+
+              <!-- CRIAR NOVA LOJA -->
+              <div class="bg-gray-50 p-4 rounded-xl border space-y-3">
+                <h4 class="font-bold text-sm text-gray-900">Criar Nova Loja na ChatShop</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <input type="text" x-model="novaLoja.id" placeholder="ID da Loja (ex: favo)" class="p-2.5 border rounded-xl text-xs bg-white">
+                  <input type="text" x-model="novaLoja.nome" placeholder="Nome Exibição (ex: Favo Moda)" class="p-2.5 border rounded-xl text-xs bg-white">
+                </div>
+                <button @click="criarNovaLoja()" class="w-full bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold py-3 rounded-xl transition">Criar Loja na ChatShop</button>
               </div>
+
+              <!-- LISTA DE LOJAS CADASTRADAS -->
+              <div>
+                <h4 class="font-bold text-sm text-gray-900 mb-2">Lojas Virtuais Criadas</h4>
+                <div class="space-y-2">
+                  <template x-for="l in listaLojas" :key="l.id">
+                    <div class="flex justify-between items-center bg-white p-3 rounded-xl border text-xs">
+                      <div>
+                        <span class="font-bold text-gray-900" x-text="l.nome"></span>
+                        <span class="text-gray-400 text-[10px] ml-2" x-text="'(?loja=' + l.id + ')'"></span>
+                      </div>
+                      <a :href="'?loja=' + l.id" class="bg-rose-100 text-rose-700 font-bold px-3 py-1 rounded-lg">Acessar Loja</a>
+                    </div>
+                  </template>
+                </div>
+              </div>
+
             </div>
 
           </div>
@@ -394,17 +455,17 @@
     </div>
   </div>
 
-  <!-- RODAPÉ SEMÂNTICO (SEO) -->
+  <!-- RODAPÉ DA PLATAFORMA CHATSHOP -->
   <footer class="bg-white border-t border-gray-200 py-8 mt-16 text-center text-xs text-gray-500">
     <div class="max-w-7xl mx-auto px-4">
-      <p class="font-bold text-gray-800" x-text="config.nomeLoja + ' © 2026'"></p>
-      <p class="mt-1">Moda Feminina Luxo, Roupas e Tendências com entrega rápida para todo o Brasil.</p>
+      <p class="font-bold text-gray-800" x-text="lojaAtiva.nome + ' © 2026'"></p>
+      <p class="mt-1 text-[11px] text-gray-400">Plataforma ChatShop - Gerador de Lojas Virtuais & Moda Feminina</p>
     </div>
   </footer>
 
-  <!-- SCRIPT ALPINE.JS -->
+  <!-- SCRIPT CENTRAL CHATSHOP -->
   <script>
-    function lojaApp() {
+    function plataformaChatShop() {
       return {
         painelAberto: false,
         carrinhoAberto: false,
@@ -419,15 +480,40 @@
           isAdminConvidado: false
         },
 
-        config: {
-          nomeLoja: 'Dridalia Moda Feminina',
-          logo: '',
-          banner: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1200',
-          layoutGrife: true,
-          dominioProprio: '',
-          googleConsole: '',
-          googleAnalytics: ''
-        },
+        // Lista Geral de Lojas na ChatShop
+        listaLojas: [
+          {
+            id: 'dridalia',
+            nome: 'Dridalia Moda Feminina',
+            logo: '',
+            banner: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1200',
+            layoutGrife: true,
+            dominioProprio: '',
+            googleConsole: '',
+            botoesFlutuantes: [
+              { id: 1, nome: 'WhatsApp', icone: 'fa-brands fa-whatsapp', link: 'https://wa.me/5500000000000', cor: '#25D366' },
+              { id: 2, nome: 'Zap Leve', icone: 'fa-solid fa-bolt', link: 'https://zapleve.com', cor: '#4F46E5' },
+              { id: 3, nome: 'Instagram', icone: 'fa-brands fa-instagram', link: 'https://instagram.com', cor: '#E1306C' }
+            ]
+          },
+          {
+            id: 'favo',
+            nome: 'Favo Moda & Acessórios',
+            logo: '',
+            banner: 'https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=1200',
+            layoutGrife: false,
+            dominioProprio: '',
+            googleConsole: '',
+            botoesFlutuantes: [
+              { id: 1, nome: 'WhatsApp', icone: 'fa-brands fa-whatsapp', link: 'https://wa.me/5500000000000', cor: '#25D366' }
+            ]
+          }
+        ],
+
+        lojaAtiva: {},
+        novaLoja: { id: '', nome: '' },
+
+        novoBtn: { nome: '', icone: 'fa-solid fa-comments', link: '', cor: '#10B981' },
 
         produtoChat: null,
         mensagensChat: [],
@@ -439,31 +525,36 @@
           descricao: '',
           chatbotAtivo: true,
           faqs: [
-            { pergunta: 'Qual a composição do tecido?', resposta: 'Confeccionado em Moletinho Premium com elastano.' },
-            { pergunta: 'Quais tamanhos veste?', resposta: 'Veste perfeitamente do tamanho 38 ao 42.' }
+            { pergunta: 'Qual a composição do tecido?', resposta: 'Moletinho Premium de alta qualidade com toque suave.' },
+            { pergunta: 'Prazo de entrega?', resposta: 'Envio imediato em até 24 horas úteis.' }
           ]
         },
 
-        botoesFlutuantes: [
-          { id: 1, nome: 'WhatsApp', icone: 'fa-brands fa-whatsapp', link: 'https://wa.me/5500000000000', cor: '#25D366' },
-          { id: 2, nome: 'Zap Leve', icone: 'fa-solid fa-bolt', link: 'https://zapleve.com', cor: '#4F46E5' },
-          { id: 3, nome: 'Instagram', icone: 'fa-brands fa-instagram', link: 'https://instagram.com', cor: '#E1306C' }
-        ],
-
-        novoAdminEmail: '',
-        listaAdmins: ['jeanaguiar636@gmail.com'],
-
+        // Produtos Cadastrados
         produtos: [
           {
             id: 1,
+            loja_id: 'dridalia',
             nome: 'Conjunto Tati Moletinho Premium',
             preco: 189.90,
             descricao: 'Conjunto de moletinho super macio e elegante para o dia a dia.',
             imagem: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600',
             chatbotAtivo: true,
             faqs: [
-              { pergunta: 'Qual a composição do tecido?', resposta: 'Moletinho Premium com toque suave.' },
-              { pergunta: 'Qual o prazo de envio?', resposta: 'Envio imediato em até 24h.' }
+              { pergunta: 'Qual a composição do tecido?', resposta: 'Moletinho Premium com elastano toque suave.' },
+              { pergunta: 'Quais tamanhos veste?', resposta: 'Veste perfeitamente do tamanho 38 ao 42.' }
+            ]
+          },
+          {
+            id: 2,
+            loja_id: 'dridalia',
+            nome: 'Vestido Midi Elegance Alfaiataria',
+            preco: 239.90,
+            descricao: 'Vestido midi fluido de alfaiataria com corte impecável.',
+            imagem: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=600',
+            chatbotAtivo: true,
+            faqs: [
+              { pergunta: 'Tem forro interno?', resposta: 'Sim, possui forro total sem transparência.' }
             ]
           }
         ],
@@ -471,11 +562,22 @@
         carrinho: [],
 
         init() {
-          const configSalva = localStorage.getItem('loja_config');
-          if (configSalva) this.config = JSON.parse(configSalva);
+          // Detecta a loja na URL ex: ?loja=favo ou usa a padrão 'dridalia'
+          const urlParams = new URLSearchParams(window.location.search);
+          const lojaParam = urlParams.get('loja') || 'dridalia';
 
-          const prodsSalvos = localStorage.getItem('loja_produtos');
+          const lojasSalvas = localStorage.getItem('chatshop_lojas');
+          if (lojasSalvas) this.listaLojas = JSON.parse(lojasSalvas);
+
+          const encontrada = this.listaLojas.find(l => l.id === lojaParam);
+          this.lojaAtiva = encontrada || this.listaLojas[0];
+
+          const prodsSalvos = localStorage.getItem('chatshop_produtos');
           if (prodsSalvos) this.produtos = JSON.parse(prodsSalvos);
+        },
+
+        get produtosFiltrados() {
+          return this.produtos.filter(p => p.loja_id === this.lojaAtiva.id);
         },
 
         abrirPainel() { this.painelAberto = true; },
@@ -491,14 +593,30 @@
         fazerLogin() {
           if (!this.usuario.email) return;
           this.usuario.logado = true;
-          if (this.listaAdmins.includes(this.usuario.email)) this.usuario.isAdminConvidado = true;
         },
 
         afiliarSe() {
           const codigo = 'AF-' + Math.random().toString(36).substring(2, 7).toUpperCase();
           this.usuario.isAfiliado = true;
           this.usuario.codigoAfiliado = codigo;
-          alert('Conta de afiliado ativada com sucesso!');
+          alert('Conta de afiliado ativada na loja ' + this.lojaAtiva.nome + '!');
+        },
+
+        adicionarBotaoFlutuante() {
+          if (!this.novoBtn.nome || !this.novoBtn.link) {
+            alert('Preencha nome e link do botão flutuante.');
+            return;
+          }
+          this.lojaAtiva.botoesFlutuantes.push({
+            id: Date.now(),
+            nome: this.novoBtn.nome,
+            icone: this.novoBtn.icone || 'fa-solid fa-comments',
+            link: this.novoBtn.link,
+            cor: this.novoBtn.cor
+          });
+          this.salvarConfiguracoes();
+          this.novoBtn = { nome: '', icone: 'fa-solid fa-comments', link: '', cor: '#10B981' };
+          alert('Botão flutuante adicionado!');
         },
 
         adicionarProduto() {
@@ -508,6 +626,7 @@
           }
           this.produtos.push({
             id: Date.now(),
+            loja_id: this.lojaAtiva.id,
             nome: this.novoProd.nome,
             preco: Number(this.novoProd.preco),
             imagem: this.novoProd.imagem,
@@ -515,18 +634,35 @@
             chatbotAtivo: this.novoProd.chatbotAtivo,
             faqs: JSON.parse(JSON.stringify(this.novoProd.faqs))
           });
-          localStorage.setItem('loja_produtos', JSON.stringify(this.produtos));
-          alert('Produto cadastrado no catálogo!');
+          localStorage.setItem('chatshop_produtos', JSON.stringify(this.produtos));
+          alert('Produto cadastrado com sucesso!');
         },
 
-        concederAdmin() {
-          if (!this.novoAdminEmail) return;
-          this.listaAdmins.push(this.novoAdminEmail);
-          alert('Acesso admin concedido!');
+        criarNovaLoja() {
+          if (!this.novaLoja.id || !this.novaLoja.nome) {
+            alert('Preencha ID e Nome da nova loja.');
+            return;
+          }
+          const idLimpo = this.novaLoja.id.toLowerCase().replace(/\s+/g, '');
+          this.listaLojas.push({
+            id: idLimpo,
+            nome: this.novaLoja.nome,
+            logo: '',
+            banner: 'https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=1200',
+            layoutGrife: true,
+            dominioProprio: '',
+            googleConsole: '',
+            botoesFlutuantes: [
+              { id: 1, nome: 'WhatsApp', icone: 'fa-brands fa-whatsapp', link: 'https://wa.me/5500000000000', cor: '#25D366' }
+            ]
+          });
+          localStorage.setItem('chatshop_lojas', JSON.stringify(this.listaLojas));
+          alert('Loja ' + this.novaLoja.nome + ' criada no ChatShop!');
+          this.novaLoja = { id: '', nome: '' };
         },
 
         salvarConfiguracoes() {
-          localStorage.setItem('loja_config', JSON.stringify(this.config));
+          localStorage.setItem('chatshop_lojas', JSON.stringify(this.listaLojas));
           alert('Configurações salvas!');
         },
 
