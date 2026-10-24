@@ -48,7 +48,7 @@ input,textarea,select{font:inherit;padding:9px 12px;border:1px solid var(--bd);b
 <body>
 <div id="hd"></div><main id="app"></main><div id="modal"></div><div id="toast"></div>
 <script>
-const API = "https://chatshop-api.SEU-USUARIO.workers.dev"; // URL do seu Worker (troque após o deploy)
+const API = "https://chatshop-api.bmlimp8.workers.dev";
 const $ = (s) => document.querySelector(s), app = $("#app");
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const brl = (n) => Number(n || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
