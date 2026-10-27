@@ -262,7 +262,7 @@
                     const email = this.loginEmail.trim().toLowerCase();
                     if (email === 'afiliado9591@gmail.com' || email.includes('admin')) {
                         this.showAccountModal = false;
-                        window.location.replace('./admin.html');
+                        window.location.href = '/admin.html';
                     } else {
                         alert('Login efetuado com sucesso! Bem-vindo.');
                         this.showAccountModal = false;
