@@ -46,9 +46,9 @@
                 <button @click="selectedPlatform = 'dridalia'" :class="selectedPlatform === 'dridalia' ? 'bg-marsala text-white shadow-sm' : 'text-slate-600 hover:text-marsala'" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition">Dridalia</button>
             </div>
 
-            <!-- BOTÃO MINHA CONTA / ADMIN -->
+            <!-- BOTÕES DO TOPO (ADMIN & CONTA) -->
             <div class="flex items-center gap-3">
-                <a href="admin.html" class="text-xs bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold px-3.5 py-2.5 rounded-xl transition flex items-center gap-1.5" title="Aceder Direto ao Admin">
+                <a href="admin.html" class="text-xs bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold px-3.5 py-2.5 rounded-xl transition flex items-center gap-1.5 shadow-sm">
                     <i class="fa-solid fa-gauge"></i> <span class="hidden sm:inline">Painel Admin</span>
                 </a>
                 <button @click="showAccountModal = true" class="text-xs bg-slate-900 hover:bg-slate-800 text-white font-semibold px-4 py-2.5 rounded-xl transition shadow-sm flex items-center gap-2">
@@ -204,7 +204,7 @@
         <p>&copy; 2026 ChatShop & Dridalia Modas. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- SCRIPT -->
+    <!-- SCRIPT DE JAVASCRIPT EMBUTIDO -->
     <script>
         function chatShopApp() {
             return {
@@ -259,10 +259,10 @@
                 loadMore() { this.displayLimit += 15; },
 
                 handleLogin() {
-                    // Verifica explicitamente o seu email de administrador ou qualquer email contendo 'admin'
                     const email = this.loginEmail.trim().toLowerCase();
                     if (email === 'afiliado9591@gmail.com' || email.includes('admin')) {
-                        window.location.href = 'admin.html';
+                        this.showAccountModal = false;
+                        window.location.replace('./admin.html');
                     } else {
                         alert('Login efetuado com sucesso! Bem-vindo.');
                         this.showAccountModal = false;
