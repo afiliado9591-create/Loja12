@@ -49,7 +49,46 @@ input,textarea,select{font:inherit;padding:9px 12px;border:1px solid var(--bd);b
 #feed{flex:1;padding:8px 0}.blk{display:grid;gap:10px}.pgrid{display:grid;gap:10px;grid-template-columns:repeat(2,1fr)}@media(min-width:700px){.pgrid{grid-template-columns:repeat(3,1fr)}}
 .pc{background:var(--card);border:1px solid var(--bd);border-radius:16px;overflow:hidden;color:inherit;display:flex;flex-direction:column}.pimg{position:relative;aspect-ratio:1;background:var(--sec)}.pimg img{width:100%;height:100%;object-fit:cover}.tag{position:absolute;left:6px;top:6px;background:#000a;color:#fff;font-size:.65rem;padding:2px 8px;border-radius:99px}.pb2{padding:10px;display:grid;gap:6px;margin-top:auto}.pt{font-size:.85rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.3}
 .topmenu{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:8px;background:rgba(253,247,246,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--bd);padding:10px 12px}.hico{font-size:1.5rem}.topmenu .chips{flex:1;padding:0}.mini{border:0;margin-top:24px}.sbar{position:sticky;top:58px;z-index:20;display:flex;gap:6px;align-items:center;background:var(--bg);padding:10px 0}.sbar input{border-radius:99px;padding:12px 16px}.mic,.send{flex:0 0 46px;height:46px;border-radius:50%;border:0;cursor:pointer;font-size:1.1rem}.mic{background:var(--sec)}.mic.rec{background:#b3261e;animation:pu 1s infinite}.send{background:var(--hero);color:#fff}@keyframes pu{50%{opacity:.5}}
-.log{background:#1b1015;color:#e9d7da;padding:10px;border-radius:12px;font-size:.8rem;white-space:pre-wrap;max-height:240px;overflow:auto;margin-top:12px}.log:empty{display:none}</style>
+.log{background:#1b1015;color:#e9d7da;padding:10px;border-radius:12px;font-size:.8rem;white-space:pre-wrap;max-height:240px;overflow:auto;margin-top:12px}.log:empty{display:none}
+/* ---- Home estilo chat de IA ---- */
+body.gpt{background:#fff;color:#0d0d0d}
+body.gpt .topmenu{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid #ececf1;padding:8px 12px}
+.brand{display:flex;align-items:center;gap:6px;font-size:1.4rem;color:#0d0d0d;flex:0 0 auto}.brand b{font:600 1rem "DM Sans",sans-serif}
+@media(max-width:620px){.brand b{display:none}}
+body.gpt .topmenu .chips{flex:1;padding:0;justify-content:center}
+body.gpt .topmenu .chip{border:0;background:none;color:#6e6e80;font:500 .9rem "DM Sans",sans-serif;padding:8px 12px;border-radius:99px}
+body.gpt .topmenu .chip:hover{background:#f4f4f6}
+body.gpt .topmenu .chip.on{background:#ececf1;color:#0d0d0d}
+.usr{flex:0 0 auto;width:38px;height:38px;border-radius:50%;border:0;background:none;color:#0d0d0d;display:grid;place-items:center;cursor:pointer;font-size:1.1rem}.usr:hover{background:#f4f4f6}
+.gpt-wrap{max-width:1040px;margin:auto;padding:0 16px;min-height:calc(100dvh - 58px);display:flex;flex-direction:column}
+.gpt-wrap.empty{justify-content:center;padding-bottom:10vh}
+.gpt-wrap.empty #feed{display:none}.gpt-wrap.has .hero2,.gpt-wrap.has .foot{display:none}
+.hero2{text-align:center;margin-bottom:22px}.mark{width:64px;height:64px;margin:0 auto 14px;border-radius:50%;background:#f4f4f6;display:grid;place-items:center;font-size:2rem}
+.hero2 h1{font:600 clamp(1.6rem,5vw,2.2rem) "DM Sans",sans-serif;letter-spacing:-.02em;color:#0d0d0d}
+.dock{max-width:760px;width:100%;margin:0 auto}
+.gpt-wrap.has .dock{position:sticky;bottom:0;background:linear-gradient(to top,#fff 78%,rgba(255,255,255,0));padding:14px 0 calc(10px + env(safe-area-inset-bottom,0px));margin-top:auto}
+.composer{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e0e0e6;border-radius:32px;padding:7px 7px 7px 20px;box-shadow:0 4px 24px -8px rgba(0,0,0,.18)}
+.composer:focus-within{border-color:#c5c5d0}
+.composer input{border:0;outline:0;background:none;box-shadow:none;border-radius:0;flex:1;width:auto;padding:12px 0;font-size:1rem;color:#0d0d0d}
+.act{flex:0 0 52px;width:52px;height:52px;border-radius:50%;border:0;background:#25d366;color:#fff;display:grid;place-items:center;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;transition:transform .15s,box-shadow .15s,background .15s;box-shadow:0 6px 16px -6px rgba(37,211,102,.7)}
+.act:hover{background:#1fbb5a}.act.rec{transform:scale(1.14);box-shadow:0 0 0 9px rgba(37,211,102,.25);animation:pu 1s infinite}
+.hint{text-align:center;font-size:.78rem;color:#8e8ea0;margin-top:8px;min-height:1.1em}.foot{text-align:center;font-size:.8rem;margin-top:26px;color:#8e8ea0}.foot a{color:#6e6e80}
+#feed{flex:1;padding:18px 0 8px}.blk{display:grid;gap:14px;scroll-margin-top:70px}
+.gpt-wrap .m.me{justify-self:end;max-width:82%;background:#f0f0f3;color:#0d0d0d;border-radius:20px;padding:10px 16px;font-size:.98rem}
+.airow{display:flex;gap:10px;align-items:flex-start}.av{flex:0 0 32px;height:32px;border-radius:50%;background:#f4f4f6;display:grid;place-items:center;font-size:1.05rem}.aitext{padding-top:5px;color:#0d0d0d;font-size:1rem}
+.pgrid{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}@media(min-width:700px){.pgrid{grid-template-columns:repeat(3,1fr)}}@media(min-width:980px){.pgrid{grid-template-columns:repeat(4,1fr)}}
+.pc{background:#fff;border:1px solid #ececf1;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;color:#0d0d0d;transition:box-shadow .2s,transform .2s}
+.pc:hover{box-shadow:0 14px 30px -14px rgba(0,0,0,.3);transform:translateY(-2px)}
+.pimg{position:relative;aspect-ratio:1;background:#f4f4f6}.pimg img{width:100%;height:100%;object-fit:cover}.noimg{height:100%;display:grid;place-items:center;font-size:2.4rem}
+.tag{position:absolute;left:8px;bottom:8px;background:rgba(255,255,255,.95);color:#0d0d0d;font-size:.68rem;font-weight:600;padding:3px 9px;border-radius:99px}
+.off{position:absolute;right:8px;top:8px;background:#25d366;color:#fff;font-size:.72rem;font-weight:700;padding:3px 8px;border-radius:99px}
+.pb2{padding:12px;display:grid;gap:8px;margin-top:auto}.pt{font-size:.88rem;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.3em}
+.pp{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.price{font-size:1.1rem;font-weight:700}.old{font-size:.8rem;color:#8e8ea0}
+.offer{background:#0d0d0d;color:#fff;border-radius:99px;text-align:center;padding:9px;font-weight:600;font-size:.85rem}
+.sk{aspect-ratio:3/4;border-radius:18px;background:linear-gradient(90deg,#f4f4f6 25%,#ececf1 50%,#f4f4f6 75%);background-size:200% 100%;animation:sh 1.2s infinite}@keyframes sh{to{background-position:-200% 0}}
+.pager{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:6px 0 14px}.pager:empty{display:none}
+.pg{min-width:40px;height:40px;border-radius:12px;border:1px solid #e0e0e6;background:#fff;color:#0d0d0d;font:600 .9rem "DM Sans",sans-serif;cursor:pointer}.pg.on{background:#0d0d0d;color:#fff;border-color:#0d0d0d}.pg:disabled{opacity:.35;cursor:default}.dots{align-self:center;color:#8e8ea0}
+</style>
 </head>
 <body>
 <div id="hd"></div><main id="app"></main><div id="modal"></div><div id="toast"></div>
@@ -85,56 +124,107 @@ const closeM = () => ($("#modal").innerHTML = "");
 const stat = (l, v) => `<div class="stat"><p>${l}</p><b>${v}</b></div>`;
 const sum = (a, k) => a.reduce((s, o) => s + Number(o[k] || 0), 0);
 
-// ---------- Home: busca de produtos com IA ----------
+// ---------- Home: busca de produtos com IA (estilo chat) ----------
 const SRCS = [["", "Todos"], ["mercadolivre", "Mercado Livre"], ["shopee", "Shopee"], ["shein", "Shein"], ["dridalia", "Dridália Modas"]];
 const SRCN = Object.fromEntries(SRCS), HS = { src: "", q: "", voice: localStorage.getItem("voice") !== "0" };
-const prodCard = (p) => `<a class="pc" href="${esc(p.url)}" target="_blank" rel="sponsored noopener"><div class="pimg">${p.image_url ? `<img loading="lazy" src="${esc(p.image_url)}" alt="${esc(p.title)}">` : ""}<span class="tag">${esc(SRCN[p.source] || p.source)}</span></div><div class="pb2"><p class="pt">${esc(p.title)}</p><div>${p.price ? `<span class="pr">${brl(p.price)}</span> ` : ""}${p.old_price > p.price ? `<s class="mut">${brl(p.old_price)}</s>` : ""}</div><span class="btn hero-b sm">Ver oferta</span></div></a>`;
+const ICON = {
+  mic: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg>',
+  send: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>',
+  user: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
+};
+const prodCard = (p) => {
+  const off = p.price && p.old_price > p.price ? Math.round((1 - p.price / p.old_price) * 100) : 0;
+  return `<a class="pc" href="${esc(p.url)}" target="_blank" rel="sponsored noopener"><div class="pimg">${p.image_url ? `<img loading="lazy" src="${esc(p.image_url)}" alt="${esc(p.title)}">` : '<div class="noimg">🛍️</div>'}<span class="tag">${esc(SRCN[p.source] || p.source)}</span>${off ? `<span class="off">-${off}%</span>` : ""}</div><div class="pb2"><p class="pt">${esc(p.title)}</p><div class="pp">${p.price ? `<b class="price">${brl(p.price)}</b>` : ""}${off ? `<s class="old">${brl(p.old_price)}</s>` : ""}</div><span class="offer">Ver oferta</span></div></a>`;
+};
+const pager = (cur, tot) => {
+  if (tot <= 1) return "";
+  const ps = [...new Set([1, tot, cur - 1, cur, cur + 1])].filter((x) => x >= 1 && x <= tot).sort((a, b) => a - b);
+  let out = "", prev = 0;
+  for (const p of ps) { if (p - prev > 1) out += '<span class="dots">…</span>'; out += `<button class="pg ${p === cur ? "on" : ""}" data-p="${p}">${p}</button>`; prev = p; }
+  return `<button class="pg" data-p="${cur - 1}" ${cur === 1 ? "disabled" : ""}>‹</button>${out}<button class="pg" data-p="${cur + 1}" ${cur === tot ? "disabled" : ""}>›</button>`;
+};
 // voz do navegador
 const NOISE = new Set(["quero", "preciso", "procuro", "buscar", "mostre", "mostrar", "me", "um", "uma", "uns", "de", "da", "do", "para", "com", "por", "favor"]);
 const plural = (w) => (/s$/.test(w) ? w : /m$/.test(w) ? w.slice(0, -1) + "ns" : /[rz]$/.test(w) ? w + "es" : /[aeiouãõáéíóúâêô]$/.test(w) ? w + "s" : w);
-const say = (q, n) => {
+const say = (q, n, partial) => {
   const ws = q.toLowerCase().replace(/(?:até|ate|menos de|abaixo de)\s*r?\$?\s*\d+(\s*reais)?/g, "").split(/\s+/).filter((x) => x && !NOISE.has(x));
-  if (!n) return q ? `Não encontrei ${ws.join(" ") || "nada"}.` : "O catálogo está vazio.";
+  if (!n) return `Não encontrei ${ws.join(" ") || "nada"}.`;
+  if (partial) return `Não achei exatamente ${ws.join(" ")}, mas encontrei ${n} produto${n > 1 ? "s parecidos" : " parecido"}.`;
   if (!ws.length) return `Encontrei ${n} produtos.`;
   return n === 1 ? `Encontrei 1 resultado para ${ws.join(" ")}.` : `Encontrei ${n} ${ws.map(plural).join(" ")}.`;
 };
 const speak = (t) => { if (!HS.voice || !window.speechSynthesis) return; speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = "pt-BR"; speechSynthesis.speak(u); };
+const SKEL = '<div class="sk"></div>'.repeat(8);
 async function home() {
   HS.q = "";
-  app.innerHTML = `<nav class="topmenu"><span class="hico">🏪</span><div class="chips" id="srcs">${SRCS.slice(1).map(([k, v]) => `<button class="chip" data-k="${k}">${v}</button>`).join("")}</div><a class="hico" href="${S.user ? (S.user.admin ? "#/admin" : "#/lojista") : "#/auth"}" title="Entrar">👤</a></nav>
-  <div class="ai"><div class="aihead"><div class="shopico">🏪</div><h1>O que você quer encontrar?</h1></div>
-  <form id="sf" class="sbar"><input id="sq" placeholder="Digite ou fale: vestido marrom" autocomplete="off"><button type="button" id="mic" class="mic" aria-label="Falar">🎤</button><button class="send" aria-label="Buscar">➤</button><button type="button" id="spk" class="mic" aria-label="Voz das respostas"></button></form>
-  <div id="feed"></div><footer class="mini">${S.user ? (S.user.admin ? '<a href="#/admin">Admin</a>' : '<a href="#/lojista">Meu painel</a>') : '<a href="#/plataforma">Criar minha loja</a> · <a href="#/auth">Entrar</a>'}</footer></div>`;
-  const feed = $("#feed"), mark = () => app.querySelectorAll("#srcs .chip").forEach((c) => c.classList.toggle("on", c.dataset.k === HS.src));
-  const spk = $("#spk"), icon = () => (spk.textContent = HS.voice ? "🔊" : "🔇");
-  spk.onclick = () => { HS.voice = !HS.voice; localStorage.setItem("voice", HS.voice ? "1" : "0"); if (!HS.voice && window.speechSynthesis) speechSynthesis.cancel(); icon(); };
+  app.innerHTML = `<nav class="topmenu"><a class="brand" href="#/">🏪<b>ChatShop</b></a><div class="chips" id="srcs">${SRCS.slice(1).map(([k, v]) => `<button class="chip" data-k="${k}">${v}</button>`).join("")}</div><button class="usr" id="spk" title="Voz das respostas"></button><a class="usr" href="${S.user ? (S.user.admin ? "#/admin" : "#/lojista") : "#/auth"}" title="${S.user ? "Meu painel" : "Entrar"}">${ICON.user}</a></nav>
+  <div class="gpt-wrap empty" id="gw"><div class="hero2"><div class="mark">🏪</div><h1>O que você quer encontrar hoje?</h1></div>
+  <div id="feed"></div>
+  <div class="dock"><form id="sf" class="composer"><input id="sq" placeholder="Digite ou segure o botão verde e fale" autocomplete="off" enterkeyhint="search"><button type="button" id="act" class="act" aria-label="Segure para falar"></button></form><p class="hint" id="hint"></p><div class="foot">${S.user ? (S.user.admin ? '<a href="#/admin">Admin</a>' : '<a href="#/lojista">Meu painel</a>') : '<a href="#/plataforma">Criar minha loja</a> · <a href="#/auth">Entrar</a>'}</div></div></div>`;
+  const gw = $("#gw"), feed = $("#feed"), inp = $("#sq"), act = $("#act"), hint = $("#hint"), spk = $("#spk");
+  const mark = () => app.querySelectorAll("#srcs .chip").forEach((c) => c.classList.toggle("on", c.dataset.k === HS.src));
+  const spkIcon = () => (spk.textContent = HS.voice ? "🔊" : "🔇");
+  spk.onclick = () => { HS.voice = !HS.voice; localStorage.setItem("voice", HS.voice ? "1" : "0"); if (!HS.voice && window.speechSynthesis) speechSynthesis.cancel(); spkIcon(); };
+  const setHint = (t) => (hint.textContent = t);
+  const IDLE = "Segure o botão verde para falar e solte para enviar";
+  const sync = () => { const txt = inp.value.trim() && !rec; act.innerHTML = txt ? ICON.send : ICON.mic; act.setAttribute("aria-label", txt ? "Enviar" : "Segure para falar"); };
+
   async function run(q) {
+    gw.classList.replace("empty", "has");
     const blk = document.createElement("div"); blk.className = "blk";
-    blk.innerHTML = `${q ? `<div class="m me">${esc(q)}</div>` : ""}<div class="m bot">Buscando…</div><div class="pgrid"></div><div class="mor"></div>`;
-    feed.innerHTML = ""; feed.append(blk); let off = 0;
-    const bot = blk.querySelector(".bot"), grid = blk.querySelector(".pgrid"), mor = blk.querySelector(".mor");
-    const load = async () => {
+    blk.innerHTML = `<div class="m me">${esc(q)}</div><div class="airow"><span class="av">🏪</span><div class="aitext">Buscando…</div></div><div class="pgrid">${SKEL}</div><div class="pager"></div>`;
+    feed.innerHTML = ""; feed.append(blk);
+    const txt = blk.querySelector(".aitext"), grid = blk.querySelector(".pgrid"), pg = blk.querySelector(".pager");
+    const load = async (page, first) => {
       try {
-        const r = await api(`/catalog/search?q=${encodeURIComponent(q)}&source=${HS.src}&offset=${off}`);
-        if (!off) {
-          const where = HS.src ? ` em ${SRCN[HS.src]}` : "";
-          bot.textContent = r.total ? `Encontrei ${r.total} produto${r.total > 1 ? "s" : ""}${q ? ` para “${q}”` : ""}${where}:` : `Não encontrei${q ? ` “${q}”` : ""}${where}. Tente outras palavras.`;
-          speak(say(q, r.total));
-        }
-        grid.insertAdjacentHTML("beforeend", r.items.map(prodCard).join(""));
-        mor.innerHTML = r.more ? '<button class="btn out full">Ver mais</button>' : "";
-        if (r.more) mor.firstChild.onclick = () => { off += 24; load(); };
-      } catch (x) { bot.textContent = "Não consegui buscar agora. Tente de novo."; fail(x); }
+        const r = await api(`/catalog/search?q=${encodeURIComponent(q)}&source=${HS.src}&offset=${(page - 1) * 20}`);
+        const where = HS.src ? ` em ${SRCN[HS.src]}` : "", s = r.total > 1 ? "s" : "";
+        txt.textContent = !r.total ? `Não encontrei “${q}”${where}. Tente palavras mais simples, como só o tipo do produto.` : r.partial ? `Não achei exatamente “${q}”${where}, mas encontrei ${r.total} produto${s} parecido${s}:` : `Encontrei ${r.total} produto${s} para “${q}”${where}:`;
+        if (first) speak(say(q, r.total, r.partial));
+        grid.innerHTML = r.items.map(prodCard).join("");
+        pg.innerHTML = pager(page, r.pages);
+        if (!first) blk.scrollIntoView({ behavior: "smooth", block: "start" });
+      } catch (x) { txt.textContent = "Não consegui buscar agora. Tente de novo."; grid.innerHTML = ""; fail(x); }
     };
-    await load();
+    pg.onclick = (e) => { const b = e.target.closest("[data-p]"); if (b && !b.disabled) { grid.innerHTML = SKEL; load(+b.dataset.p, false); } };
+    await load(1, true);
   }
-  const ask = (q) => { HS.q = q; run(q); };
+  const ask = (q) => { HS.q = q; inp.value = ""; sync(); run(q); };
   $("#srcs").onclick = (e) => { const c = e.target.closest("[data-k]"); if (!c) return; HS.src = HS.src === c.dataset.k ? "" : c.dataset.k; mark(); if (HS.q) run(HS.q); };
-  $("#sf").onsubmit = (e) => { e.preventDefault(); const q = $("#sq").value.trim(); if (!q) return; $("#sq").value = ""; ask(q); };
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition, mic = $("#mic");
-  if (!SR) mic.style.display = "none";
-  else mic.onclick = () => { if (window.speechSynthesis) speechSynthesis.cancel(); const r = new SR(); r.lang = "pt-BR"; r.interimResults = false; mic.classList.add("rec"); r.onresult = (e) => ask(e.results[0][0].transcript); r.onend = () => mic.classList.remove("rec"); r.onerror = () => toast("Não consegui ouvir. Tente de novo.", 1); r.start(); };
-  mark(); icon();
+  $("#sf").onsubmit = (e) => { e.preventDefault(); const q = inp.value.trim(); if (q && !rec) ask(q); };
+  inp.oninput = sync;
+
+  // botão verde: segure para falar, solte para enviar (um toque rápido liga/desliga a gravação)
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let rec = null, heard = "", holding = false, t0 = 0, sx = 0, cancelled = false, toggled = false, stopOnUp = false;
+  function startRec() {
+    if (!SR) return toast("Este navegador não tem reconhecimento de voz. Digite a busca.", 1);
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    heard = ""; cancelled = false; inp.value = "";
+    const r = new SR(); r.lang = "pt-BR"; r.continuous = true; r.interimResults = true;
+    r.onresult = (e) => { heard = [...e.results].map((x) => x[0].transcript).join(" ").trim(); inp.value = heard; };
+    r.onerror = (e) => { if (!["no-speech", "aborted"].includes(e.error)) toast("Não consegui usar o microfone. Libere a permissão no navegador.", 1); };
+    r.onend = () => { const q = heard; rec = null; toggled = false; act.classList.remove("rec"); setHint(IDLE); inp.value = ""; sync(); if (q && !cancelled) ask(q); };
+    try { r.start(); rec = r; act.classList.add("rec"); setHint("Gravando… solte para enviar · arraste para a esquerda para cancelar"); sync(); } catch { rec = null; }
+  }
+  act.onpointerdown = (e) => {
+    if (inp.value.trim() && !rec) return;
+    e.preventDefault(); try { act.setPointerCapture(e.pointerId); } catch {}
+    if (rec && toggled) { stopOnUp = true; return; }
+    holding = true; t0 = Date.now(); sx = e.clientX; startRec();
+  };
+  act.onpointermove = (e) => { if (holding && rec) { cancelled = e.clientX - sx < -70; setHint(cancelled ? "Solte para cancelar" : "Gravando… solte para enviar · arraste para a esquerda para cancelar"); } };
+  act.onpointerup = () => {
+    if (stopOnUp) { stopOnUp = false; if (rec) rec.stop(); return; }
+    if (!holding) return;
+    holding = false;
+    if (!rec) return;
+    if (Date.now() - t0 < 350) { toggled = true; setHint("Falando… toque no botão verde para enviar"); } else rec.stop();
+  };
+  act.onpointercancel = () => { if (holding) { holding = false; cancelled = true; if (rec) rec.stop(); } };
+  act.oncontextmenu = (e) => e.preventDefault();
+  act.onclick = () => { const q = inp.value.trim(); if (q && !rec) ask(q); };
+  mark(); spkIcon(); sync(); setHint(IDLE);
 }
 // ---------- Plataforma (lojistas) ----------
 async function plataforma() {
@@ -311,7 +401,7 @@ async function adCatalogo(box) {
   await load();
 }
 function adForm(p, box, back) {
-  box.innerHTML = `<form id="af" class="form stack"><h2>${p ? "Editar produto" : "Novo produto"}</h2><label>Loja de origem<select name="source">${SRCS.slice(1).map(([k, v]) => `<option value="${k}" ${p?.source === k ? "selected" : ""}>${v}</option>`).join("")}</select></label><label>Título<input name="title" required value="${esc(p?.title)}"></label><label>Preço (R$)<input name="price" type="number" step="0.01" min="0" value="${p?.price ?? ""}"></label><label>Preço antigo (opcional)<input name="old_price" type="number" step="0.01" min="0" value="${p?.old_price ?? ""}"></label><label>Link de afiliado<input name="url" type="url" required placeholder="https://…" value="${esc(p?.url)}"></label><label>Categoria<input name="category" placeholder="vestido" value="${esc(p?.category)}"></label><label>Cor<input name="color" placeholder="vermelho" value="${esc(p?.color)}"></label><div><b style="font-size:.85rem">Foto</b><div id="ip" style="margin:8px 0"></div><label class="btn out sm" style="cursor:pointer"><span id="up">Enviar foto do aparelho</span><input type="file" id="fl" accept="image/*" hidden></label><input name="image_url" id="iu" placeholder="ou cole o link da imagem" value="${esc(p?.image_url)}" style="margin-top:8px"></div><div class="row"><button class="btn hero-b">Salvar</button><button type="button" class="btn ghost" id="cn">Cancelar</button></div></form>`;
+  box.innerHTML = `<form id="af" class="form stack"><h2>${p ? "Editar produto" : "Novo produto"}</h2><label>Loja de origem<select name="source">${SRCS.slice(1).map(([k, v]) => `<option value="${k}" ${p?.source === k ? "selected" : ""}>${v}</option>`).join("")}</select></label><label>Título<input name="title" required value="${esc(p?.title)}"></label><label>Preço (R$)<input name="price" type="number" step="0.01" min="0" value="${p?.price ?? ""}"></label><label>Preço antigo (opcional)<input name="old_price" type="number" step="0.01" min="0" value="${p?.old_price ?? ""}"></label><label>Link de afiliado<input name="url" type="url" required placeholder="https://…" value="${esc(p?.url)}"></label><label>Categoria e palavras-chave (ajudam a achar o produto)<input name="category" placeholder="vestido longo festa" value="${esc(p?.category)}"></label><label>Cor<input name="color" placeholder="vermelho" value="${esc(p?.color)}"></label><div><b style="font-size:.85rem">Foto</b><div id="ip" style="margin:8px 0"></div><label class="btn out sm" style="cursor:pointer"><span id="up">Enviar foto do aparelho</span><input type="file" id="fl" accept="image/*" hidden></label><input name="image_url" id="iu" placeholder="ou cole o link da imagem" value="${esc(p?.image_url)}" style="margin-top:8px"></div><div class="row"><button class="btn hero-b">Salvar</button><button type="button" class="btn ghost" id="cn">Cancelar</button></div></form>`;
   const prev = () => ($("#ip").innerHTML = $("#iu").value ? `<img src="${esc($("#iu").value)}" alt="" style="width:96px;height:96px;object-fit:cover;border-radius:12px">` : "");
   prev(); $("#iu").oninput = prev; $("#cn").onclick = back;
   $("#fl").onchange = async (e) => {
@@ -407,7 +497,7 @@ async function adCsv(box) {
 // ---------- Rotas (hash, funciona no GitHub Pages sem config extra) ----------
 async function go() {
   const [path, qs] = (location.hash.slice(1) || "/").split("?"), r = path.split("/").filter(Boolean), ref = new URLSearchParams(qs || "").get("ref");
-  header(); closeM(); app.onclick = null; document.title = "ChatShop — Busca de produtos com IA"; scrollTo(0, 0);
+  document.body.classList.toggle("gpt", !r.length); header(); closeM(); app.onclick = null; document.title = "ChatShop — Busca de produtos com IA"; scrollTo(0, 0);
   const priv = { lojista, afiliado, admin };
   try {
     if (!r.length) await home();
