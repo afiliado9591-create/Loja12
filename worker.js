@@ -51,7 +51,7 @@ async function upsertCatalog(env, items) {
     const title = String(it.title || "").trim().slice(0, 200), link = String(it.url || "");
     if (!source || !title || !/^https?:\/\//.test(link)) continue;
     const ext = String(it.external_id || link).slice(0, 300), img = /^https?:\/\//.test(it.image_url || "") ? it.image_url : "";
-    const cat = String(it.category || "").slice(0, 80), col = String(it.color || "").slice(0, 40), sn = String(it.store_name || "").slice(0, 80);
+    const cat = String(it.category || "").slice(0, 200), col = String(it.color || "").slice(0, 40), sn = String(it.store_name || "").slice(0, 80);
     st.push(env.DB.prepare("insert into catalog(id,source,external_id,title,price,old_price,image_url,url,category,color,store_name,search) values(?,?,?,?,?,?,?,?,?,?,?,?) on conflict(source,external_id) do update set title=excluded.title,price=excluded.price,old_price=excluded.old_price,image_url=excluded.image_url,url=excluded.url,category=excluded.category,color=excluded.color,store_name=excluded.store_name,search=excluded.search")
       .bind(uid(), source, ext, title, Number(it.price) || null, Number(it.old_price) || null, img, link, cat, col, sn, foldS(`${title} ${cat} ${col} ${sn}`)));
   }
@@ -272,19 +272,25 @@ async function route(req, env, u, p, m) {
     const fold = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     if (b === "search" && m === "GET") {
       const raw = fold(u.searchParams.get("q")), src = u.searchParams.get("source") || "";
-      const lim = 24, off = Math.max(0, Number(u.searchParams.get("offset")) || 0);
+      const lim = 20, off = Math.max(0, Number(u.searchParams.get("offset")) || 0);
       const mp = raw.match(/(?:ate|menos de|abaixo de|maximo)\s*r?\$?\s*(\d+)/);
       const stem = (w) => { w = w.replace(/s$/, ""); return w.length > 4 ? w.slice(0, -1) : w; };
       const toks = raw.split(/[^a-z0-9]+/).filter((w) => w.length > 1 && !STOP.has(w) && !/^\d+$/.test(w)).slice(0, 6).map(stem);
-      const where = ["1=1"], args = [];
-      if (src) { where.push("source=?"); args.push(src); }
-      if (mp) { where.push("price<=?"); args.push(Number(mp[1])); }
-      toks.forEach((t) => { where.push("search like ?"); args.push(`%${t}%`); });
-      const [rows, tot] = await Promise.all([
-        q(`select id,source,title,price,old_price,image_url,url,store_name from catalog where ${where.join(" and ")} order by created_at desc limit ? offset ?`, ...args, lim + 1, off).all(),
-        q(`select count(*) n from catalog where ${where.join(" and ")}`, ...args).first(),
-      ]);
-      return J({ items: rows.results.slice(0, lim), more: rows.results.length > lim, total: tot.n });
+      const base = ["1=1"], bargs = [];
+      if (src) { base.push("source=?"); bargs.push(src); }
+      if (mp) { base.push("price<=?"); bargs.push(Number(mp[1])); }
+      const like = toks.map((t) => `%${t}%`);
+      let wh = [...base, ...toks.map(() => "search like ?")], wa = [...bargs, ...like], order = "created_at desc", oa = [], partial = false;
+      let tot = await q(`select count(*) n from catalog where ${wh.join(" and ")}`, ...wa).first();
+      if (!tot.n && toks.length > 1) {
+        // nada com todas as palavras: mostra os que combinam com alguma, os mais parecidos primeiro
+        partial = true;
+        wh = [...base, "(" + toks.map(() => "search like ?").join(" or ") + ")"]; wa = [...bargs, ...like];
+        order = "(" + toks.map(() => "(search like ?)").join(" + ") + ") desc, created_at desc"; oa = like;
+        tot = await q(`select count(*) n from catalog where ${wh.join(" and ")}`, ...wa).first();
+      }
+      const rows = (await q(`select id,source,title,price,old_price,image_url,url,store_name from catalog where ${wh.join(" and ")} order by ${order} limit ? offset ?`, ...wa, ...oa, lim, off).all()).results;
+      return J({ items: rows, more: off + rows.length < tot.n, total: tot.n, partial, pages: Math.ceil(tot.n / lim) });
     }
     if (b === "stats" && m === "GET") return J((await q("select source, count(*) n from catalog group by source").all()).results);
     if (b === "admin" && m === "GET") {
