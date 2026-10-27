@@ -46,9 +46,12 @@
                 <button @click="selectedPlatform = 'dridalia'" :class="selectedPlatform === 'dridalia' ? 'bg-marsala text-white shadow-sm' : 'text-slate-600 hover:text-marsala'" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition">Dridalia</button>
             </div>
 
-            <!-- BOTÃO MINHA CONTA (MODAL DE LOGIN) -->
-            <div>
-                <button @click="showAccountModal = true" class="text-xs bg-slate-900 hover:bg-slate-800 text-white font-semibold px-5 py-2.5 rounded-xl transition shadow-sm flex items-center gap-2">
+            <!-- BOTÃO MINHA CONTA / ADMIN -->
+            <div class="flex items-center gap-3">
+                <a href="admin.html" class="text-xs bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold px-3.5 py-2.5 rounded-xl transition flex items-center gap-1.5" title="Aceder Direto ao Admin">
+                    <i class="fa-solid fa-gauge"></i> <span class="hidden sm:inline">Painel Admin</span>
+                </a>
+                <button @click="showAccountModal = true" class="text-xs bg-slate-900 hover:bg-slate-800 text-white font-semibold px-4 py-2.5 rounded-xl transition shadow-sm flex items-center gap-2">
                     <i class="fa-regular fa-user text-marsala"></i> Minha Conta
                 </button>
             </div>
@@ -96,7 +99,7 @@
                     <i class="fa-solid fa-bag-shopping"></i>
                 </div>
                 <h3 class="text-slate-800 font-bold text-lg mb-1">Catálogo Inteligente Pronto</h3>
-                <p class="text-slate-400 text-sm">Digite o nome de um produto acima para comecar as buscas.</p>
+                <p class="text-slate-400 text-sm">Digite o nome de um produto acima para começar as buscas.</p>
             </div>
         </template>
 
@@ -112,7 +115,7 @@
                     </button>
                 </div>
 
-                <!-- GRELHA DE PRODUTOS COM BOTÕES NAS CORES CORRETAS -->
+                <!-- GRELHA DE PRODUTOS -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     <template x-for="product in paginatedProducts" :key="product.id">
                         <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col justify-between">
@@ -136,7 +139,6 @@
                                 </div>
                             </div>
                             
-                            <!-- Botão de Ação com Cor Dinâmica -->
                             <div class="p-5 pt-0">
                                 <a :href="product.link" target="_blank" 
                                    class="w-full text-center py-3 px-4 rounded-xl font-bold text-white text-xs uppercase tracking-wider block transition shadow-sm"
@@ -257,11 +259,12 @@
                 loadMore() { this.displayLimit += 15; },
 
                 handleLogin() {
-                    // Se for o admin, redireciona para admin.html
-                    if (this.loginEmail.includes('admin') || this.loginEmail === 'afiliado9591@gmail.com') {
+                    // Verifica explicitamente o seu email de administrador ou qualquer email contendo 'admin'
+                    const email = this.loginEmail.trim().toLowerCase();
+                    if (email === 'afiliado9591@gmail.com' || email.includes('admin')) {
                         window.location.href = 'admin.html';
                     } else {
-                        alert('Login efetuado com sucesso!');
+                        alert('Login efetuado com sucesso! Bem-vindo.');
                         this.showAccountModal = false;
                     }
                 },
