@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - ChatShop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style> body { font-family: 'Inter', sans-serif; } </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen" x-data="adminApp()">
+
+    <!-- CABEÇALHO ADMIN -->
+    <header class="bg-white border-b border-slate-100 py-4 px-8 flex justify-between items-center sticky top-0 z-50 shadow-sm">
+        <div class="flex items-center gap-3">
+            <div class="bg-slate-900 text-white w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg shadow-md">
+                <i class="fa-solid fa-gauge-high"></i>
+            </div>
+            <div>
+                <h1 class="text-base font-extrabold text-slate-900">Painel de Gestão</h1>
+                <p class="text-xs text-slate-400">ChatShop Master Admin</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <a href="index.html" target="_blank" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-4 py-2.5 rounded-xl transition flex items-center gap-2">
+                Ver Loja <i class="fa-solid fa-external-link text-xs"></i>
+            </a>
+            <button @click="logout()" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-600 font-semibold px-4 py-2.5 rounded-xl transition">
+                Sair
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto p-8 space-y-8">
+        
+        <!-- MÉTRICAS -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold uppercase text-slate-400 tracking-wider">Total de Produtos</p>
+                    <h3 class="text-3xl font-extrabold text-slate-900 mt-1" x-text="products.length">0</h3>
+                </div>
+                <div class="bg-indigo-50 text-indigo-600 w-14 h-14 rounded-2xl flex items-center justify-center text-xl shadow-inner">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold uppercase text-slate-400 tracking-wider">Acessos Registados</p>
+                    <h3 class="text-3xl font-extrabold text-slate-900 mt-1">1,480</h3>
+                </div>
+                <div class="bg-emerald-50 text-emerald-600 w-14 h-14 rounded-2xl flex items-center justify-center text-xl shadow-inner">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold uppercase text-slate-400 tracking-wider">Base de Dados</p>
+                    <h3 class="text-lg font-bold text-emerald-600 mt-1 flex items-center gap-1.5">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span> Cloudflare D1
+                    </h3>
+                </div>
+                <div class="bg-amber-50 text-amber-600 w-14 h-14 rounded-2xl flex items-center justify-center text-xl shadow-inner">
+                    <i class="fa-solid fa-database"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORMULÁRIO DE CADASTRO -->
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-8">
+            <h2 class="text-lg font-extrabold mb-6 text-slate-900 flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-sm"><i class="fa-solid fa-plus"></i></div>
+                Adicionar Novo Produto
+            </h2>
+            
+            <form @submit.prevent="saveProduct" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-2">Nome do Produto</label>
+                    <input type="text" x-model="form.name" required placeholder="Ex: Smartwatch Esportivo" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-2">Preço</label>
+                    <input type="text" x-model="form.price" required placeholder="R$ 00,00" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-2">Plataforma</label>
+                    <select x-model="form.platform" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                        <option value="shopee">Shopee</option>
+                        <option value="mercadolivre">Mercado Livre</option>
+                        <option value="shein">Shein</option>
+                        <option value="amazon">Amazon</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-2">URL da Imagem</label>
+                    <input type="url" x-model="form.image" required placeholder="https://..." class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="block text-xs font-bold text-slate-600 uppercase mb-2">Link de Destino / Indicação</label>
+                    <input type="url" x-model="form.link" required placeholder="https://..." class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="block text-xs font-bold text-indigo-600 uppercase mb-2">
+                        <i class="fa-solid fa-tags mr-1"></i> Palavras-Chave de SEO (Para indexação inteligente da IA)
+                    </label>
+                    <input type="text" x-model="form.seo_keywords" placeholder="ex: relogio inteligente, smartwatch baratinho, prova d'agua" class="w-full bg-indigo-50/30 border border-indigo-100 rounded-2xl p-3.5 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+
+                <div class="md:col-span-2 flex justify-end">
+                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 py-3.5 rounded-2xl text-sm transition shadow-lg shadow-indigo-100">
+                        Salvar Produto na Base de Dados
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- LISTA DE PRODUTOS -->
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-8">
+            <h2 class="text-lg font-extrabold mb-6 text-slate-900">Produtos Registados (<span x-text="products.length"></span>)</h2>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr class="border-b border-slate-100 text-slate-400 text-xs uppercase tracking-wider">
+                            <th class="py-3 px-4">Imagem</th>
+                            <th class="py-3 px-4">Nome</th>
+                            <th class="py-3 px-4">Plataforma</th>
+                            <th class="py-3 px-4">Preço</th>
+                            <th class="py-3 px-4 text-right">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template x-for="p in products" :key="p.id">
+                            <tr class="border-b border-slate-50 hover:bg-slate-50/60 transition">
+                                <td class="py-3 px-4"><img :src="p.image" class="w-12 h-12 object-cover rounded-2xl border border-slate-100 shadow-sm"></td>
+                                <td class="py-3 px-4 font-semibold text-slate-800" x-text="p.name"></td>
+                                <td class="py-3 px-4">
+                                    <span class="px-3 py-1 rounded-full text-xs font-bold text-white uppercase shadow-sm"
+                                          :class="{
+                                              'bg-red-600': p.platform === 'shopee',
+                                              'bg-blue-600': p.platform === 'mercadolivre',
+                                              'bg-slate-900': p.platform === 'shein',
+                                              'bg-amber-600': p.platform === 'amazon'
+                                          }" x-text="p.platform"></span>
+                                </td>
+                                <td class="py-3 px-4 font-extrabold text-slate-900" x-text="p.price"></td>
+                                <td class="py-3 px-4 text-right">
+                                    <button @click="deleteProduct(p.id)" class="text-slate-300 hover:text-rose-500 p-2.5 transition" title="Eliminar">
+                                        <i class="fa-solid fa-trash-can text-base"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function adminApp() {
+            return {
+                products: [],
+                form: { name: '', price: '', platform: 'shopee', image: '', link: '', seo_keywords: '' },
+
+                async init() {
+                    this.fetchProducts();
+                },
+
+                async fetchProducts() {
+                    try {
+                        const res = await fetch('/api/products');
+                        this.products = await res.json();
+                    } catch (e) {
+                        this.products = [];
+                    }
+                },
+
+                async saveProduct() {
+                    try {
+                        const res = await fetch('/api/products', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(this.form)
+                        });
+                        if (res.ok) {
+                            alert('Produto guardado com sucesso!');
+                            this.form = { name: '', price: '', platform: 'shopee', image: '', link: '', seo_keywords: '' };
+                            this.fetchProducts();
+                        }
+                    } catch (e) {
+                        alert('Erro ao guardar.');
+                    }
+                },
+
+                async deleteProduct(id) {
+                    if (confirm('Tem certeza que deseja eliminar este produto?')) {
+                        try {
+                            await fetch(`/api/products?id=${id}`, { method: 'DELETE' });
+                            this.fetchProducts();
+                        } catch (e) {}
+                    }
+                },
+
+                logout() {
+                    window.location.href = 'index.html';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
