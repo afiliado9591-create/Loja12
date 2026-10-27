@@ -1,277 +1,340 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatShop - Sua IA de Achadinhos e Afiliados</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <!-- FontAwesome para Ícones -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ChatShop — Busca de produtos com IA</title>
+<meta name="description" content="Busque produtos por texto ou voz e compare ofertas do Mercado Livre, Shein, Shopee e mais.">
+<meta property="og:title" content="ChatShop — Busca de produtos com IA">
+<meta property="og:description" content="Digite ou fale o que procura e veja o catálogo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🛍️%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fdf7f6;--fg:#3b1a22;--card:#fff;--pri:#7a1f3d;--prf:#fdf3f3;--sec:#f8e6e8;--mut:#f6eded;--mf:#8a6a70;--bd:#efd9dc;--wa:#25c866;--rad:14px;--hero:linear-gradient(135deg,#7a1f3d,#a8465f);--sh:0 12px 32px -14px rgba(122,31,61,.4)}
+*{box-sizing:border-box;margin:0}body{background:var(--bg);color:var(--fg);font:16px/1.5 "DM Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;letter-spacing:-.01em;line-height:1.15}h1{font-size:clamp(2rem,6vw,3.4rem)}h2{font-size:1.7rem}a{color:var(--pri);text-decoration:none}
+.wrap{max-width:1100px;margin:auto;padding:28px 16px}.narrow{max-width:380px;margin:auto;padding:40px 16px}.c{text-align:center;padding:40px}.mut{color:var(--mf);font-size:.9rem}.sm{font-size:.85rem;padding:6px 14px}
+#hd{position:sticky;top:0;z-index:30;background:rgba(253,247,246,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--bd)}
+#hd div{max-width:1100px;margin:auto;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+#hd .logo{font:600 1.5rem Fraunces,serif;color:var(--pri)}#hd nav{display:flex;gap:4px;align-items:center;flex-wrap:wrap}#hd nav a{padding:6px 12px;border-radius:99px;font-size:.9rem}#hd nav a:hover{background:var(--sec)}
+.btn{display:inline-block;border:1px solid transparent;border-radius:99px;padding:10px 20px;font:600 .95rem inherit;cursor:pointer;background:var(--sec);color:var(--pri);text-align:center}
+.hero-b{background:var(--hero);color:#fff;box-shadow:var(--sh)}.out{background:transparent;border-color:var(--bd);color:var(--fg)}.sec{background:var(--sec)}.wa{background:var(--wa);color:#fff}.ghost{background:none}.full{width:100%}.btn:disabled{opacity:.5}
+.hero{max-width:1100px;margin:auto;padding:48px 16px;display:grid;gap:32px;align-items:center}@media(min-width:800px){.hero{grid-template-columns:1fr 1fr}}
+.eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:.8rem;font-weight:700;color:var(--pri);margin-bottom:12px}.sub{margin:16px 0 24px;color:var(--mf);font-size:1.1rem;max-width:30rem}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.heroimg{aspect-ratio:4/3;border-radius:24px;background:var(--hero);display:grid;place-items:center;font-size:5rem;overflow:hidden;box-shadow:var(--sh)}.heroimg img{width:100%;height:100%;object-fit:cover}
+.grid3{max-width:1100px;margin:auto;padding:0 16px 32px;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.sec-t{max-width:1100px;margin:16px auto;padding:0 16px}
+.card{display:block;background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:20px;color:inherit}a.card:hover{box-shadow:var(--sh)}.card h3{margin:6px 0}
+footer{border-top:1px solid var(--bd);padding:28px;text-align:center;font-size:.85rem;color:var(--mf);margin-top:32px}
+.bar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:20px}.tabs{display:flex;gap:6px;flex-wrap:wrap;background:var(--mut);padding:4px;border-radius:12px;margin-bottom:16px;width:fit-content}
+.tab{border:0;background:none;padding:8px 14px;border-radius:9px;font:500 .9rem inherit;cursor:pointer;color:var(--mf)}.tab.on{background:var(--card);color:var(--fg);box-shadow:0 1px 3px #0002}
+.stack{display:grid;gap:14px}label{font-size:.85rem;font-weight:600;display:grid;gap:4px}.chk{display:flex;justify-content:space-between;align-items:center;background:var(--mut);padding:12px;border-radius:12px;font-weight:500}
+input,textarea,select{font:inherit;padding:9px 12px;border:1px solid var(--bd);border-radius:10px;background:#fff;color:var(--fg);width:100%}input[type=checkbox]{width:auto;accent-color:var(--pri);width:20px;height:20px}textarea{min-height:70px}select{width:auto;border-radius:99px}
+.lnk{background:none;border:0;color:var(--pri);margin-top:14px;width:100%;cursor:pointer;font:inherit}.form{max-width:640px;background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:22px}
+.item{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:14px;margin-bottom:8px;font-size:.9rem}.item>.g{flex:1;min-width:180px}.item img,.item .ph{width:72px;height:72px;border-radius:12px;object-fit:cover;background:var(--mut)}
+.badge{font-size:.75rem;padding:2px 10px;border-radius:99px;background:var(--sec);color:var(--pri);margin-right:4px}.pr{font-weight:700;color:var(--pri)}
+.stats{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:16px}.stat{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px}.stat p{font-size:.75rem;color:var(--mf)}.stat b{font:600 1.5rem Fraunces,serif}
+.shophead{background:var(--hero);color:#fff;text-align:center;padding:48px 16px}.shophead p{max-width:36rem;margin:10px auto 0;opacity:.9}
+.prods{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}@media(min-width:800px){.prods{grid-template-columns:repeat(4,1fr)}}
+.prod{background:var(--card);border:1px solid var(--bd);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}.prod>img,.prod>.ph{aspect-ratio:3/4;width:100%;object-fit:cover;background:var(--sec)}.pb{padding:12px;display:grid;gap:8px;margin-top:auto}.pb b{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.ov{position:fixed;inset:0;background:#0006;z-index:50;display:flex;align-items:flex-end;justify-content:center}@media(min-width:600px){.ov{align-items:center}}
+.sheet{background:var(--card);width:100%;max-width:420px;max-height:88vh;overflow:auto;border-radius:24px 24px 0 0;padding:18px;display:grid;gap:12px}@media(min-width:600px){.sheet{border-radius:24px}}
+.ch{display:flex;justify-content:space-between;align-items:center}.x{border:0;background:none;font-size:1.2rem;cursor:pointer}.msgs{display:grid;gap:8px;min-height:80px}
+.m{max-width:85%;padding:8px 12px;border-radius:16px;font-size:.9rem}.bot{background:var(--mut)}.me{background:var(--pri);color:#fff;margin-left:auto}.chip{border:1px solid var(--bd);background:#fff;border-radius:99px;padding:5px 12px;font-size:.8rem;cursor:pointer;margin:0 6px 6px 0}
+.faq{background:var(--mut);padding:10px;border-radius:12px;display:grid;gap:6px;margin-bottom:8px}
+#toast{position:fixed;top:12px;left:0;right:0;z-index:99;display:grid;gap:6px;justify-items:center;pointer-events:none}.t{background:#1f7a4a;color:#fff;padding:10px 18px;border-radius:12px;font-size:.9rem}.t.err{background:#b3261e}
+.ai{max-width:760px;margin:auto;padding:20px 16px 0;min-height:calc(100vh - 60px);display:flex;flex-direction:column}
+.aihead{text-align:center;padding:18px 0 8px}.shopico{width:84px;height:84px;margin:0 auto 12px;border-radius:26px;background:var(--hero);display:grid;place-items:center;font-size:2.6rem;box-shadow:var(--sh)}.aihead h1{font-size:clamp(1.5rem,5vw,2.2rem)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:6px 0;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chips .chip{white-space:nowrap;margin:0;flex:0 0 auto}.chip.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+#feed{flex:1;padding:8px 0}.blk{display:grid;gap:10px}.pgrid{display:grid;gap:10px;grid-template-columns:repeat(2,1fr)}@media(min-width:700px){.pgrid{grid-template-columns:repeat(3,1fr)}}
+.pc{background:var(--card);border:1px solid var(--bd);border-radius:16px;overflow:hidden;color:inherit;display:flex;flex-direction:column}.pimg{position:relative;aspect-ratio:1;background:var(--sec)}.pimg img{width:100%;height:100%;object-fit:cover}.tag{position:absolute;left:6px;top:6px;background:#000a;color:#fff;font-size:.65rem;padding:2px 8px;border-radius:99px}.pb2{padding:10px;display:grid;gap:6px;margin-top:auto}.pt{font-size:.85rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.3}
+.topmenu{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:8px;background:rgba(253,247,246,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--bd);padding:10px 12px}.hico{font-size:1.5rem}.topmenu .chips{flex:1;padding:0}.mini{border:0;margin-top:24px}.sbar{position:sticky;top:58px;z-index:20;display:flex;gap:6px;align-items:center;background:var(--bg);padding:10px 0}.sbar input{border-radius:99px;padding:12px 16px}.mic,.send{flex:0 0 46px;height:46px;border-radius:50%;border:0;cursor:pointer;font-size:1.1rem}.mic{background:var(--sec)}.mic.rec{background:#b3261e;animation:pu 1s infinite}.send{background:var(--hero);color:#fff}@keyframes pu{50%{opacity:.5}}
+</style>
 </head>
-<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col justify-between" x-data="chatShopApp()">
+<body>
+<div id="hd"></div><main id="app"></main><div id="modal"></div><div id="toast"></div>
+<script>
+const API = "https://chatshop-api.bmlimp8.workers.dev";
+const $ = (s) => document.querySelector(s), app = $("#app");
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const brl = (n) => Number(n || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const S = { user: JSON.parse(localStorage.getItem("u") || "null") };
+const toast = (m, err) => { const t = document.createElement("div"); t.className = "t" + (err ? " err" : ""); t.textContent = m; $("#toast").append(t); setTimeout(() => t.remove(), 3200); };
+const fail = (e) => toast(e.message || "Erro", 1);
 
-    <!-- CABEÇALHO -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-2 cursor-pointer" @click="resetSearch()">
-                <div class="bg-indigo-600 text-white p-2.5 rounded-2xl font-bold text-xl shadow-sm">
-                    <i class="fa-solid fa-store"></i>
-                </div>
-                <span class="text-xl font-bold tracking-tight text-gray-900">ChatShop <span class="text-indigo-600">Afiliados</span></span>
-            </div>
+async function api(p, o = {}) {
+  const h = {}, tk = localStorage.getItem("t"); if (tk) h.authorization = "Bearer " + tk;
+  let b = o.body; if (b instanceof Blob) h["content-type"] = b.type; else if (b) { h["content-type"] = "application/json"; b = JSON.stringify(b); }
+  const r = await fetch(API + p, { method: o.method || (b ? "POST" : "GET"), headers: h, body: b });
+  const d = await r.json().catch(() => ({}));
+  if (r.status === 401 && tk) { logout(); throw new Error("Sessão expirada"); }
+  if (!r.ok) throw new Error(d.error || "Erro");
+  return d;
+}
+const setAuth = (d) => { localStorage.setItem("t", d.token); localStorage.setItem("u", JSON.stringify(d.user)); S.user = d.user; };
+function logout() { localStorage.removeItem("t"); localStorage.removeItem("u"); S.user = null; location.hash = "#/"; header(); }
+const header = () => {
+  const hh = location.hash;
+  if (hh === "" || hh === "#" || hh === "#/" || hh.startsWith("#/loja/")) { $("#hd").innerHTML = ""; return; }
+  const u = S.user;
+  $("#hd").innerHTML = `<div><a class="logo" href="#/">ChatShop</a><nav>${u ? `<a href="#/lojista">Lojista</a><a href="#/afiliado">Afiliado</a>${u.admin ? '<a href="#/admin">Admin</a>' : ""}<button class="btn ghost sm" id="out">Sair</button>` : '<a href="#/plataforma">Para lojistas</a><a class="btn hero-b sm" href="#/auth">Entrar</a>'}</nav></div>`;
+  if (u) $("#out").onclick = logout;
+};
+const modal = (h) => { const m = $("#modal"); m.innerHTML = `<div class="ov"><div class="sheet">${h}</div></div>`; m.firstChild.onclick = (e) => { if (e.target === m.firstChild || e.target.closest("[data-x]")) closeM(); }; };
+const closeM = () => ($("#modal").innerHTML = "");
+const stat = (l, v) => `<div class="stat"><p>${l}</p><b>${v}</b></div>`;
+const sum = (a, k) => a.reduce((s, o) => s + Number(o[k] || 0), 0);
 
-            <!-- FILTROS DE PLATAFORMA NO TOPO -->
-            <div class="flex flex-wrap items-center justify-center gap-2">
-                <button @click="selectedPlatform = 'all'" :class="selectedPlatform === 'all' ? 'bg-gray-900 text-white shadow-sm' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition">Todos</button>
-                <button @click="selectedPlatform = 'shopee'" :class="selectedPlatform === 'shopee' ? 'bg-red-600 text-white shadow-sm' : 'bg-red-50 text-red-600 hover:bg-red-100'" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition">Shopee</button>
-                <button @click="selectedPlatform = 'mercadolivre'" :class="selectedPlatform === 'mercadolivre' ? 'bg-blue-600 text-white shadow-sm' : 'bg-blue-50 text-blue-600 hover:bg-blue-100'" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition">Mercado Livre</button>
-                <button @click="selectedPlatform = 'shein'" :class="selectedPlatform === 'shein' ? 'bg-black text-white shadow-sm' : 'bg-gray-100 text-black hover:bg-gray-200'" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition">Shein</button>
-                <button @click="selectedPlatform = 'amazon'" :class="selectedPlatform === 'amazon' ? 'bg-amber-600 text-white shadow-sm' : 'bg-amber-50 text-amber-700 hover:bg-amber-100'" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition">Amazon</button>
-            </div>
-
-            <!-- LINK PARA O PAINEL ADMIN -->
-            <div>
-                <a href="admin.html" class="text-xs bg-indigo-50 text-indigo-600 hover:bg-indigo-100 font-semibold px-4 py-2 rounded-xl transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-gauge"></i> Admin
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <!-- CONTEÚDO PRINCIPAL -->
-    <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full">
-        
-        <!-- SEÇÃO DE PESQUISA (Limpa e Centralizada) -->
-        <div class="text-center max-w-2xl mx-auto mb-10">
-            <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">O que você está procurando hoje?</h1>
-            <p class="text-gray-500 mb-6 text-sm md:text-base">Pesquise por nome ou utilize o microfone para encontrar os melhores achadinhos.</p>
-            
-            <!-- BARRA DE PESQUISA + BOTÃO DE VOZ ESTILO WHATSAPP -->
-            <div class="flex items-center bg-white border border-gray-200 rounded-full shadow-lg p-2 transition focus-within:ring-2 focus-within:ring-indigo-500">
-                <span class="pl-4 text-gray-400"><i class="fa-solid fa-magnifying-glass"></i></span>
-                <input type="text" 
-                       x-model="searchQuery" 
-                       @keyup.enter="performSearch()" 
-                       placeholder="Pesquise o produto aqui..." 
-                       class="w-full px-4 py-2 text-gray-700 bg-transparent focus:outline-none text-base">
-                
-                <!-- Botão de Voz Estilo WhatsApp (Verde) -->
-                <button @click="toggleVoiceSearch()" 
-                        :class="isListening ? 'bg-red-500 animate-pulse' : 'bg-emerald-600 hover:bg-emerald-700'" 
-                        class="text-white w-12 h-12 rounded-full flex items-center justify-center shadow-md transition shrink-0 ml-1"
-                        title="Pesquisar por voz">
-                    <i :class="isListening ? 'fa-solid fa-microphone-slash' : 'fa-solid fa-microphone'" class="text-lg"></i>
-                </button>
-
-                <!-- Botão de Enviar Texto -->
-                <button @click="performSearch()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full font-semibold transition ml-2 hidden sm:block shadow-sm">
-                    Buscar
-                </button>
-            </div>
-
-            <!-- Indicador de gravação de voz -->
-            <div x-show="isListening" class="mt-3 text-emerald-600 text-sm font-medium animate-bounce">
-                <i class="fa-solid fa-circle-dot mr-1"></i> Ouvindo... Fale o nome do produto.
-            </div>
-        </div>
-
-        <!-- ESTADO INICIAL (Sem pesquisa efetuada) -->
-        <template x-if="!hasSearched">
-            <div class="text-center py-16 text-gray-400 border-2 border-dashed border-gray-200 rounded-3xl bg-white/50">
-                <i class="fa-solid fa-bag-shopping text-5xl mb-3 text-gray-300"></i>
-                <p class="text-base font-medium">Faça uma busca acima ou use a voz para encontrar produtos.</p>
-            </div>
-        </template>
-
-        <!-- RESULTADOS DA PESQUISA -->
-        <template x-if="hasSearched">
-            <div>
-                <!-- Resumo e feedback de voz -->
-                <div class="flex items-center justify-between mb-6">
-                    <p class="text-sm text-gray-600">
-                        Encontrámos <span class="font-bold text-gray-900" x-text="filteredProducts.length"></span> produtos para "<span x-text="searchQuery" class="italic"></span>"
-                    </p>
-                    <button @click="speakResults()" class="text-xs bg-indigo-50 text-indigo-600 hover:bg-indigo-100 px-3.5 py-2 rounded-xl font-medium transition flex items-center gap-1.5 shadow-sm">
-                        <i class="fa-solid fa-volume-high"></i> Ouvir Resumo
-                    </button>
-                </div>
-
-                <!-- GRELHA DE PRODUTOS (Catálogo Dinâmico) -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                    <template x-for="product in paginatedProducts" :key="product.id">
-                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition flex flex-col justify-between">
-                            <div>
-                                <div class="relative h-48 bg-gray-100 overflow-hidden">
-                                    <img :src="product.image" :alt="product.name" class="w-full h-full object-cover">
-                                    <!-- Badge de Plataforma com cores corretas -->
-                                    <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-bold text-white uppercase shadow-sm"
-                                          :class="{
-                                              'bg-red-600': product.platform === 'shopee',
-                                              'bg-blue-600': product.platform === 'mercadolivre',
-                                              'bg-black': product.platform === 'shein',
-                                              'bg-amber-600': product.platform === 'amazon'
-                                          }"
-                                          x-text="product.platform">
-                                    </span>
-                                </div>
-                                <div class="p-4">
-                                    <h3 class="font-semibold text-gray-800 text-sm mb-1 line-clamp-2" x-text="product.name"></h3>
-                                    <p class="text-lg font-extrabold text-gray-900 mb-3" x-text="product.price"></p>
-                                </div>
-                            </div>
-                            
-                            <!-- Botão de Ação Dinâmico por Plataforma -->
-                            <div class="p-4 pt-0">
-                                <a :href="product.link" target="_blank" 
-                                   class="w-full text-center py-2.5 px-4 rounded-xl font-bold text-white text-xs uppercase tracking-wide block transition shadow-sm"
-                                   :class="{
-                                       'bg-red-600 hover:bg-red-700': product.platform === 'shopee',
-                                       'bg-blue-600 hover:bg-blue-700': product.platform === 'mercadolivre',
-                                       'bg-black hover:bg-gray-800': product.platform === 'shein',
-                                       'bg-amber-600 hover:bg-amber-700': product.platform === 'amazon'
-                                   }">
-                                    Ver Oferta <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </template>
-                </div>
-
-                <!-- Caso não encontre produtos -->
-                <div x-show="filteredProducts.length === 0" class="text-center py-12 text-gray-500 bg-white rounded-2xl border border-gray-100">
-                    <i class="fa-regular fa-face-frown text-4xl mb-2 text-gray-400"></i>
-                    <p class="font-medium">Nenhum produto encontrado com esse termo.</p>
-                </div>
-
-                <!-- BOTÃO "VER MAIS" (Paginação Inteligente) -->
-                <div class="mt-8 text-center" x-show="currentPage < totalPages">
-                    <button @click="loadMore()" class="bg-gray-900 hover:bg-gray-800 text-white font-semibold px-8 py-3 rounded-full text-sm transition shadow">
-                        Ver mais produtos <i class="fa-solid fa-chevron-down ml-1"></i>
-                    </button>
-                </div>
-            </div>
-        </template>
-
-    </main>
-
-    <!-- RODAPÉ -->
-    <footer class="bg-white border-t border-gray-100 py-6 text-center text-xs text-gray-400">
-        <p>&copy; 2026 ChatShop Afiliados. Todos os direitos reservados.</p>
-    </footer>
-
-    <!-- SCRIPT DE LÓGICA (Alpine.js + Cloudflare D1 API) -->
-    <script>
-        function chatShopApp() {
-            return {
-                searchQuery: '',
-                hasSearched: false,
-                selectedPlatform: 'all',
-                isListening: false,
-                itemsPerPage: 15,
-                displayLimit: 15,
-                products: [],
-
-                async init() {
-                    // Carrega os produtos diretamente da base de dados Cloudflare D1 via Worker
-                    try {
-                        const res = await fetch('/api/products');
-                        this.products = await res.json();
-                    } catch (e) {
-                        // Fallback de segurança caso a API demore a responder
-                        this.products = [];
-                    }
-                },
-
-                get filteredProducts() {
-                    return this.products.filter(p => {
-                        const query = this.searchQuery.toLowerCase();
-                        // Procura no nome ou nas palavras-chave de SEO cadastradas pelo admin
-                        const matchesName = p.name.toLowerCase().includes(query);
-                        const matchesSEO = p.seo_keywords && p.seo_keywords.toLowerCase().includes(query);
-                        const matchesSearch = query === '' || matchesName || matchesSEO;
-                        const matchesPlatform = this.selectedPlatform === 'all' || p.platform === this.selectedPlatform;
-                        return matchesSearch && matchesPlatform;
-                    });
-                },
-
-                get paginatedProducts() {
-                    return this.filteredProducts.slice(0, this.displayLimit);
-                },
-
-                get totalPages() {
-                    return Math.ceil(this.filteredProducts.length / this.itemsPerPage);
-                },
-
-                get currentPage() {
-                    return Math.ceil(this.displayLimit / this.itemsPerPage);
-                },
-
-                async performSearch() {
-                    if (this.searchQuery.trim() !== '') {
-                        this.hasSearched = true;
-                        this.displayLimit = 15;
-                        
-                        // Regista a métrica de pesquisa no Worker em segundo plano
-                        try {
-                            await fetch(`/api/products?q=${encodeURIComponent(this.searchQuery)}`);
-                        } catch (e) {}
-                    }
-                },
-
-                resetSearch() {
-                    this.searchQuery = '';
-                    this.hasSearched = false;
-                    this.selectedPlatform = 'all';
-                },
-
-                loadMore() {
-                    this.displayLimit += 15;
-                },
-
-                // Pesquisa por Voz (Speech Recognition estilo WhatsApp)
-                toggleVoiceSearch() {
-                    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-                    if (!SpeechRecognition) {
-                        alert('O seu navegador não suporta pesquisa por voz.');
-                        return;
-                    }
-
-                    if (this.isListening) return;
-
-                    const recognition = new SpeechRecognition();
-                    recognition.lang = 'pt-BR';
-                    recognition.interimResults = false;
-                    recognition.maxAlternatives = 1;
-
-                    recognition.onstart = () => { this.isListening = true; };
-                    recognition.onresult = (event) => {
-                        const speechToText = event.results[0][0].transcript;
-                        this.searchQuery = speechToText.replace(/\.$/, '');
-                        this.isListening = false;
-                        this.performSearch();
-                        this.speakResults();
-                    };
-                    recognition.onerror = () => { this.isListening = false; };
-                    recognition.onend = () => { this.isListening = false; };
-
-                    recognition.start();
-                },
-
-                // Síntese de Voz (Text-to-Speech)
-                speakResults() {
-                    if ('speechSynthesis' in window) {
-                        const count = this.filteredProducts.length;
-                        const text = `Encontrei ${count} produtos para ${this.searchQuery}. Confira as ofertas na tela.`;
-                        const utterance = new SpeechSynthesisUtterance(text);
-                        utterance.lang = 'pt-BR';
-                        window.speechSynthesis.speak(utterance);
-                    }
-                }
-            }
+// ---------- Home: busca de produtos com IA ----------
+const SRCS = [["", "Todos"], ["mercadolivre", "Mercado Livre"], ["shopee", "Shopee"], ["shein", "Shein"], ["dridalia", "Dridália Modas"]];
+const SRCN = Object.fromEntries(SRCS), HS = { src: "", q: "", voice: localStorage.getItem("voice") !== "0" };
+const prodCard = (p) => `<a class="pc" href="${esc(p.url)}" target="_blank" rel="sponsored noopener"><div class="pimg">${p.image_url ? `<img loading="lazy" src="${esc(p.image_url)}" alt="${esc(p.title)}">` : ""}<span class="tag">${esc(SRCN[p.source] || p.source)}</span></div><div class="pb2"><p class="pt">${esc(p.title)}</p><div>${p.price ? `<span class="pr">${brl(p.price)}</span> ` : ""}${p.old_price > p.price ? `<s class="mut">${brl(p.old_price)}</s>` : ""}</div><span class="btn hero-b sm">Ver oferta</span></div></a>`;
+// voz do navegador
+const NOISE = new Set(["quero", "preciso", "procuro", "buscar", "mostre", "mostrar", "me", "um", "uma", "uns", "de", "da", "do", "para", "com", "por", "favor"]);
+const plural = (w) => (/s$/.test(w) ? w : /m$/.test(w) ? w.slice(0, -1) + "ns" : /[rz]$/.test(w) ? w + "es" : /[aeiouãõáéíóúâêô]$/.test(w) ? w + "s" : w);
+const say = (q, n) => {
+  const ws = q.toLowerCase().replace(/(?:até|ate|menos de|abaixo de)\s*r?\$?\s*\d+(\s*reais)?/g, "").split(/\s+/).filter((x) => x && !NOISE.has(x));
+  if (!n) return q ? `Não encontrei ${ws.join(" ") || "nada"}.` : "O catálogo está vazio.";
+  if (!ws.length) return `Encontrei ${n} produtos.`;
+  return n === 1 ? `Encontrei 1 resultado para ${ws.join(" ")}.` : `Encontrei ${n} ${ws.map(plural).join(" ")}.`;
+};
+const speak = (t) => { if (!HS.voice || !window.speechSynthesis) return; speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = "pt-BR"; speechSynthesis.speak(u); };
+async function home() {
+  HS.q = "";
+  app.innerHTML = `<nav class="topmenu"><span class="hico">🏪</span><div class="chips" id="srcs">${SRCS.slice(1).map(([k, v]) => `<button class="chip" data-k="${k}">${v}</button>`).join("")}</div></nav>
+  <div class="ai"><div class="aihead"><div class="shopico">🏪</div><h1>O que você quer encontrar?</h1></div>
+  <form id="sf" class="sbar"><input id="sq" placeholder="Digite ou fale: vestido marrom" autocomplete="off"><button type="button" id="mic" class="mic" aria-label="Falar">🎤</button><button class="send" aria-label="Buscar">➤</button><button type="button" id="spk" class="mic" aria-label="Voz das respostas"></button></form>
+  <div id="feed"></div><footer class="mini">${S.user ? '<a href="#/lojista">Meu painel</a>' : '<a href="#/plataforma">Criar minha loja</a> · <a href="#/auth">Entrar</a>'}</footer></div>`;
+  const feed = $("#feed"), mark = () => app.querySelectorAll("#srcs .chip").forEach((c) => c.classList.toggle("on", c.dataset.k === HS.src));
+  const spk = $("#spk"), icon = () => (spk.textContent = HS.voice ? "🔊" : "🔇");
+  spk.onclick = () => { HS.voice = !HS.voice; localStorage.setItem("voice", HS.voice ? "1" : "0"); if (!HS.voice && window.speechSynthesis) speechSynthesis.cancel(); icon(); };
+  async function run(q) {
+    const blk = document.createElement("div"); blk.className = "blk";
+    blk.innerHTML = `${q ? `<div class="m me">${esc(q)}</div>` : ""}<div class="m bot">Buscando…</div><div class="pgrid"></div><div class="mor"></div>`;
+    feed.innerHTML = ""; feed.append(blk); let off = 0;
+    const bot = blk.querySelector(".bot"), grid = blk.querySelector(".pgrid"), mor = blk.querySelector(".mor");
+    const load = async () => {
+      try {
+        const r = await api(`/catalog/search?q=${encodeURIComponent(q)}&source=${HS.src}&offset=${off}`);
+        if (!off) {
+          const where = HS.src ? ` em ${SRCN[HS.src]}` : "";
+          bot.textContent = r.total ? `Encontrei ${r.total} produto${r.total > 1 ? "s" : ""}${q ? ` para “${q}”` : ""}${where}:` : `Não encontrei${q ? ` “${q}”` : ""}${where}. Tente outras palavras.`;
+          speak(say(q, r.total));
         }
-    </script>
+        grid.insertAdjacentHTML("beforeend", r.items.map(prodCard).join(""));
+        mor.innerHTML = r.more ? '<button class="btn out full">Ver mais</button>' : "";
+        if (r.more) mor.firstChild.onclick = () => { off += 24; load(); };
+      } catch (x) { bot.textContent = "Não consegui buscar agora. Tente de novo."; fail(x); }
+    };
+    await load();
+  }
+  const ask = (q) => { HS.q = q; run(q); };
+  $("#srcs").onclick = (e) => { const c = e.target.closest("[data-k]"); if (!c) return; HS.src = HS.src === c.dataset.k ? "" : c.dataset.k; mark(); if (HS.q) run(HS.q); };
+  $("#sf").onsubmit = (e) => { e.preventDefault(); const q = $("#sq").value.trim(); if (!q) return; $("#sq").value = ""; ask(q); };
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition, mic = $("#mic");
+  if (!SR) mic.style.display = "none";
+  else mic.onclick = () => { if (window.speechSynthesis) speechSynthesis.cancel(); const r = new SR(); r.lang = "pt-BR"; r.interimResults = false; mic.classList.add("rec"); r.onresult = (e) => ask(e.results[0][0].transcript); r.onend = () => mic.classList.remove("rec"); r.onerror = () => toast("Não consegui ouvir. Tente de novo.", 1); r.start(); };
+  mark(); icon();
+}
+// ---------- Plataforma (lojistas) ----------
+async function plataforma() {
+  const st = await api("/stores").catch(() => []);
+  const f = [["🏬", "Painel do lojista", "Produtos, pedidos, afiliados e comissões da sua loja."], ["💬", "Chatbot por produto", "Ative em cada produto e cadastre as perguntas frequentes."], ["🤝", "Programa de afiliados", "Você define a % de comissão e cada afiliado ganha seu link."]];
+  app.innerHTML = `<section class="hero"><div><p class="eyebrow">Plataforma de lojas virtuais</p><h1>Sua loja de moda, com chatbot e afiliados vendendo por você.</h1><p class="sub">Crie a loja, cadastre produtos com perguntas prontas e receba pedidos direto no WhatsApp.</p><div class="row"><a class="btn hero-b" href="#/lojista">Criar minha loja</a><a class="btn out" href="#/afiliado">Quero ser afiliado</a></div></div><div class="heroimg"><img src="hero.jpg" alt="Araras com vestidos em tons de rosa e vinho" onerror="this.replaceWith('🛍️')"></div></section>
+  <section class="grid3">${f.map(([i, t, d]) => `<div class="card"><div style="font-size:1.6rem">${i}</div><h3>${t}</h3><p class="mut">${d}</p></div>`).join("")}</section>
+  ${st.length ? `<div class="sec-t"><h2>Lojas na ChatShop</h2></div><section class="grid3">${st.map((s) => `<a class="card" href="#/loja/${esc(s.slug)}"><h3>${esc(s.name)}</h3><p class="mut">${esc(s.description || "Visite a loja")}</p></a>`).join("")}</section>` : ""}
+  <footer>ChatShop © 2026</footer>`;
+}
+
+// ---------- Login ----------
+let mode = "in";
+function auth() {
+  const up = mode === "up";
+  app.innerHTML = `<div class="narrow"><h1>${up ? "Criar conta" : "Entrar"}</h1><p class="mut" style="margin:6px 0 20px">Uma conta serve para lojista e afiliado.</p><form id="f" class="stack">${up ? '<label>Nome<input name="name" required></label>' : ""}<label>E-mail<input name="email" type="email" required></label><label>Senha<input name="password" type="password" minlength="6" required></label><button class="btn hero-b">${up ? "Criar conta" : "Entrar"}</button></form><button class="lnk" id="sw">${up ? "Já tem conta? Entrar" : "Não tem conta? Cadastre-se"}</button></div>`;
+  $("#sw").onclick = () => { mode = up ? "in" : "up"; auth(); };
+  $("#f").onsubmit = async (e) => {
+    e.preventDefault();
+    try { setAuth(await api("/auth/" + (up ? "signup" : "login"), { body: Object.fromEntries(new FormData(e.target)) })); header(); location.hash = "#/lojista"; } catch (x) { fail(x); }
+  };
+}
+
+// ---------- Loja pública ----------
+async function loja(slug, ref) {
+  const k = "ref:" + slug; if (ref) localStorage.setItem(k, ref); ref = ref || localStorage.getItem(k);
+  const d = await api("/stores/" + encodeURIComponent(slug)).catch(() => null);
+  if (!d) { app.innerHTML = '<p class="c">Loja não encontrada. <a href="#/">Voltar</a></p>'; return; }
+  const { store: s, products: ps } = d, by = (id) => ps.find((p) => p.id === id);
+  document.title = s.name + " — ChatShop";
+  app.innerHTML = `<header class="shophead"><h1>${esc(s.name)}</h1>${s.description ? `<p>${esc(s.description)}</p>` : ""}</header><div class="wrap">${ps.length ? "" : '<p class="c mut">Em breve novidades por aqui.</p>'}<div class="prods">${ps.map((p) => `<div class="prod">${p.image_url ? `<img loading="lazy" src="${esc(p.image_url)}" alt="${esc(p.name)}">` : '<div class="ph"></div>'}<div class="pb"><b>${esc(p.name)}</b><span class="pr">${brl(p.price)}</span>${p.chatbot_enabled && p.faqs.length ? `<button class="btn sec sm" data-chat="${p.id}">💬 Dúvidas</button>` : ""}<button class="btn wa sm" data-buy="${p.id}">Pedir no WhatsApp</button></div></div>`).join("")}</div></div>`;
+  app.onclick = (e) => {
+    const c = e.target.closest("[data-chat]"), b = e.target.closest("[data-buy]");
+    if (c) chat(by(c.dataset.chat), () => buy(by(c.dataset.chat), s, ref)); else if (b) buy(by(b.dataset.buy), s, ref);
+  };
+}
+function chat(p, onBuy) {
+  modal(`<div class="ch"><b>${esc(p.name)}</b><button data-x class="x">✕</button></div><div id="msgs" class="msgs"><div class="m bot">Olá! Tire suas dúvidas sobre "${esc(p.name)}". Toque em uma pergunta:</div></div><div>${p.faqs.map((q, i) => `<button class="chip" data-q="${i}">${esc(q.question)}</button>`).join("")}</div><button class="btn wa full" id="cb">Quero comprar</button>`);
+  $("#modal").querySelectorAll("[data-q]").forEach((b) => (b.onclick = () => { const q = p.faqs[b.dataset.q]; $("#msgs").insertAdjacentHTML("beforeend", `<div class="m me">${esc(q.question)}</div><div class="m bot">${esc(q.answer)}</div>`); }));
+  $("#cb").onclick = onBuy;
+}
+function buy(p, s, ref) {
+  modal(`<div class="ch"><b>${esc(p.name)}</b><button data-x class="x">✕</button></div><form id="bf" class="stack"><label>Seu nome<input name="name" required minlength="2"></label><label>Seu WhatsApp<input name="phone" required minlength="8"></label><label>Quantidade<input name="qty" type="number" min="1" max="100" value="1"></label><p class="pr" id="tt">Total: ${brl(p.price)}</p><button class="btn wa full">Enviar pedido no WhatsApp</button></form>`);
+  const f = $("#bf"); f.qty.oninput = () => ($("#tt").textContent = "Total: " + brl(p.price * (+f.qty.value || 1)));
+  f.onsubmit = async (e) => {
+    e.preventDefault(); const qty = +f.qty.value || 1;
+    try {
+      await api("/orders", { body: { product_id: p.id, qty, name: f.name.value, phone: f.phone.value, ref: ref || "" } });
+      const t = `Olá! Quero pedir:\n${qty}× ${p.name} — ${brl(p.price * qty)}\nNome: ${f.name.value}\nTelefone: ${f.phone.value}`;
+      const url = `https://wa.me/${s.whatsapp}?text=${encodeURIComponent(t)}`;
+      toast("Pedido registrado! Finalize no WhatsApp."); closeM(); window.open(url, "_blank") || (location.href = url);
+    } catch (x) { fail(x); }
+  };
+}
+
+// ---------- Painel do lojista ----------
+const L = { sid: null, tab: "produtos", creating: false };
+const TABS = { produtos: "Produtos", pedidos: "Pedidos", afiliados: "Afiliados", config: "Configurações" };
+async function lojista() {
+  const ss = await api("/my/stores");
+  if (!ss.length || L.creating) return novaLoja(ss.length > 0);
+  const s = ss.find((x) => x.id === L.sid) || ss[0]; L.sid = s.id;
+  app.innerHTML = `<div class="wrap"><div class="bar"><div><p class="mut">Admin da loja</p><h1 style="font-size:2rem">${esc(s.name)}</h1></div><div class="row">${ss.length > 1 ? `<select id="sel">${ss.map((x) => `<option value="${x.id}" ${x.id === s.id ? "selected" : ""}>${esc(x.name)}</option>`).join("")}</select>` : ""}<a class="btn out sm" href="#/loja/${esc(s.slug)}">Ver loja</a><button class="btn sec sm" id="nw">Nova loja</button></div></div><div class="tabs">${Object.entries(TABS).map(([k, v]) => `<button class="tab ${L.tab === k ? "on" : ""}" data-t="${k}">${v}</button>`).join("")}</div><div id="tb"></div></div>`;
+  if ($("#sel")) $("#sel").onchange = (e) => { L.sid = e.target.value; lojista(); };
+  $("#nw").onclick = () => { L.creating = true; lojista(); };
+  app.querySelectorAll("[data-t]").forEach((b) => (b.onclick = () => { L.tab = b.dataset.t; lojista(); }));
+  try { await { produtos: prods, pedidos: pedidos, afiliados: afils, config: conf }[L.tab](s, $("#tb")); } catch (e) { fail(e); }
+}
+function novaLoja(cancel) {
+  app.innerHTML = `<div class="wrap"><form id="f" class="form stack"><h1 style="font-size:1.8rem">Crie sua loja virtual</h1><label>Nome da loja<input name="name" required minlength="2"></label><label>WhatsApp para receber pedidos (com DDD)<input name="whatsapp" placeholder="55 11 99999-9999" required></label><div class="row"><button class="btn hero-b">Criar loja</button>${cancel ? '<button type="button" class="btn ghost" id="cn">Cancelar</button>' : ""}</div></form></div>`;
+  if (cancel) $("#cn").onclick = () => { L.creating = false; lojista(); };
+  $("#f").onsubmit = async (e) => {
+    e.preventDefault();
+    try { const r = await api("/stores", { body: Object.fromEntries(new FormData(e.target)) }); L.sid = r.id; L.creating = false; toast("Loja criada!"); lojista(); } catch (x) { fail(x); }
+  };
+}
+async function prods(s, box) {
+  const ps = await api("/my/products/" + s.id);
+  box.innerHTML = `<button class="btn hero-b" id="np" style="margin-bottom:14px">+ Novo produto</button>${ps.length ? "" : '<p class="mut">Nenhum produto ainda.</p>'}<div>${ps.map((p) => `<div class="item">${p.image_url ? `<img src="${esc(p.image_url)}" alt="">` : '<div class="ph"></div>'}<div class="g"><b>${esc(p.name)}</b><br><span class="pr">${brl(p.price)}</span><br>${p.chatbot_enabled ? `<span class="badge">Chatbot · ${p.faqs.length} perguntas</span>` : ""}${p.active ? "" : '<span class="badge">Oculto</span>'}</div><button class="btn out sm" data-e="${p.id}">Editar</button><button class="btn ghost sm" data-d="${p.id}">🗑</button></div>`).join("")}</div>`;
+  $("#np").onclick = () => prodForm(s, null, box);
+  box.querySelectorAll("[data-e]").forEach((b) => (b.onclick = () => prodForm(s, ps.find((p) => p.id === b.dataset.e), box)));
+  box.querySelectorAll("[data-d]").forEach((b) => (b.onclick = async () => { if (!confirm("Excluir este produto?")) return; try { await api("/products/" + b.dataset.d, { method: "DELETE" }); prods(s, box); } catch (x) { fail(x); } }));
+}
+function prodForm(s, p, box) {
+  const faqs = p ? p.faqs : [{ question: "Quais tamanhos estão disponíveis?", answer: "" }, { question: "Qual o prazo de entrega?", answer: "" }];
+  const faqH = (q) => `<div class="faq"><input class="fq" placeholder="Pergunta" value="${esc(q.question)}"><textarea class="fa" placeholder="Resposta">${esc(q.answer)}</textarea><button type="button" class="btn ghost sm" onclick="this.parentElement.remove()">Remover</button></div>`;
+  box.innerHTML = `<form id="pf" class="form stack"><h2>${p ? "Editar produto" : "Novo produto"}</h2><label>Nome<input name="name" required value="${esc(p?.name)}"></label><label>Descrição<textarea name="description">${esc(p?.description)}</textarea></label><label>Preço (R$)<input name="price" type="number" step="0.01" min="0" value="${p?.price ?? 0}"></label><label>Foto do produto<input name="image_url" id="iu" placeholder="Cole um link https://…" value="${esc(p?.image_url)}"></label><label class="btn out sm" style="cursor:pointer"><span id="up">ou envie do seu aparelho</span><input type="file" id="fl" accept="image/*" hidden></label><div class="chk">Produto visível na loja<input type="checkbox" name="active" ${p?.active ?? 1 ? "checked" : ""}></div><div class="chk">Chatbot de dúvidas<input type="checkbox" name="chatbot_enabled" ${p?.chatbot_enabled ?? 1 ? "checked" : ""}></div><div id="fqs">${faqs.map(faqH).join("")}</div><button type="button" class="btn out sm" id="af">+ Pergunta</button><div class="row"><button class="btn hero-b">Salvar</button><button type="button" class="btn ghost" id="cn">Cancelar</button></div></form>`;
+  $("#af").onclick = () => $("#fqs").insertAdjacentHTML("beforeend", faqH({ question: "", answer: "" }));
+  $("#cn").onclick = () => prods(s, box);
+  $("#fl").onchange = async (e) => {
+    const f = e.target.files[0]; if (!f) return; if (f.size > 5242880) return toast("Imagem maior que 5MB", 1);
+    $("#up").textContent = "Enviando…";
+    try { $("#iu").value = (await api("/upload", { body: f })).url; toast("Imagem enviada"); } catch (x) { fail(x); }
+    $("#up").textContent = "ou envie do seu aparelho";
+  };
+  $("#pf").onsubmit = async (e) => {
+    e.preventDefault(); const f = e.target;
+    const body = { store_id: s.id, name: f.name.value, description: f.description.value, price: +f.price.value, image_url: f.image_url.value, active: f.active.checked, chatbot_enabled: f.chatbot_enabled.checked, faqs: [...document.querySelectorAll(".faq")].map((d) => ({ question: d.querySelector(".fq").value, answer: d.querySelector(".fa").value })) };
+    try { await api(p ? "/products/" + p.id : "/products", { method: p ? "PUT" : "POST", body }); toast("Produto salvo"); prods(s, box); } catch (x) { fail(x); }
+  };
+}
+async function pedidos(s, box) {
+  const os = await api("/orders/store/" + s.id), ok = os.filter((o) => o.status === "confirmed");
+  const lb = { pending: "Pendente", confirmed: "Confirmado", cancelled: "Cancelado" };
+  box.innerHTML = `<div class="stats">${stat("Pedidos", os.length)}${stat("Vendas confirmadas", brl(sum(ok, "total")))}${stat("Comissões a pagar", brl(sum(ok.filter((o) => !o.commission_paid), "commission")))}</div>${os.length ? "" : '<p class="mut">Nenhum pedido ainda.</p>'}${os.map((o) => `<div class="item"><div class="g"><b>${o.quantity}× ${esc(o.product_name)} · ${brl(o.total)}</b><br><span class="mut">${esc(o.customer_name)} · ${esc(o.customer_phone)} · ${new Date(o.created_at + "Z").toLocaleDateString("pt-BR")}</span>${o.aff_name ? `<br><span class="pr" style="font-size:.8rem">Afiliado: ${esc(o.aff_name)} — comissão ${brl(o.commission)}</span>` : ""}</div><select data-s="${o.id}">${Object.entries(lb).map(([k, v]) => `<option value="${k}" ${o.status === k ? "selected" : ""}>${v}</option>`).join("")}</select>${o.affiliate_id && o.status === "confirmed" ? `<label class="row" style="font-size:.8rem"><input type="checkbox" data-p="${o.id}" ${o.commission_paid ? "checked" : ""}>Comissão paga</label>` : ""}</div>`).join("")}`;
+  const up = async (id, body) => { try { await api("/orders/" + id, { method: "PUT", body }); pedidos(s, box); } catch (x) { fail(x); } };
+  box.querySelectorAll("[data-s]").forEach((e) => (e.onchange = () => up(e.dataset.s, { status: e.value })));
+  box.querySelectorAll("[data-p]").forEach((e) => (e.onchange = () => up(e.dataset.p, { commission_paid: e.checked })));
+}
+async function afils(s, box) {
+  const as = await api("/affiliates/store/" + s.id);
+  box.innerHTML = `<p class="mut" style="margin-bottom:14px">${s.affiliates_enabled ? `Programa ativo · comissão de ${s.commission_percent}% por venda confirmada.` : "Programa de afiliados desativado nas configurações."}</p>${as.length ? "" : '<p class="mut">Nenhum afiliado ainda.</p>'}${as.map((a) => `<div class="item"><div class="g"><b>${esc(a.name || a.email)}</b><br><span class="mut">${esc(a.email)} · código ${esc(a.code)} · ${a.sales} vendas · ${brl(a.comm)}</span></div><span class="badge">${a.status === "approved" ? "Ativo" : "Bloqueado"}</span><button class="btn out sm" data-a="${a.id}" data-st="${a.status === "approved" ? "blocked" : "approved"}">${a.status === "approved" ? "Bloquear" : "Reativar"}</button></div>`).join("")}`;
+  box.querySelectorAll("[data-a]").forEach((b) => (b.onclick = async () => { try { await api("/affiliates/" + b.dataset.a, { method: "PUT", body: { status: b.dataset.st } }); afils(s, box); } catch (x) { fail(x); } }));
+}
+function conf(s, box) {
+  box.innerHTML = `<form id="cf" class="form stack"><label>Nome<input name="name" value="${esc(s.name)}"></label><label>Descrição<textarea name="description">${esc(s.description)}</textarea></label><label>WhatsApp<input name="whatsapp" value="${esc(s.whatsapp)}"></label><div class="chk">Programa de afiliados<input type="checkbox" name="affiliates_enabled" ${s.affiliates_enabled ? "checked" : ""}></div><label>Comissão dos afiliados (%)<input name="commission_percent" type="number" min="0" max="90" value="${s.commission_percent}"></label><div class="chk">Loja visível ao público<input type="checkbox" name="active" ${s.active ? "checked" : ""}></div><button class="btn hero-b">Salvar</button></form>`;
+  $("#cf").onsubmit = async (e) => {
+    e.preventDefault(); const f = e.target;
+    try { await api("/stores/" + s.id, { method: "PUT", body: { name: f.name.value, description: f.description.value, whatsapp: f.whatsapp.value, logo_url: s.logo_url, commission_percent: +f.commission_percent.value, affiliates_enabled: f.affiliates_enabled.checked, active: f.active.checked } }); toast("Configurações salvas"); lojista(); } catch (x) { fail(x); }
+  };
+}
+
+// ---------- Afiliado ----------
+async function afiliado() {
+  const d = await api("/my/affiliate"), ok = d.orders.filter((o) => o.status === "confirmed"), joined = new Set(d.mine.map((m) => m.store_id));
+  const link = (slug, code) => `${location.origin}${location.pathname}#/loja/${slug}?ref=${code}`;
+  const st = (o) => (o.status === "confirmed" ? (o.commission_paid ? "Paga" : "A receber") : o.status === "pending" ? "Aguardando loja" : "Cancelado");
+  app.innerHTML = `<div class="wrap"><h1 style="font-size:2rem;margin-bottom:16px">Painel do afiliado</h1><div class="stats">${stat("Vendas confirmadas", ok.length)}${stat("Comissão a receber", brl(sum(ok.filter((o) => !o.commission_paid), "commission")))}${stat("Comissão recebida", brl(sum(ok.filter((o) => o.commission_paid), "commission")))}</div>
+  <h2 style="margin:20px 0 10px">Meus links</h2>${d.mine.length ? "" : '<p class="mut">Entre no programa de uma loja abaixo para ganhar seu link.</p>'}${d.mine.map((m) => `<div class="item"><div class="g"><b>${esc(m.sname)}</b> <span class="mut">· ${m.commission_percent}% por venda</span><br><span class="mut" style="word-break:break-all">${esc(link(m.slug, m.code))}</span></div>${m.status !== "approved" ? '<span class="badge">Bloqueado</span>' : `<button class="btn out sm" data-c="${esc(link(m.slug, m.code))}">Copiar</button>`}</div>`).join("")}
+  <h2 style="margin:20px 0 10px">Lojas com programa de afiliados</h2>${d.stores.filter((s) => !joined.has(s.id)).map((s) => `<div class="item"><div class="g"><b>${esc(s.name)}</b><br><span class="pr">${s.commission_percent}% de comissão</span></div><button class="btn hero-b sm" data-j="${s.id}">Participar</button></div>`).join("")}
+  <h2 style="margin:20px 0 10px">Minhas vendas</h2>${d.orders.length ? "" : '<p class="mut">Nenhuma venda ainda.</p>'}${d.orders.map((o) => `<div class="item"><div class="g">${esc(o.product_name)} · ${brl(o.total)}</div><span class="mut">${st(o)} · ${brl(o.commission)}</span></div>`).join("")}</div>`;
+  app.querySelectorAll("[data-c]").forEach((b) => (b.onclick = () => { navigator.clipboard.writeText(b.dataset.c); toast("Link copiado"); }));
+  app.querySelectorAll("[data-j]").forEach((b) => (b.onclick = async () => { try { await api("/affiliates", { body: { store_id: b.dataset.j } }); toast("Você agora é afiliado desta loja!"); afiliado(); } catch (x) { fail(x); } }));
+}
+
+// ---------- Admin ----------
+async function admin() {
+  if (!S.user.admin) { app.innerHTML = '<p class="c mut">Acesso restrito ao admin da plataforma.</p>'; return; }
+  const d = await api("/admin");
+  app.innerHTML = `<div class="wrap"><h1 style="font-size:2rem;margin-bottom:16px">Admin da plataforma ChatShop</h1><div class="stats">${stat("Usuários", d.users)}${stat("Lojas", d.stores.length)}${stat("Afiliados", d.affiliates)}${stat("Vendas confirmadas", brl(sum(d.stores, "revenue")))}</div>${d.stores.map((s) => `<div class="item"><div class="g"><a href="#/loja/${esc(s.slug)}"><b>${esc(s.name)}</b></a><br><span class="mut">${esc(s.owner_email)} · ${s.affs} afiliados · ${s.sales} vendas · ${brl(s.revenue)}</span></div><label class="row" style="font-size:.85rem">Ativa<input type="checkbox" data-s="${s.id}" ${s.active ? "checked" : ""}></label></div>`).join("")}</div>`;
+  app.querySelectorAll("[data-s]").forEach((c) => (c.onchange = async () => { try { await api("/admin/stores/" + c.dataset.s, { method: "PUT", body: { active: c.checked } }); } catch (x) { fail(x); } }));
+  await catImport();
+}
+// ---------- Admin: importar produtos para o catálogo ----------
+const ALIAS = { title: ["titulo", "título", "title", "nome", "name", "productname"], price: ["preco", "preço", "price", "pricemin"], old_price: ["preco_antigo", "preço_antigo", "old_price", "preco_de"], image_url: ["imagem", "image", "image_url", "imageurl", "foto"], url: ["link", "url", "offerlink", "link_afiliado", "producturl"], category: ["categoria", "category"], color: ["cor", "color"], external_id: ["id", "external_id", "itemid", "sku"], store_name: ["loja", "store", "shop", "shopname"] };
+const num = (v) => { let s = String(v ?? "").replace(/[^\d,.-]/g, ""); if (!s) return null; if (s.includes(",")) s = s.replace(/\./g, "").replace(",", "."); const n = parseFloat(s); return isNaN(n) ? null : n; };
+function toItem(o, source) {
+  const k = {}; for (const key in o) k[key.trim().toLowerCase()] = o[key];
+  const g = (f) => { for (const a of ALIAS[f]) if (k[a] !== undefined && k[a] !== "") return k[a]; return ""; };
+  return { source, title: g("title"), price: num(g("price")), old_price: num(g("old_price")), image_url: g("image_url"), url: g("url"), category: g("category"), color: g("color"), external_id: String(g("external_id") || ""), store_name: g("store_name") };
+}
+function parseItems(txt, source) {
+  txt = txt.trim(); if (!txt) return [];
+  if (txt[0] === "[" || txt[0] === "{") { const j = JSON.parse(txt); return (Array.isArray(j) ? j : j.items || []).map((o) => toItem(o, source)); }
+  const first = txt.split("\n")[0], sep = first.includes(";") && !first.includes(",") ? ";" : ",";
+  const rows = []; let row = [], cur = "", inq = false;
+  for (let i = 0; i < txt.length; i++) {
+    const c = txt[i];
+    if (inq) { if (c === '"' && txt[i + 1] === '"') { cur += '"'; i++; } else if (c === '"') inq = false; else cur += c; }
+    else if (c === '"') inq = true;
+    else if (c === sep) { row.push(cur); cur = ""; }
+    else if (c === "\n") { row.push(cur); rows.push(row); row = []; cur = ""; }
+    else if (c !== "\r") cur += c;
+  }
+  row.push(cur); rows.push(row);
+  const hd = rows.shift();
+  return rows.filter((r) => r.some((x) => x.trim())).map((r) => { const o = {}; hd.forEach((h, i) => (o[h] = (r[i] || "").trim())); return toItem(o, source); });
+}
+async function catImport() {
+  const st = await api("/catalog/stats").catch(() => []), box = document.createElement("div");
+  box.className = "form"; box.style.margin = "20px 0";
+  box.innerHTML = `<h2 style="margin-bottom:6px">Catálogo da IA de buscas</h2><p class="mut" style="margin-bottom:12px">${SRCS.slice(1).map(([k, v]) => `${v}: ${st.find((x) => x.source === k)?.n || 0}`).join(" · ")}</p><form id="imf" class="stack"><label>Loja de origem<select id="ims">${SRCS.slice(1).map(([k, v]) => `<option value="${k}">${v}</option>`).join("")}</select></label><label>Produtos (CSV com cabeçalho, ou JSON)<textarea id="imt" rows="6" placeholder="titulo,preco,imagem,link,categoria,cor,id\nVestido vermelho midi,89.90,https://site/foto.jpg,https://link-afiliado,vestido,vermelho,123"></textarea></label><button class="btn hero-b">Importar</button></form><button class="btn out sm" id="imd" style="margin-top:10px">Apagar catálogo da loja selecionada</button>`;
+  app.querySelector(".wrap").append(box);
+  const src = () => $("#ims").value;
+  $("#imf").onsubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const items = parseItems($("#imt").value, src()); if (!items.length) return toast("Nada para importar", 1);
+      let n = 0; for (let i = 0; i < items.length; i += 100) n += (await api("/catalog/import", { body: { items: items.slice(i, i + 100) } })).imported;
+      toast(`${n} de ${items.length} produtos importados`); $("#imt").value = "";
+    } catch (x) { fail(x); }
+  };
+  $("#imd").onclick = async () => { if (!confirm("Apagar todos os produtos desta loja do catálogo?")) return; try { await api("/catalog/source/" + src(), { method: "DELETE" }); toast("Catálogo apagado"); } catch (x) { fail(x); } };
+}
+
+// ---------- Rotas (hash, funciona no GitHub Pages sem config extra) ----------
+async function go() {
+  const [path, qs] = (location.hash.slice(1) || "/").split("?"), r = path.split("/").filter(Boolean), ref = new URLSearchParams(qs || "").get("ref");
+  header(); closeM(); app.onclick = null; document.title = "ChatShop — Busca de produtos com IA"; scrollTo(0, 0);
+  const priv = { lojista, afiliado, admin };
+  try {
+    if (!r.length) await home();
+    else if (r[0] === "auth") auth();
+    else if (r[0] === "plataforma") await plataforma();
+    else if (r[0] === "loja" && r[1]) await loja(r[1], ref);
+    else if (priv[r[0]]) { if (!S.user) { location.hash = "#/auth"; return; } await priv[r[0]](); }
+    else app.innerHTML = '<p class="c">Página não encontrada. <a href="#/">Voltar</a></p>';
+  } catch (e) { app.innerHTML = `<p class="c mut">${esc(e.message)}</p>`; }
+}
+addEventListener("hashchange", go); go();
+</script>
 </body>
 </html>
